@@ -23,10 +23,16 @@ module.exports = {
         useLocalIp: true,
         overlay: true
     },
+    output: {
+        path: __dirname + "/assets",
+        filename: 'bundle.js',
+        publicPath: '/',
+    },
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://localhost:4000'
+            apiUrl: 'http://localhost:4000',
+            BackendUrl: 'http://192.168.0.195:3000'
         })
     }
 };

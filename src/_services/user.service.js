@@ -1,5 +1,6 @@
 import config from 'config';
-import { authHeader } from '../_helpers';
+import {authHeader} from '../_helpers';
+import uuid from 'uuid/v4';
 
 export const userService = {
     login,
@@ -11,20 +12,28 @@ export const userService = {
     delete: _delete
 };
 
-function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+function header_params(methodType, object = '') {
+    var header =  {
+        method: methodType,
+        headers: {'Content-Type': 'application/json', headers: authHeader()},
+        credentials: 'same-origin',
     };
+    if (object !== ''){
+        header = Object.assign({body: JSON.stringify(object)}, header)
+    }
+    return header;
+}
 
-    return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+function login(username, password) {
+    return fetch(`${config.BackendUrl}/users/authenticate?username=${username}&password=${password}`,
+        header_params('GET'))
         .then(handleResponse)
         .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
-
-            return user;
+            if (user.length) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user));
+                return user;
+            }
         });
 }
 
@@ -34,51 +43,26 @@ function logout() {
 }
 
 function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
+    return fetch(`${config.BackendUrl}/users`, header_params('GET')).then(handleResponse);
 }
 
 function getById(id) {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.BackendUrl}/users/${id}`, header_params('GET')).then(handleResponse);
 }
 
 function register(user) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
-
-    return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
+    user.id = uuid();
+    return fetch(`${config.BackendUrl}/users/register`,
+        header_params('POST',user)).then(handleResponse);
 }
 
 function update(user) {
-    const requestOptions = {
-        method: 'PUT',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
-
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.BackendUrl}/users/${user.id}`, header_params('PUT',user)).then(handleResponse);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.BackendUrl}/users/${id}`, header_params('DELETE')).then(handleResponse);
 }
 
 function handleResponse(response) {
@@ -95,6 +79,15 @@ function handleResponse(response) {
             return Promise.reject(error);
         }
 
-        return data;
+        if (response.url.match(new RegExp(/\/users\/authenticate(\?|\&)([^=]+)\=([^&]+)/))) {
+            if (data.length) {
+                return data;
+            } else {
+                const error = 'Username or password is incorrect';
+                return Promise.reject(error);
+            }
+        } else {
+            return data;
+        }
     });
 }

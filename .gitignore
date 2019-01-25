@@ -36,3 +36,10 @@ typings
 
 # Optional REPL history
 .node_repl_history
+
+#idea
+.idea
+
+#package locks
+yarn.lock
+package-lock.json

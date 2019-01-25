@@ -1,0 +1,136 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "mouerr",
+      "firstname": "mouerr",
+      "lastname": "mouerr",
+      "email": "mouad@gmpanel.net",
+      "password": "gms2019.",
+      "phone": "06009856985",
+      "token": "fake-jwt-token"
+    },
+    {
+      "id": 2,
+      "username": "badr",
+      "firstname": "badr",
+      "lastname": "badr",
+      "email": "badr@gmpanel.net",
+      "password": "gms2019.",
+      "phone": "0688996633",
+      "token": "fake-jwt-token"
+    },
+    {
+      "id": 3,
+      "username": "jaouad",
+      "firstname": "jaouad",
+      "lastname": "jaouad",
+      "email": "jaouad@gmpanel.net",
+      "password": "gms2019.",
+      "phone": "0788956545",
+      "token": "fake-jwt-token"
+    },
+    {
+      "id": 4,
+      "username": "alpha",
+      "firstname": "alpha",
+      "lastname": "alpha",
+      "email": "alpha@gmpanel.net",
+      "password": "123456",
+      "phone": "0600000000",
+      "token": "fake-jwt-token"
+    },
+    {
+      "firstname": "albert",
+      "lastname": "albert",
+      "username": "albert",
+      "email": "albert@ghjg.gg",
+      "password": "albert",
+      "token": "",
+      "id": "51f5e6bf-31ab-4fd9-8dc8-1e937ea1d06d"
+    },
+    {
+      "firstname": "end",
+      "lastname": "end",
+      "username": "end",
+      "email": "end@email.cim",
+      "password": "endend",
+      "token": "",
+      "id": "aecb42e4-9eaf-4197-b187-8f37f2cb4ce7"
+    },
+    {
+      "firstname": "casandra",
+      "lastname": "casandra",
+      "username": "casandra",
+      "email": "casandra@fgffff.ff",
+      "password": "casandra",
+      "token": "",
+      "id": "7612e7ae-cee8-4d05-812c-453a1403cc91"
+    }
+  ],
+  "leaves": [
+    {
+      "id": 1,
+      "userId": 1,
+      "fromdate": "2019-02-02",
+      "todate": "2019-02-10",
+      "leavetype": "paid leave",
+      "cause": "travel the world",
+      "token": "fake-jwt-token"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "fromdate": "2019-02-03",
+      "todate": "2019-02-15",
+      "leavetype": "paid leave",
+      "cause": "travel the world",
+      "token": "fake-jwt-token"
+    },
+    {
+      "id": 3,
+      "userId": 4,
+      "fromdate": "2019-02-04",
+      "todate": "2019-02-18",
+      "leavetype": "paid leave",
+      "cause": "travel the world",
+      "token": "fake-jwt-token"
+    },
+    {
+      "fromdate": "2019-01-25",
+      "todate": "2019-01-31",
+      "leavetype": "testos",
+      "cause": "fgfggdfgdfggdffgdgfdg",
+      "token": "",
+      "userId": 4,
+      "id": "b2859d51-b2a0-44d5-be7d-e0ce8edc8933"
+    },
+    {
+      "fromdate": "2019-01-01",
+      "todate": "2019-01-31",
+      "leavetype": "gdfgfd",
+      "cause": "gdfgfdgfdgdf",
+      "userId": 4,
+      "token": "",
+      "id": "7f8a7263-2646-42e6-b4fc-76d4d9866759"
+    },
+    {
+      "id": "283184d5-cd31-44ab-89c7-2bdc0b687e4b",
+      "fromdate": "2018-12-31",
+      "todate": "2019-02-10",
+      "leavetype": "ghgg",
+      "cause": "ggggggggggggggggggggg",
+      "userId": 4,
+      "token": ""
+    },
+    {
+      "id": "e0f75673-4ff1-492a-8463-231e45c9ae21",
+      "fromdate": "2019-01-01",
+      "todate": "2019-01-20",
+      "leavetype": "ghghbg",
+      "cause": "hghfghfgf",
+      "userId": "7612e7ae-cee8-4d05-812c-453a1403cc91",
+      "token": ""
+    }
+  ]
+}
