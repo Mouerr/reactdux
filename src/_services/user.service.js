@@ -1,38 +1,94 @@
 import config from 'config';
 import {authHeader} from '../_helpers';
 import uuid from 'uuid/v4';
+import myData from '../db.json';
+
+let users = myData.users || [];
 
 export const userService = {
     login,
     logout,
     register,
     getAll,
+    loginAsRegistered,
     getById,
     update,
     delete: _delete
 };
 
 function header_params(methodType, object = '') {
-    var header =  {
+    var header = {
         method: methodType,
         headers: {'Content-Type': 'application/json', headers: authHeader()},
         credentials: 'same-origin',
     };
-    if (object !== ''){
+    if (object !== '') {
         header = Object.assign({body: JSON.stringify(object)}, header)
     }
     return header;
 }
 
-function login(username, password) {
-    return fetch(`${config.BackendUrl}/users/authenticate?username=${username}&password=${password}`,
-        header_params('GET'))
+function login(email, password) {
+
+    var header = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email, password: password})
+    };
+
+    return fetch(`http://web.gmpanel.net:8093/api/users/api-token-auth/`, header)
         .then(handleResponse)
         .then(user => {
-            if (user.length) {
+
+            if (user.token !== '') {
+                console.log('usertoken', user.token);
+                let responseJson = {
+                    email: email,
+                    token: user.token
+                };
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('user', JSON.stringify(responseJson));
                 return user;
+            }
+        });
+}
+
+function loginAsRegistered(email, password) {
+
+    var header = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email, password: password})
+    };
+
+    return fetch(`http://web.gmpanel.net:8093/api/users/api-token-auth/`, header)
+        .then(handleResponse)
+        .then(user => {
+
+            if (user.token !== '') {
+
+                let filteredUsers = users.filter(user => {
+                    return user.email === email;
+                });
+
+                if (filteredUsers.length) {
+                    localStorage.setItem('user', JSON.stringify(filteredUsers));
+                    return filteredUsers[0];
+
+                } else {
+                    var emailname = email.substring(0, email.lastIndexOf("@"));
+                    user.id = users.length ? Math.max(...users.map(user => user.id)) + 1 : 1;
+                    user.firstname = emailname;
+                    user.lastname = emailname;
+                    user.username = emailname;
+                    user.email = email;
+                    user.password = password;
+
+                    fetch(`${config.BackendUrl}/users/register`,
+                        header_params('POST', user));
+                    localStorage.setItem('user', JSON.stringify(user));
+                    return user;
+                }
             }
         });
 }
@@ -53,11 +109,11 @@ function getById(id) {
 function register(user) {
     user.id = uuid();
     return fetch(`${config.BackendUrl}/users/register`,
-        header_params('POST',user)).then(handleResponse);
+        header_params('POST', user)).then(handleResponse);
 }
 
 function update(user) {
-    return fetch(`${config.BackendUrl}/users/${user.id}`, header_params('PUT',user)).then(handleResponse);
+    return fetch(`${config.BackendUrl}/users/${user.id}`, header_params('PUT', user)).then(handleResponse);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -75,19 +131,14 @@ function handleResponse(response) {
                 location.reload(true);
             }
 
-            const error = (data && data.message) || response.statusText;
+            var error;
+            if (response.url.endsWith('/api/users/api-token-auth/')) {
+                error = (data && data.non_field_errors[0]) || response.statusText;
+            } else {
+                error = (data && data.message) || response.statusText;
+            }
             return Promise.reject(error);
         }
-
-        if (response.url.match(new RegExp(/\/users\/authenticate(\?|\&)([^=]+)\=([^&]+)/))) {
-            if (data.length) {
-                return data;
-            } else {
-                const error = 'Username or password is incorrect';
-                return Promise.reject(error);
-            }
-        } else {
-            return data;
-        }
+        return data;
     });
 }

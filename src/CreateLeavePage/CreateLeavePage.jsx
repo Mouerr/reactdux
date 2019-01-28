@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 
 import { leaveActions } from '../_actions';
-//import {userActions} from "../_actions/user.actions";
 
 class CreateLeavePage extends React.Component {
     constructor(props) {
@@ -19,7 +18,7 @@ class CreateLeavePage extends React.Component {
                 todate: '',
                 leavetype: '',
                 cause: '',
-                userId: user[0].id,
+                userId: user.id,
                 token: ''
             },
             submitted: false
@@ -62,34 +61,43 @@ class CreateLeavePage extends React.Component {
                         <label htmlFor="fromdate">FROM DATE</label>
                         <input type="date" className="form-control" name="fromdate" value={leave.fromdate} onChange={this.handleChange} />
                         {submitted && !leave.fromdate &&
-                            <div className="help-block">From Date is required</div>
+                        <div className="help-block">From Date is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !leave.todate ? ' has-error' : '')}>
                         <label htmlFor="todate">TO DATE</label>
                         <input type="date" className="form-control" name="todate" value={leave.todate} onChange={this.handleChange} />
                         {submitted && !leave.todate &&
-                        <div className="help-block">todate is required</div>
+                        <div className="help-block">To Date is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !leave.leavetype ? ' has-error' : '')}>
                         <label htmlFor="leavetype">Leave Type</label>
-                        <input type="text" className="form-control" name="leavetype" value={leave.leavetype} onChange={this.handleChange} />
+
+                        <select className="form-control" name="leavetype" onChange={this.handleChange}>
+                            <option value="0">Select type</option>
+                            <option value="0" disabled="">---------------</option>
+                            <option value="Special leave">Special leave</option>
+                            <option value="Paid leave">Paid leave</option>
+                            <option value="Sick leave">Sick leave</option>
+                            <option value="National Holidays">National Holidays</option>
+                            <option value="Religious Holidays">Religious Holidays</option>
+                        </select>
                         {submitted && !leave.leavetype &&
-                            <div className="help-block">Last Name is required</div>
+                        <div className="help-block">Leave Type is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !leave.cause ? ' has-error' : '')}>
                         <label htmlFor="cause">Cause</label>
                         <textarea className="form-control" name="cause" onChange={this.handleChange} defaultValue={leave.cause}/>
                         {submitted && !leave.cause &&
-                            <div className="help-block">cause is required</div>
+                        <div className="help-block">cause is required</div>
                         }
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Sumbit</button>
                         {submitting &&
-                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                        <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                         }
                         <Link to="/login" className="btn btn-link">Cancel</Link>
                     </div>
