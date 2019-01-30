@@ -50,7 +50,6 @@ function getAll() {
 }
 
 function getByUserid(userid) {
-    console.log('action id',userid);
     return dispatch => {
         dispatch(request(userid));
 

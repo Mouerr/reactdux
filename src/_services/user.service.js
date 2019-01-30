@@ -1,9 +1,5 @@
 import config from 'config';
 import {authHeader} from '../_helpers';
-import uuid from 'uuid/v4';
-import myData from '../db.json';
-
-let users = myData.users || [];
 
 export const userService = {
     login,
@@ -41,7 +37,6 @@ function login(email, password) {
         .then(user => {
 
             if (user.token !== '') {
-                console.log('usertoken', user.token);
                 let responseJson = {
                     email: email,
                     token: user.token
@@ -66,28 +61,29 @@ function loginAsRegistered(email, password) {
         .then(user => {
 
             if (user.token !== '') {
+                const users = JSON.parse(localStorage.getItem('stored_users'));
 
                 let filteredUsers = users.filter(user => {
                     return user.email === email;
                 });
 
                 if (filteredUsers.length) {
-                    localStorage.setItem('user', JSON.stringify(filteredUsers));
+                    localStorage.setItem('user', JSON.stringify(filteredUsers[0]));
                     return filteredUsers[0];
 
                 } else {
                     var emailname = email.substring(0, email.lastIndexOf("@"));
-                    user.id = users.length ? Math.max(...users.map(user => user.id)) + 1 : 1;
                     user.firstname = emailname;
                     user.lastname = emailname;
                     user.username = emailname;
                     user.email = email;
                     user.password = password;
 
-                    fetch(`${config.BackendUrl}/users/register`,
-                        header_params('POST', user));
-                    localStorage.setItem('user', JSON.stringify(user));
-                    return user;
+                    return fetch(`${config.BackendUrl}/users/register`,
+                        header_params('POST', user)).then(handleResponse).then(user => {
+                        localStorage.setItem('user', JSON.stringify(user));
+                        return user;
+                    });
                 }
             }
         });
@@ -96,10 +92,14 @@ function loginAsRegistered(email, password) {
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
+    localStorage.removeItem('storedusers');
 }
 
 function getAll() {
-    return fetch(`${config.BackendUrl}/users`, header_params('GET')).then(handleResponse);
+    return fetch(`${config.BackendUrl}/users`, header_params('GET')).then(handleResponse).then(users => {
+        localStorage.setItem('stored_users', JSON.stringify(users));
+        return users;
+    });
 }
 
 function getById(id) {
@@ -107,9 +107,7 @@ function getById(id) {
 }
 
 function register(user) {
-    user.id = uuid();
-    return fetch(`${config.BackendUrl}/users/register`,
-        header_params('POST', user)).then(handleResponse);
+    return fetch(`${config.BackendUrl}/users/register`,header_params('POST', user)).then(handleResponse);
 }
 
 function update(user) {

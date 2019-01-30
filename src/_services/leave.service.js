@@ -35,9 +35,7 @@ function getByUserid(userid) {
 }
 
 function create(leave) {
-    console.log('leave',leave);
-    return fetch(`${config.BackendUrl}/leaves/create`,
-        header_params('POST',leave)).then(handleResponse);
+    return fetch(`${config.BackendUrl}/leaves/create`, header_params('POST',leave)).then(handleResponse);
 }
 
 function update(leave) {
@@ -62,7 +60,6 @@ function handleResponse(response) {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-        console.log('DATA RETURNED', data);
         return data;
     });
 }

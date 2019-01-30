@@ -16,10 +16,10 @@ class UserIdLeavePage extends React.Component {
 
     render() {
         const {leaves} = this.props;
-        const userid = this.props.match.params.userid;
+        const user = JSON.parse(localStorage.getItem('user'));
         return (
             <div className="col-md-12">
-                <h3>User Id {userid} leaves:</h3>
+                <h3>{user.firstname + ' ' + user.lastname} leaves:</h3>
 
                 <p><Link to="/create/leave">Create Leave</Link></p>
                 {leaves.loading && <em>Loading leaves...</em>}

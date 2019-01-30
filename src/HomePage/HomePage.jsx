@@ -31,6 +31,8 @@ class HomePage extends React.Component {
                         <th>FULL NAME</th>
                         <th>USER NAME</th>
                         <th>EMAIL</th>
+                        <th>LEAVES</th>
+                        <th>ACTIONS</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,6 +42,7 @@ class HomePage extends React.Component {
                             <td>{user.firstname +' '+ user.lastname}</td>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
+                            <td><Link to={"/users/"+user.id+"/leaves"}>Leaves</Link></td>
                             <td>{
                                 user.deleting ? <em> - Deleting...</em>
                                     : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>

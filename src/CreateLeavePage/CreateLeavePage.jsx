@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import uuid from 'uuid/v4';
 
 import { leaveActions } from '../_actions';
 
@@ -9,11 +8,10 @@ class CreateLeavePage extends React.Component {
     constructor(props) {
         super(props);
 
-        let user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user'));
 
         this.state = {
             leave: {
-                id: uuid(),
                 fromdate: '',
                 todate: '',
                 leavetype: '',
