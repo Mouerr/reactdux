@@ -58,13 +58,12 @@ function loginAsRegistered(email, password) {
 
     return fetch(`http://web.gmpanel.net:8093/api/users/api-token-auth/`, header)
         .then(handleResponse)
-        .then(user => {
-
-            if (user.token !== '') {
+        .then(response => {
+            if (response.token !== '') {
                 const users = JSON.parse(localStorage.getItem('stored_users'));
 
                 let filteredUsers = users.filter(user => {
-                    return user.email === email;
+                    return user.email === email || user.username === email;
                 });
 
                 if (filteredUsers.length) {
@@ -72,15 +71,15 @@ function loginAsRegistered(email, password) {
                     return filteredUsers[0];
 
                 } else {
-                    var emailname = email.substring(0, email.lastIndexOf("@"));
-                    user.firstname = emailname;
-                    user.lastname = emailname;
-                    user.username = emailname;
-                    user.email = email;
-                    user.password = password;
+                    let apiuser = response.user;
+                    const emailname = apiuser.username.substring(0, apiuser.username.lastIndexOf("@"));
+                    apiuser.firstname = emailname;
+                    apiuser.lastname = emailname;
+                    apiuser.email = apiuser.username;
+                    apiuser.password = password;
 
                     return fetch(`${config.BackendUrl}/users/register`,
-                        header_params('POST', user)).then(handleResponse).then(user => {
+                        header_params('POST', apiuser)).then(handleResponse).then(user => {
                         localStorage.setItem('user', JSON.stringify(user));
                         return user;
                     });
