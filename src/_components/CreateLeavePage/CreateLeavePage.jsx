@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { leaveActions } from '../_actions';
+import { leaveActions } from '../../_actions';
 
 class CreateLeavePage extends React.Component {
     constructor(props) {
@@ -106,7 +106,7 @@ class CreateLeavePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { submitting } = state.creationleaves;
+    const { submitting } = state.leaveCreation;
     return {
         submitting
     };

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {leaveActions} from '../_actions';
+import {leaveActions} from '../../_actions';
 
 class UserIdLeavePage extends React.Component {
     componentDidMount() {
@@ -21,7 +21,7 @@ class UserIdLeavePage extends React.Component {
             <div className="col-md-12">
                 <h3>{user.firstname + ' ' + user.lastname} leaves:</h3>
 
-                <p><Link to="/create/leave">Create Leave</Link></p>
+                <p><Link to="/leave/create">Create Leave</Link></p>
                 {leaves.loading && <em>Loading leaves...</em>}
                 {leaves.error && <span className="text-danger">ERROR: {leaves.error}</span>}
                 {leaves.items &&

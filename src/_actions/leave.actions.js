@@ -1,5 +1,5 @@
 import { leaveConstants } from '../_constants';
-import { leaveService } from '../_services';
+import { leaveService } from '../api';
 import { alertActions } from './';
 import { history } from '../_helpers';
 
@@ -19,7 +19,7 @@ function create(leave) {
                 leave => {
                     dispatch(success());
                     history.push('/leaves');
-                    dispatch(alertActions.success('Request successful'));
+                    dispatch(alertActions.success('Leave successfully created'));
                 },
                 error => {
                     dispatch(failure(error.toString()));

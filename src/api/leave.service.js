@@ -35,7 +35,7 @@ function getByUserid(userid) {
 }
 
 function create(leave) {
-    return fetch(`${config.BackendUrl}/leaves/create`, header_params('POST',leave)).then(handleResponse);
+    return fetch(`${config.BackendUrl}/leave/create`, header_params('POST',leave)).then(handleResponse);
 }
 
 function update(leave) {

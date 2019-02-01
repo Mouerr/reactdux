@@ -4,7 +4,7 @@ import {authHeader} from '../_helpers';
 export const userService = {
     login,
     logout,
-    register,
+    create,
     getAll,
     loginAsRegistered,
     getById,
@@ -78,7 +78,7 @@ function loginAsRegistered(email, password) {
                     apiuser.email = apiuser.username;
                     apiuser.password = password;
 
-                    return fetch(`${config.BackendUrl}/users/register`,
+                    return fetch(`${config.BackendUrl}/user/create`,
                         header_params('POST', apiuser)).then(handleResponse).then(user => {
                         localStorage.setItem('user', JSON.stringify(user));
                         return user;
@@ -105,8 +105,8 @@ function getById(id) {
     return fetch(`${config.BackendUrl}/users/${id}`, header_params('GET')).then(handleResponse);
 }
 
-function register(user) {
-    return fetch(`${config.BackendUrl}/users/register`,header_params('POST', user)).then(handleResponse);
+function create(user) {
+    return fetch(`${config.BackendUrl}/user/create`,header_params('POST', user)).then(handleResponse);
 }
 
 function update(user) {

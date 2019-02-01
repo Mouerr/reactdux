@@ -18,9 +18,9 @@ module.exports = {
     })],
     devServer: {
         historyApiFallback: true,
-        host: '0.0.0.0',
-        port: 8083,
-        useLocalIp: true,
+        host: '192.168.0.195',
+        port: 3000,
+        //useLocalIp: true,
         overlay: true
     },
     output: {
@@ -31,8 +31,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://localhost:4000',
-            BackendUrl: 'http://192.168.0.195:3000'
+            BackendUrl: 'http://192.168.0.195:9000'
         })
     }
 };

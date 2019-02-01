@@ -1,6 +1,6 @@
 import { leaveConstants } from '../_constants';
 
-export function creationleaves(state = {}, action) {
+export function leaveCreation(state = {}, action) {
   switch (action.type) {
     case leaveConstants.CREATE_LEAVE_REQUEST:
       return { submitting: true };

@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { userActions } from '../_actions';
+import { userActions } from '../../_actions';
 
-class HomePage extends React.Component {
+class UserPage extends React.Component {
     componentDidMount() {
         this.props.dispatch(userActions.getAll());
     }
@@ -18,9 +18,8 @@ class HomePage extends React.Component {
         return (
             <div className="col-md-12">
                 <h1>Hi {user.firstname}!</h1>
-                <p>You're logged in with React!!</p>
-                <h3>All registered users:</h3>
-                <p><Link to="/create/leave">Create Leave</Link></p>
+                <h3>All Users:</h3>
+                <p><Link to="/leave/create">Create Leave</Link></p>
                 {users.loading && <em>Loading users...</em>}
                 {users.error && <span className="text-danger">ERROR: {users.error}</span>}
                 {users.items &&
@@ -32,7 +31,7 @@ class HomePage extends React.Component {
                         <th>USER NAME</th>
                         <th>EMAIL</th>
                         <th>LEAVES</th>
-                        <th>ACTIONS</th>
+                        <th className='text-center'>ACTIONS</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,11 +41,13 @@ class HomePage extends React.Component {
                             <td>{user.firstname +' '+ user.lastname}</td>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
-                            <td><Link to={"/users/"+user.id+"/leaves"}>Leaves</Link></td>
+                            <td><Link className="btn btn-info btn-md" to={"/user/"+user.id+"/leaves"}>Leaves</Link></td>
                             <td>{
                                 user.deleting ? <em> - Deleting...</em>
                                     : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
+                                    : <div className="col-sm-12 text-center">
+                                        <button className="btn btn-danger btn-md" onClick={this.handleDeleteUser(user.id)}>Delete</button>
+                                    </div>
                             }</td>
                         </tr>
                     )}
@@ -70,5 +71,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedHomePage = connect(mapStateToProps)(HomePage);
-export { connectedHomePage as HomePage };
+const connectedUserPage = connect(mapStateToProps)(UserPage);
+export { connectedUserPage as UserPage };

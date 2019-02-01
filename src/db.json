@@ -47,7 +47,7 @@
       "email": "albert@ghjg.gg",
       "password": "albert",
       "token": "",
-      "id": "51f5e6bf-31ab-4fd9-8dc8-1e937ea1d06d"
+      "id": 5
     },
     {
       "firstname": "end",
@@ -56,7 +56,7 @@
       "email": "end@email.cim",
       "password": "endend",
       "token": "",
-      "id": "aecb42e4-9eaf-4197-b187-8f37f2cb4ce7"
+      "id": 6
     },
     {
       "firstname": "casandra",
@@ -65,7 +65,18 @@
       "email": "casandra@fgffff.ff",
       "password": "casandra",
       "token": "",
-      "id": "7612e7ae-cee8-4d05-812c-453a1403cc91"
+      "id": 7
+    },
+    {
+      "id": 39,
+      "is_active": true,
+      "username": "test100@iportal.com",
+      "is_staff": false,
+      "is_superuser": false,
+      "firstname": "test100",
+      "lastname": "test100",
+      "email": "test100@iportal.com",
+      "password": "gm1436.."
     }
   ],
   "leaves": [
@@ -97,40 +108,22 @@
       "token": "fake-jwt-token"
     },
     {
-      "fromdate": "2019-01-25",
+      "fromdate": "2019-01-30",
       "todate": "2019-01-31",
-      "leavetype": "testos",
-      "cause": "fgfggdfgdfggdffgdgfdg",
+      "leavetype": "Sick leave",
+      "cause": "9999",
+      "userId": 39,
       "token": "",
-      "userId": 4,
-      "id": "b2859d51-b2a0-44d5-be7d-e0ce8edc8933"
+      "id": 4
     },
     {
-      "fromdate": "2019-01-01",
-      "todate": "2019-01-31",
-      "leavetype": "gdfgfd",
-      "cause": "gdfgfdgfdgdf",
-      "userId": 4,
+      "fromdate": "2019-01-02",
+      "todate": "2019-01-11",
+      "leavetype": "Paid leave",
+      "cause": "9996633",
+      "userId": 39,
       "token": "",
-      "id": "7f8a7263-2646-42e6-b4fc-76d4d9866759"
-    },
-    {
-      "id": "283184d5-cd31-44ab-89c7-2bdc0b687e4b",
-      "fromdate": "2018-12-31",
-      "todate": "2019-02-10",
-      "leavetype": "ghgg",
-      "cause": "ggggggggggggggggggggg",
-      "userId": 4,
-      "token": ""
-    },
-    {
-      "id": "e0f75673-4ff1-492a-8463-231e45c9ae21",
-      "fromdate": "2019-01-01",
-      "todate": "2019-01-20",
-      "leavetype": "ghghbg",
-      "cause": "hghfghfgf",
-      "userId": "7612e7ae-cee8-4d05-812c-453a1403cc91",
-      "token": ""
+      "id": 5
     }
   ]
 }
