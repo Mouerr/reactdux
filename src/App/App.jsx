@@ -4,14 +4,14 @@ import {connect} from 'react-redux';
 
 import {history} from '../_helpers';
 import {alertActions} from '../_actions';
-import {PrivateRoute} from '../_components';
-import {UserPage} from '../_components/UserPage';
-import {LeavePage} from '../_components/LeavePage';
-import {UserIdLeavePage} from '../_components/UserIdLeavePage';
-import {LoginPage} from '../_components/LoginPage';
-import {CreateUserPage} from '../_components/CreateUserPage';
-import {CreateLeavePage} from '../_components/CreateLeavePage';
-import {NotFoundPage} from '../_components/NotFoundPage';
+import {PrivateRoute} from '../_containers';
+import {UserPage} from '../_containers/UserPage';
+import {LeavePage} from '../_containers/LeavePage';
+import {UserIdLeavePage} from '../_containers/UserIdLeavePage';
+import {LoginPage} from '../_containers/LoginPage/LoginPage';
+import {CreateUserPage} from '../_containers/CreateUserPage';
+import {CreateLeavePage} from '../_containers/CreateLeavePage';
+import {NotFoundPage} from '../_containers/NotFoundPage';
 
 class App extends React.Component {
     constructor(props) {

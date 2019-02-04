@@ -56,11 +56,11 @@ function getByUserid(userid) {
         leaveService.getByUserid(userid)
             .then(
                 leaves => dispatch(success(leaves)),
-                error => dispatch(failure(id,error.toString()))
+                error => dispatch(failure(error.toString()))
             );
     };
 
-    function request(userid) { return { type: leaveConstants.GETUSERID_LEAVE_REQUEST, userid } }
+    function request(userid) { return { type: leaveConstants.GETALL_LEAVE_REQUEST, userid } }
     function success(leaves) { return { type: leaveConstants.GETALL_LEAVE_SUCCESS, leaves, userid } }
     function failure(error) { return { type: leaveConstants.GETALL_LEAVE_FAILURE, error } }
 }
