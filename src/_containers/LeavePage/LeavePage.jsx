@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import LeaveList from '../../_components/Leave/LeaveList';
 
-import {leaveActions, userActions} from '../../_actions';
+import {leaveActions} from '../../_actions';
 
 class LeavePage extends React.Component {
     constructor(props) {

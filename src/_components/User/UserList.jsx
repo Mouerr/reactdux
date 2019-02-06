@@ -10,6 +10,7 @@ export default function UserList(props) {
         <div className="col-md-12">
             <h3>All Users:</h3>
             <p><Link to="/leave/create">Create Leave</Link></p>
+            <p><Link to="/user/create">Create User</Link></p>
             {users.loading && <em>Loading users...</em>}
             {users.error && <span className="text-danger">ERROR: {users.error}</span>}
             {users.items &&

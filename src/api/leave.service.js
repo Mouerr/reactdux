@@ -1,5 +1,6 @@
-import config from 'config';
 import {authHeader} from '../_helpers';
+
+const apiurl = process.env.REACT_APP_API_URL;
 
 export const leaveService = {
     create,
@@ -23,28 +24,28 @@ function header_params(methodType, object = '') {
 }
 
 function getAll() {
-    return fetch(`${config.BackendUrl}/leaves`, header_params('GET')).then(handleResponse);
+    return fetch(apiurl+`/leaves`, header_params('GET')).then(handleResponse);
 }
 
 function getById(id) {
-    return fetch(`${config.BackendUrl}/leaves/${id}`, header_params('GET')).then(handleResponse);
+    return fetch(apiurl+`/leaves/${id}`, header_params('GET')).then(handleResponse);
 }
 
 function getByUserid(userid) {
-    return fetch(`${config.BackendUrl}/users/${userid}/leaves`, header_params('GET')).then(handleResponse);
+    return fetch(apiurl+`/users/${userid}/leaves`, header_params('GET')).then(handleResponse);
 }
 
 function create(leave) {
-    return fetch(`${config.BackendUrl}/leave/create`, header_params('POST',leave)).then(handleResponse);
+    return fetch(apiurl+`/leave/create`, header_params('POST',leave)).then(handleResponse);
 }
 
 function update(leave) {
-    return fetch(`${config.BackendUrl}/leaves/${leave.id}`, header_params('PUT',leave)).then(handleResponse);
+    return fetch(apiurl+`/leaves/${leave.id}`, header_params('PUT',leave)).then(handleResponse);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
-    return fetch(`${config.BackendUrl}/leaves/${id}`, header_params('DELETE')).then(handleResponse);
+    return fetch(apiurl+`/leaves/${id}`, header_params('DELETE')).then(handleResponse);
 }
 
 function handleResponse(response) {
@@ -54,7 +55,7 @@ function handleResponse(response) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 //logout();
-                location.reload(true);
+                window.location.reload(true);
             }
 
             const error = (data && data.message) || response.statusText;

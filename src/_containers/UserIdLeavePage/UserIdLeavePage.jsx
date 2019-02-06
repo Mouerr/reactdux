@@ -43,8 +43,13 @@ class UserIdLeavePage extends React.Component {
                             <td>{leave.cause}</td>
                             <td>{
                                 leave.deleting ? <em> - Deleting...</em>
-                                    : leave.deleteError ? <span className="text-danger"> - ERROR: {leave.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteleave(leave.id)}>Delete</a></span>
+                                    : leave.deleteError ?
+                                    <span className="text-danger"> - ERROR: {leave.deleteError}</span>
+                                    : <div className="col-sm-12 text-center">
+                                        <button className="btn btn-danger btn-md"
+                                                onClick={this.handleDeleteleave(leave.id)}>Delete
+                                        </button>
+                                    </div>
                             }</td>
                         </tr>
                     )}

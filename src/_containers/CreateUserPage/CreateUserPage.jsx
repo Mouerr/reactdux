@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import UserForm from '../../_components/User/UserForm';
 
 import {userActions} from '../../_actions';
-import LeaveForm from "../CreateLeavePage/CreateLeavePage";
 
 class CreateUserPage extends React.Component {
     constructor(props) {

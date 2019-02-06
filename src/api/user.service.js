@@ -1,5 +1,6 @@
-import config from 'config';
 import {authHeader} from '../_helpers';
+
+const apiurl = process.env.REACT_APP_API_URL;
 
 export const userService = {
     login,
@@ -78,7 +79,7 @@ function loginAsRegistered(email, password) {
                     apiuser.email = apiuser.username;
                     apiuser.password = password;
 
-                    return fetch(`${config.BackendUrl}/user/create`,
+                    return fetch(apiurl+`/user/create`,
                         header_params('POST', apiuser)).then(handleResponse).then(user => {
                         localStorage.setItem('user', JSON.stringify(user));
                         return user;
@@ -95,27 +96,27 @@ function logout() {
 }
 
 function getAll() {
-    return fetch(`${config.BackendUrl}/users`, header_params('GET')).then(handleResponse).then(users => {
+    return fetch(apiurl+`/users`, header_params('GET')).then(handleResponse).then(users => {
         localStorage.setItem('stored_users', JSON.stringify(users));
         return users;
     });
 }
 
 function getById(id) {
-    return fetch(`${config.BackendUrl}/users/${id}`, header_params('GET')).then(handleResponse);
+    return fetch(apiurl+`/users/${id}`, header_params('GET')).then(handleResponse);
 }
 
 function create(user) {
-    return fetch(`${config.BackendUrl}/user/create`,header_params('POST', user)).then(handleResponse);
+    return fetch(apiurl+`/user/create`,header_params('POST', user)).then(handleResponse);
 }
 
 function update(user) {
-    return fetch(`${config.BackendUrl}/users/${user.id}`, header_params('PUT', user)).then(handleResponse);
+    return fetch(apiurl+`/users/${user.id}`, header_params('PUT', user)).then(handleResponse);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
-    return fetch(`${config.BackendUrl}/users/${id}`, header_params('DELETE')).then(handleResponse);
+    return fetch(apiurl+`/users/${id}`, header_params('DELETE')).then(handleResponse);
 }
 
 function handleResponse(response) {
@@ -125,7 +126,7 @@ function handleResponse(response) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 logout();
-                location.reload(true);
+                window.location.reload(true);
             }
 
             var error;
