@@ -12,7 +12,12 @@ class LeavePage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(leaveActions.getAll());
+        if (this.props.match.url === '/leaves'){
+            this.props.dispatch(leaveActions.getAll());
+        }else{
+            const userid = this.props.match.params.userid;
+            this.props.dispatch(leaveActions.getByUserid(userid));
+        }
     }
 
     handleDeleteLeave(id) {
