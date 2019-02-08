@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import LoginForm from '../../_components/Login/LoginForm';
+import LoginForm from '../../components/Login/Form';
 
 import {userActions} from '../../_actions';
 
-class LoginPage extends Component {
+class LoginFormContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -58,5 +58,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(LoginPage);
-export {connectedLoginPage as LoginPage};
+const connectedLoginFormContainer = connect(mapStateToProps)(LoginFormContainer);
+export {connectedLoginFormContainer as LoginFormContainer};

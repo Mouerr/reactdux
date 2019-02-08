@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-class NotFoundPage extends React.Component {
+class NotFoundShowContainer extends React.Component {
 
     render() {
         return (
@@ -13,5 +13,5 @@ class NotFoundPage extends React.Component {
     }
 }
 
-const connectedNotFoundPage = connect()(NotFoundPage);
-export {connectedNotFoundPage as NotFoundPage};
+const connectedNotFoundShowContainer = connect()(NotFoundShowContainer);
+export {connectedNotFoundShowContainer as NotFoundShowContainer};

@@ -4,13 +4,13 @@ import {connect} from 'react-redux';
 
 import {history} from './_helpers';
 import {alertActions} from './_actions';
-import {PrivateRoute} from './_containers';
-import {UserPage} from './_containers/UserPage';
-import {LeavePage} from './_containers/LeavePage';
-import {LoginPage} from './_containers/LoginPage/LoginPage';
-import {CreateUserPage} from './_containers/CreateUserPage';
-import {CreateLeavePage} from './_containers/CreateLeavePage';
-import {NotFoundPage} from './_containers/NotFoundPage';
+import {PrivateRoute} from './containers';
+import {UserListContainer} from './containers/User';
+import {LeaveListContainer} from './containers/Leave';
+import {LoginFormContainer} from './containers/Login/Form';
+import {UserFormContainer} from './containers/User';
+import {LeaveFormContainer} from './containers/Leave';
+import {NotFoundShowContainer} from './containers/NotFound';
 
 class App extends Component {
     constructor(props) {
@@ -36,13 +36,15 @@ class App extends Component {
                             <Router history={history}>
                                 <div>
                                     <Switch>
-                                        <PrivateRoute exact path="/users" component={UserPage}/>
-                                        <PrivateRoute exact path="/leaves" component={LeavePage}/>
-                                        <PrivateRoute exact path="/leave/create" component={CreateLeavePage}/>
-                                        <PrivateRoute exact path="/user/:userid/leaves" component={LeavePage}/>
-                                        <PrivateRoute exact path="/user/create" component={CreateUserPage}/>
-                                        <Route exact path="/login" component={LoginPage}/>
-                                        <Route path="" component={NotFoundPage}/>
+                                        <PrivateRoute exact path="/user/list" container={UserListContainer}/>
+                                        <PrivateRoute exact path="/user/create" container={UserFormContainer}/>
+                                        <PrivateRoute exact path="/user/update/:userid" container={UserFormContainer}/>
+                                        <PrivateRoute exact path="/leave/list" container={LeaveListContainer}/>
+                                        <PrivateRoute exact path="/leave/create" container={LeaveFormContainer}/>
+                                        <PrivateRoute exact path="/leave/update/:leaveid" container={LeaveFormContainer}/>
+                                        <PrivateRoute exact path="/user/:userid/leaves" container={LeaveListContainer}/>
+                                        <Route exact path="/login" component={LoginFormContainer}/>
+                                        <PrivateRoute path="" container={NotFoundShowContainer}/>
                                     </Switch>
                                 </div>
                             </Router>

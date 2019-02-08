@@ -39,6 +39,7 @@ export default function UserList(props) {
                                     <button className="btn btn-danger btn-md"
                                             onClick={onDelete(user.id)}>Delete
                                     </button>
+                                    <Link className="btn btn-primary btn-md" to={"/user/update/" + user.id}>Update</Link>
                                 </div>
                         }</td>
                     </tr>

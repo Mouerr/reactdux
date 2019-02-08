@@ -2,6 +2,18 @@ import { userConstants } from '../_constants';
 
 export function users(state = {}, action) {
   switch (action.type) {
+    case userConstants.CREATE_REQUEST:
+      return { submitting: true };
+    case userConstants.CREATE_SUCCESS:
+      return {};
+    case userConstants.CREATE_FAILURE:
+      return {};
+    case userConstants.UPDATE_REQUEST:
+      return { submitting: true };
+    case userConstants.UPDATE_SUCCESS:
+      return {};
+    case userConstants.UPDATE_FAILURE:
+      return {};
     case userConstants.GETALL_REQUEST:
       return {
         loading: true
@@ -12,6 +24,19 @@ export function users(state = {}, action) {
       };
     case userConstants.GETALL_FAILURE:
       return { 
+        error: action.error
+      };
+    case userConstants.GETBYID_REQUEST:
+      return {
+        loading: true,
+        user: action.user
+      };
+    case userConstants.GETBYID_SUCCESS:
+      return {
+        item: action.user
+      };
+    case userConstants.GETBYID_FAILURE:
+      return {
         error: action.error
       };
     case userConstants.DELETE_REQUEST:

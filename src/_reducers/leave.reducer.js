@@ -2,19 +2,44 @@ import { leaveConstants } from '../_constants';
 
 export function leaves(state = {}, action) {
   switch (action.type) {
-    case leaveConstants.GETALL_LEAVE_REQUEST:
+    case leaveConstants.CREATE_REQUEST:
+      return { submitting: true };
+    case leaveConstants.CREATE_SUCCESS:
+      return {};
+    case leaveConstants.CREATE_FAILURE:
+      return {};
+    case leaveConstants.UPDATE_REQUEST:
+      return { submitting: true };
+    case leaveConstants.UPDATE_SUCCESS:
+      return {};
+    case leaveConstants.UPDATE_FAILURE:
+      return {};
+    case leaveConstants.GETALL_REQUEST:
       return {
         loading: true
       };
-    case leaveConstants.GETALL_LEAVE_SUCCESS:
+    case leaveConstants.GETALL_SUCCESS:
       return {
         items: action.leaves
       };
-    case leaveConstants.GETALL_LEAVE_FAILURE:
+    case leaveConstants.GETALL_FAILURE:
       return { 
         error: action.error
       };
-    case leaveConstants.DELETE_LEAVE_REQUEST:
+    case leaveConstants.GETBYID_REQUEST:
+      return {
+        loading: true,
+        leave: action.leave
+      };
+    case leaveConstants.GETBYID_SUCCESS:
+      return {
+        item: action.leave
+      };
+    case leaveConstants.GETBYID_FAILURE:
+      return {
+        error: action.error
+      };
+    case leaveConstants.DELETE_REQUEST:
       // add 'deleting:true' property to leave being deleted
       return {
         ...state,
@@ -24,12 +49,12 @@ export function leaves(state = {}, action) {
             : leave
         )
       };
-    case leaveConstants.DELETE_LEAVE_SUCCESS:
+    case leaveConstants.DELETE_SUCCESS:
       // remove deleted leave from state
       return {
         items: state.items.filter(leave => leave.id !== action.id)
       };
-    case leaveConstants.DELETE_LEAVE_FAILURE:
+    case leaveConstants.DELETE_FAILURE:
       // remove 'deleting:true' property and add 'deleteError:[error]' property to leave 
       return {
         ...state,

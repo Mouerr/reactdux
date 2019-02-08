@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import LeaveList from '../../_components/User/UserList';
+import LeaveList from '../../components/User/List';
 
 import {userActions} from '../../_actions';
 
-class UserPage extends React.Component {
+class UserListContainer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -37,5 +37,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedUserPage = connect(mapStateToProps)(UserPage);
-export {connectedUserPage as UserPage};
+const connectedUserListContainer = connect(mapStateToProps)(UserListContainer);
+export {connectedUserListContainer as UserListContainer};

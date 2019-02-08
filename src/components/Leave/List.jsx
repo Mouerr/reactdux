@@ -36,6 +36,7 @@ export default function LeaveList(props) {
                                     <button className="btn btn-danger btn-md"
                                             onClick={onDelete(leave.id)}>Delete
                                     </button>
+                                    <Link className="btn btn-primary btn-md" to={"/leave/update/" + leave.id}>Update</Link>
                                 </div>
                         }</td>
                     </tr>

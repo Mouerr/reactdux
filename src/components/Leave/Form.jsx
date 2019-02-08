@@ -7,7 +7,7 @@ export default function LeaveForm(props) {
 
     return (
         <div className="col-md-6 col-md-offset-3">
-            <h2>Create Leave</h2>
+            <h2>{leave.id ? 'Update Leave': 'Create Leave'}</h2>
             <form name="form" onSubmit={onSubmit}>
                 <div className={'form-group' + (submitted && !leave.fromdate ? ' has-error' : '')}>
                     <label htmlFor="fromdate">FROM DATE</label>
@@ -27,7 +27,7 @@ export default function LeaveForm(props) {
                 <div className={'form-group' + (submitted && !leave.leavetype ? ' has-error' : '')}>
                     <label htmlFor="leavetype">Leave Type</label>
 
-                    <select className="form-control" name="leavetype" onChange={onChange}>
+                    <select className="form-control" name="leavetype" value={leave.leavetype} onChange={onChange}>
                         <option value="0">Select type</option>
                         <option value="0" disabled="">---------------</option>
                         <option value="Special leave">Special leave</option>
@@ -42,7 +42,7 @@ export default function LeaveForm(props) {
                 </div>
                 <div className={'form-group' + (submitted && !leave.cause ? ' has-error' : '')}>
                     <label htmlFor="cause">Cause</label>
-                    <textarea className="form-control" name="cause" onChange={onChange} defaultValue={leave.cause}/>
+                    <textarea className="form-control" name="cause" onChange={onChange} value={leave.cause}/>
                     {submitted && !leave.cause &&
                     <div className="help-block">cause is required</div>
                     }

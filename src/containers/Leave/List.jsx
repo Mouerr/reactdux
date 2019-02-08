@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import LeaveList from '../../_components/Leave/LeaveList';
+import LeaveList from '../../components/Leave/List';
 
 import {leaveActions} from '../../_actions';
 
-class LeavePage extends React.Component {
+class LeaveListContainer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -12,7 +12,7 @@ class LeavePage extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.match.url === '/leaves'){
+        if (this.props.match.url === '/leave/list'){
             this.props.dispatch(leaveActions.getAll());
         }else{
             const userid = this.props.match.params.userid;
@@ -42,5 +42,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedLeavePage = connect(mapStateToProps)(LeavePage);
-export {connectedLeavePage as LeavePage};
+const connectedLeaveListContainer = connect(mapStateToProps)(LeaveListContainer);
+export {connectedLeaveListContainer as LeaveListContainer};
