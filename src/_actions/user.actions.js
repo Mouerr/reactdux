@@ -17,7 +17,8 @@ function login(email, password) {
     return dispatch => {
         dispatch(request({ email }));
 
-        userService.loginAsRegistered(email, password)
+        //userService.loginAsRegistered(email, password)
+        userService.login(email, password)
             .then(
                 user => {
                     dispatch(success(user));

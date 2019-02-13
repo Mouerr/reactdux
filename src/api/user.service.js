@@ -27,23 +27,13 @@ function header_params(methodType, object = '') {
 
 function login(email, password) {
 
-    var header = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: email, password: password})
-    };
-
-    return fetch(`http://web.gmpanel.net:8093/api/users/api-token-auth/`, header)
+    return fetch(apiurl+`/users/authenticate?username=${email}&password=${password}`,
+        header_params('GET'))
         .then(handleResponse)
         .then(user => {
-
-            if (user.token !== '') {
-                let responseJson = {
-                    email: email,
-                    token: user.token
-                };
+            if (user.length) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(responseJson));
+                localStorage.setItem('user', JSON.stringify(user[0]));
                 return user;
             }
         });
@@ -137,6 +127,15 @@ function handleResponse(response) {
             }
             return Promise.reject(error);
         }
-        return data;
+        if (response.url.match(new RegExp(/\/users\/authenticate(\?|&)([^=]+)=([^&]+)/))) {
+            if (data.length) {
+                return data;
+            } else {
+                const error = 'Username or password is incorrect';
+                return Promise.reject(error);
+            }
+        } else {
+            return data;
+        }
     });
 }

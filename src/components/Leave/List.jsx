@@ -9,7 +9,6 @@ export default function LeaveList(props) {
     return (
         <div className="col-md-12">
             <h3>Leaves List:</h3>
-            <p><Link to="/leave/create">Create Leave</Link></p>
             {leaves.loading && <em>Loading leaves...</em>}
             {leaves.error && <span className="text-danger">ERROR: {leaves.error}</span>}
             {leaves.items &&

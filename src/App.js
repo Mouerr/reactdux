@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
-import {Router, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {history} from './_helpers';
+import {history, registered_routes, PrivateRoute} from './_helpers';
 import {alertActions} from './_actions';
-import {PrivateRoute} from './containers';
-import {UserListContainer} from './containers/User';
-import {LeaveListContainer} from './containers/Leave';
 import {LoginFormContainer} from './containers/Login/Form';
-import {UserFormContainer} from './containers/User';
-import {LeaveFormContainer} from './containers/Leave';
 import {NotFoundShowContainer} from './containers/NotFound';
 
 class App extends Component {
@@ -24,33 +19,47 @@ class App extends Component {
     }
 
     render() {
-        const {alert} = this.props;
+        const {alert, loggedIn} = this.props;
+        const user = JSON.parse(localStorage.getItem('user'));
+
         return (
             <div className="App">
-                <div className="jumbotron">
-                    <div className="container">
-                        <div className="col-md-12">
-                            {alert.message &&
-                            <div className={`alert ${alert.type}`}>{alert.message}</div>
-                            }
-                            <Router history={history}>
-                                <div>
-                                    <Switch>
-                                        <PrivateRoute exact path="/user/list" container={UserListContainer}/>
-                                        <PrivateRoute exact path="/user/create" container={UserFormContainer}/>
-                                        <PrivateRoute exact path="/user/update/:userid" container={UserFormContainer}/>
-                                        <PrivateRoute exact path="/leave/list" container={LeaveListContainer}/>
-                                        <PrivateRoute exact path="/leave/create" container={LeaveFormContainer}/>
-                                        <PrivateRoute exact path="/leave/update/:leaveid" container={LeaveFormContainer}/>
-                                        <PrivateRoute exact path="/user/:userid/leaves" container={LeaveListContainer}/>
-                                        <Route exact path="/login" component={LoginFormContainer}/>
-                                        <PrivateRoute path="" container={NotFoundShowContainer}/>
-                                    </Switch>
+                {alert.message &&
+                <div className={`alert ${alert.type}`}>{alert.message}</div>
+                }
+                <Router history={history}>
+                    <div>
+                        {loggedIn && <nav className="navbar navbar-inverse">
+                            <div className="container-fluid">
+                                <div className="navbar-header">
+                                    <Link to="#" className="navbar-brand">REACT LOGIN</Link>
                                 </div>
-                            </Router>
+                                <ul className="nav navbar-nav">
+                                    {user && registered_routes.map((route, index) =>
+                                        user.routes && user.routes.indexOf(route.path) !==-1 && route.navbar &&
+                                        <li key={index}><Link to={route.path}>{route.label}</Link></li>
+                                    )}
+                                </ul>
+                                <ul className="nav navbar-nav navbar-right">
+                                    <li><Link to="/login"><span
+                                        className="glyphicon glyphicon-log-out"/> Logout</Link></li>
+                                </ul>
+                            </div>
+                        </nav>}
+                        <div className="container">
+                            <div className="col-md-12">
+                                <Switch>
+                                    {user && registered_routes.map((route, index) =>
+                                        user.routes && user.routes.indexOf(route.path) !==-1 &&
+                                        <PrivateRoute key={index} exact path={route.path} container={route.container}/>
+                                    )}
+                                    <Route exact path="/login" component={LoginFormContainer}/>
+                                    <PrivateRoute path="" container={NotFoundShowContainer}/>
+                                </Switch>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Router>
             </div>
         );
     }
@@ -58,8 +67,10 @@ class App extends Component {
 
 function mapStateToProps(state) {
     const {alert} = state;
+    const {loggedIn} = state.authentication;
+
     return {
-        alert
+        alert, loggedIn
     };
 }
 
