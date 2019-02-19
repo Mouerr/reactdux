@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {Router, Route, Switch, Link} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {Container, Row, Col, Alert} from 'reactstrap';
 
 import {history, registered_routes, PrivateRoute} from './_helpers';
 import {alertActions} from './_actions';
 import {LoginFormContainer} from './containers/Login/Form';
 import {NotFoundShowContainer} from './containers/NotFound';
+
+import AppNavbar from './components/AppNavbar'
 
 class App extends Component {
     constructor(props) {
@@ -24,41 +27,32 @@ class App extends Component {
 
         return (
             <div className="App">
-                {alert.message &&
-                <div className={`alert ${alert.type}`}>{alert.message}</div>
-                }
                 <Router history={history}>
-                    <div>
-                        {loggedIn && <nav className="navbar navbar-inverse">
-                            <div className="container-fluid">
-                                <div className="navbar-header">
-                                    <Link to="#" className="navbar-brand">REACT LOGIN</Link>
-                                </div>
-                                <ul className="nav navbar-nav">
-                                    {user && registered_routes.map((route, index) =>
-                                        user.routes && user.routes.indexOf(route.path) !==-1 && route.navbar &&
-                                        <li key={index}><Link to={route.path}>{route.label}</Link></li>
-                                    )}
-                                </ul>
-                                <ul className="nav navbar-nav navbar-right">
-                                    <li><Link to="/login"><span
-                                        className="glyphicon glyphicon-log-out"/> Logout</Link></li>
-                                </ul>
-                            </div>
-                        </nav>}
-                        <div className="container">
+                    <React.Fragment>
+
+                        <AppNavbar loggedIn={loggedIn} user={user} registered_routes={registered_routes}/>
+
+                        <Container>
+                            {alert.message && <Row>
+                                <Col sm="12">
+                                    <Alert color={alert.type}>
+                                        {alert.message}
+                                    </Alert>
+                                </Col>
+                            </Row>}
                             <div className="col-md-12">
                                 <Switch>
                                     {user && registered_routes.map((route, index) =>
-                                        user.routes && user.routes.indexOf(route.path) !==-1 &&
-                                        <PrivateRoute key={index} exact path={route.path} container={route.container}/>
+                                        user.routes && user.routes.indexOf(route.path) !== -1 &&
+                                        <PrivateRoute key={index} exact path={route.path}
+                                                      container={route.container}/>
                                     )}
                                     <Route exact path="/login" component={LoginFormContainer}/>
                                     <PrivateRoute path="" container={NotFoundShowContainer}/>
                                 </Switch>
                             </div>
-                        </div>
-                    </div>
+                        </Container>
+                    </React.Fragment>
                 </Router>
             </div>
         );

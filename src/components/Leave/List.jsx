@@ -1,24 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {Button, Table} from 'reactstrap';
 
 export default function LeaveList(props) {
 
     const {leaves, onDelete} = props;
 
     return (
-        <div className="col-md-12">
-            <h3>Leaves List:</h3>
+        <React.Fragment>
+            <div className='pb-2 mt-4 mb-2'>
+                <h3>Leaves List:</h3>
+            </div>
             {leaves.loading && <em>Loading leaves...</em>}
             {leaves.error && <span className="text-danger">ERROR: {leaves.error}</span>}
             {leaves.items &&
-            <table className="table table-hover">
+            <Table hover striped responsive>
                 <thead>
                 <tr>
-                    <th>From DATE</th>
-                    <th>TO DATE</th>
-                    <th>LEAVE TYPE</th>
-                    <th>CAUSE</th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Leave Type</th>
+                    <th>Cause</th>
+                    <th className='text-center'>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,18 +36,16 @@ export default function LeaveList(props) {
                             leave.deleting ? <em> - Deleting...</em>
                                 : leave.deleteError ? <span className="text-danger"> - ERROR: {leave.deleteError}</span>
                                 : <div className="col-sm-12 text-center">
-                                    <button className="btn btn-danger btn-md"
-                                            onClick={onDelete(leave.id)}>Delete
-                                    </button>
-                                    <Link className="btn btn-primary btn-md" to={"/leave/update/" + leave.id}>Update</Link>
+                                    <Button color='danger' onClick={onDelete(leave.id)}>Delete</Button>{' '}
+                                    <Button color='primary' tag={Link} to={"/leave/update/" + leave.id}>Update</Button>
                                 </div>
                         }</td>
                     </tr>
                 )}
                 </tbody>
-            </table>
+            </Table>
             }
-        </div>
+        </React.Fragment>
     )
 }
 LeaveList.propTypes = {
