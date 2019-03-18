@@ -115,8 +115,14 @@ function _delete(id) {
 
         leaveService.delete(id)
             .then(
-                leave => dispatch(success(id)),
-                error => dispatch(failure(id, error.toString()))
+                leave => {
+                    dispatch(success(id));
+                    dispatch(alertActions.success('Leave successfully Deleted'));
+                },
+                error => {
+                    dispatch(failure(id, error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
             );
     };
 

@@ -1,44 +1,82 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import LeaveList from '../../components/Leave/List';
+import {datatableActions} from '../../_actions';
+import DataTableContainer from "../DataTable";
+import {leavestate} from '../../_helpers/const_state';
 
-import {leaveActions} from '../../_actions';
-
-class LeaveListContainer extends React.Component {
+class LeaveListContainer extends Component {
     constructor(props) {
         super(props);
-
-        this.handleDeleteLeave = this.handleDeleteLeave.bind(this);
+        this.state = {
+            page: 1,
+            sizePerPage: 10,
+            totalSize: 100,
+            columns: leavestate
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleFilter = this.handleFilter.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
-        if (this.props.match.url === '/leave/list'){
-            this.props.dispatch(leaveActions.getAll());
-        }else{
+        if (this.props.match.url === '/leave/list') {
+            this.props.dispatch(datatableActions.getAll('leave'));
+        } else {
             const userid = this.props.match.params.userid;
-            this.props.dispatch(leaveActions.getByUserid(userid));
+            this.props.dispatch(datatableActions.getByUserid(userid));
         }
     }
 
-    handleDeleteLeave(id) {
-        return (e) => this.props.dispatch(leaveActions.delete(id));
+    handleToggle() {
+        this.props.dispatch(datatableActions.toggleModal());
+    }
+
+    handleDelete(id) {
+        return (e) => this.props.dispatch(datatableActions.delete('leave', id));
+    }
+
+    handleSubmit(object) {
+        this.props.dispatch(datatableActions.create('leave', object));
+        this.handleToggle();
+    }
+
+    handleUpdate(editedRow) {
+        this.props.dispatch(datatableActions.update('leave', editedRow));
+    }
+
+    handleFilter(conditions) {
+        this.props.dispatch(datatableActions.filter('leave', conditions));
     }
 
     render() {
-        const {leaves} = this.props;
+        const {sizePerPage, page, totalSize} = this.state;
+        const {items, loading, modal} = this.props;
+
         return (
-            <LeaveList
-                leaves={leaves}
-                onDelete={this.handleDeleteLeave}
+            <DataTableContainer
+                data={items}
+                columns={this.state.columns}
+                loading={loading}
+                page={page}
+                sizePerPage={sizePerPage}
+                totalSize={totalSize}
+                onSubmit={this.handleSubmit}
+                onUpdate={this.handleUpdate}
+                onFilter={this.handleFilter}
+                onToggle={this.handleToggle}
+                onDelete={this.handleDelete}
+                modal={modal}
             />
         );
     }
 }
 
 function mapStateToProps(state) {
-    const {leaves} = state;
+    const {items, loading, modal} = state.datatable;
     return {
-        leaves
+        items, loading, modal
     };
 }
 

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import UserForm from '../../components/User/Form';
 
 import {userActions} from '../../_actions';
 
-class UserFormContainer extends React.Component {
+class UserFormContainer extends Component {
     constructor(props) {
         super(props);
 

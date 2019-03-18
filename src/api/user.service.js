@@ -8,13 +8,14 @@ export const userService = {
     create,
     getAll,
     loginAsRegistered,
+    getByDataTableFilter,
     getById,
     update,
     delete: _delete
 };
 
 function header_params(methodType, object = '') {
-    var header = {
+    let header = {
         method: methodType,
         headers: {'Content-Type': 'application/json', headers: authHeader()},
         credentials: 'same-origin',
@@ -41,7 +42,7 @@ function login(email, password) {
 
 function loginAsRegistered(email, password) {
 
-    var header = {
+    const header = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email: email, password: password})
@@ -86,7 +87,7 @@ function logout() {
 }
 
 function getAll() {
-    return fetch(apiurl+`/users`, header_params('GET')).then(handleResponse).then(users => {
+    return fetch(apiurl+`/users?_limit=10`, header_params('GET')).then(handleResponse).then(users => {
         localStorage.setItem('stored_users', JSON.stringify(users));
         return users;
     });
@@ -94,6 +95,10 @@ function getAll() {
 
 function getById(id) {
     return fetch(apiurl+`/users/${id}`, header_params('GET')).then(handleResponse);
+}
+
+function getByDataTableFilter(params_filters) {
+    return fetch(apiurl+`/users${params_filters}`, header_params('GET')).then(handleResponse);
 }
 
 function create(user) {
@@ -119,7 +124,7 @@ function handleResponse(response) {
                 window.location.reload(true);
             }
 
-            var error;
+            let error;
             if (response.url.endsWith('/api/users/api-token-auth/')) {
                 error = (data && data.non_field_errors[0]) || response.statusText;
             } else {

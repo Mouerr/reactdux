@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LeaveForm from '../../components/Leave/Form';
 
 import {leaveActions} from '../../_actions';
 
-class LeaveFormContainer extends React.Component {
+class LeaveFormContainer extends Component {
     constructor(props) {
         super(props);
 

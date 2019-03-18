@@ -1,6 +1,6 @@
 import { leaveConstants } from '../_constants';
 
-export function leaves(state = {}, action) {
+export function leaves(state = {items: [],loading: false}, action) {
   switch (action.type) {
     case leaveConstants.CREATE_REQUEST:
       return { submitting: true };
@@ -20,6 +20,7 @@ export function leaves(state = {}, action) {
       };
     case leaveConstants.GETALL_SUCCESS:
       return {
+        loading: false,
         items: action.leaves
       };
     case leaveConstants.GETALL_FAILURE:
@@ -33,6 +34,7 @@ export function leaves(state = {}, action) {
       };
     case leaveConstants.GETBYID_SUCCESS:
       return {
+        loading: false,
         item: action.leave
       };
     case leaveConstants.GETBYID_FAILURE:

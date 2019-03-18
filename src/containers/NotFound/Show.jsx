@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-class NotFoundShowContainer extends React.Component {
+class NotFoundShowContainer extends Component {
 
     render() {
         return (

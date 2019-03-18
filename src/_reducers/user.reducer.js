@@ -1,6 +1,6 @@
 import { userConstants } from '../_constants';
 
-export function users(state = {}, action) {
+export function users(state = {items: [],loading: false}, action) {
   switch (action.type) {
     case userConstants.CREATE_REQUEST:
       return { submitting: true };
@@ -20,6 +20,7 @@ export function users(state = {}, action) {
       };
     case userConstants.GETALL_SUCCESS:
       return {
+        loading: false,
         items: action.users
       };
     case userConstants.GETALL_FAILURE:

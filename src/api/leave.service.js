@@ -5,6 +5,7 @@ const apiurl = process.env.REACT_APP_API_URL;
 export const leaveService = {
     create,
     getAll,
+    getByDataTableFilter,
     getById,
     getByUserid,
     update,
@@ -12,7 +13,7 @@ export const leaveService = {
 };
 
 function header_params(methodType, object = '') {
-    var header =  {
+    let header = {
         method: methodType,
         headers: {'Content-Type': 'application/json', headers: authHeader()},
         credentials: 'same-origin',
@@ -24,7 +25,7 @@ function header_params(methodType, object = '') {
 }
 
 function getAll() {
-    return fetch(apiurl+`/leaves`, header_params('GET')).then(handleResponse);
+    return fetch(apiurl+`/leaves?_limit=10`, header_params('GET')).then(handleResponse);
 }
 
 function getById(id) {
@@ -33,6 +34,10 @@ function getById(id) {
 
 function getByUserid(userid) {
     return fetch(apiurl+`/users/${userid}/leaves`, header_params('GET')).then(handleResponse);
+}
+
+function getByDataTableFilter(params_filters) {
+    return fetch(apiurl + `/leaves${params_filters}`, header_params('GET')).then(handleResponse);
 }
 
 function create(leave) {

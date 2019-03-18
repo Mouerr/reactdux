@@ -19,7 +19,7 @@ const registered_routes = [
     {path: '/leave/list', container: LeaveListContainer, navbar: true, label: 'Leave List'},
     {path: '/user/:userid/leaves', container: LeaveListContainer, navbar: false, label: 'User Leaves'},
     {path: '/leave/create', container: LeaveFormContainer, navbar: true, label: 'Leave Create'},
-    {path: '/leave/update/:userid', container: LeaveFormContainer, navbar: false, label: 'Leave Update'},
+    {path: '/leave/update/:leaveid', container: LeaveFormContainer, navbar: false, label: 'Leave Update'},
 ];
 
 export {PrivateRoute, registered_routes};

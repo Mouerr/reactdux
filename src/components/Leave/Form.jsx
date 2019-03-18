@@ -41,8 +41,7 @@ export default function LeaveForm(props) {
                             <Col sm={10}>
                                 <Input type="select" name="leavetype" value={leave.leavetype} onChange={onChange}
                                        invalid={!!(submitted && !leave.leavetype)}>
-                                    <option value="0">Select type</option>
-                                    <option value="0" disabled>---------------</option>
+                                    <option value="0">Select option</option>
                                     {leavetypes.map((leavetype, index) =>
                                         <option value={leavetype} key={index}>{leavetype}</option>
                                     )}
