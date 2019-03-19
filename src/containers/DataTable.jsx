@@ -98,12 +98,8 @@ export default class DataTableContainer extends Component {
                 });
                 onUpdate(editedRow);
             } else {
-                onFilter(conditions);
-                this.setState(() => ({
-                    page,
-                    totalSize: 100,
-                    sizePerPage
-                }));
+                const totalSize = 100;
+                onFilter(conditions, page, sizePerPage, totalSize);
             }
         }, 500);
     };
@@ -195,9 +191,9 @@ DataTableContainer.propTypes = {
     page: PropTypes.number.isRequired,
     totalSize: PropTypes.number.isRequired,
     sizePerPage: PropTypes.number.isRequired,
-    onSubmit:PropTypes.func.isRequired,
-    onUpdate:PropTypes.func.isRequired,
-    onFilter:PropTypes.func.isRequired,
-    onToggle:PropTypes.func.isRequired,
-    onDelete:PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired,
+    onFilter: PropTypes.func.isRequired,
+    onToggle: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 };

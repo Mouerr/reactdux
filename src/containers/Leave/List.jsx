@@ -46,8 +46,14 @@ class LeaveListContainer extends Component {
         this.props.dispatch(datatableActions.update('leave', editedRow));
     }
 
-    handleFilter(conditions) {
+    handleFilter(conditions, page, sizePerPage, totalSize) {
         this.props.dispatch(datatableActions.filter('leave', conditions));
+
+        this.setState({
+            page,
+            sizePerPage,
+            totalSize
+        });
     }
 
     render() {

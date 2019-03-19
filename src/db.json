@@ -200,8 +200,18 @@
     {
       "firstname": "Yassine",
       "lastname": "Ahammar",
-      "username": "ya.ahammar",
+      "username": "ahammar@gmpanel.net",
       "email": "ahammar@gmpanel.net",
+      "password": "ahammar2019",
+      "routes": [
+        "/user/list",
+        "/user/create",
+        "/leave/list",
+        "/leave/create",
+        "/user/:userid/leaves",
+        "/user/update/:userid",
+        "/leave/update/:leaveid"
+      ],
       "id": 71
     }
   ],

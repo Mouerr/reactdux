@@ -68,7 +68,7 @@ export default function UserForm(props) {
                         </FormGroup>
                         <FormGroup check row>
                             <Col sm={{size: 6, offset: 2}}>
-                                <Button color='primary'>Login</Button>
+                                <Button color='primary'>Submit</Button>
                                 {submitting && <Spinner color="primary"/>}
                             </Col>
                         </FormGroup>

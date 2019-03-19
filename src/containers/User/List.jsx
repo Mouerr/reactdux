@@ -41,8 +41,14 @@ class UserListContainer extends Component {
         this.props.dispatch(datatableActions.update('user', editedRow));
     }
 
-    handleFilter(conditions) {
+    handleFilter(conditions, page, sizePerPage, totalSize) {
         this.props.dispatch(datatableActions.filter('user', conditions));
+
+        this.setState({
+            page,
+            sizePerPage,
+            totalSize
+        });
     }
 
     render() {
