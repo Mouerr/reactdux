@@ -49,7 +49,6 @@ class LeaveListContainer extends PureComponent {
     };
 
     render() {
-        console.log('inside render');
         const {sizePerPage, page, totalSize} = this.state;
         const {items, loading, modal} = this.props;
 

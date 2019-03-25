@@ -7,7 +7,7 @@ import {
 
 const ModalC = props => {
     const {dt_object, columns, onSubmit, onChange, onToggle, modal, submitted, title} = props;
-    console.log('render modal');
+
     return <div>
         <Button onClick={onToggle} color="primary">{title}</Button>
         <Modal isOpen={modal} toggle={onToggle}>
@@ -48,4 +48,4 @@ const ModalC = props => {
         </Modal>
     </div>
 };
-export default ModalC;
+export default React.memo(ModalC);
