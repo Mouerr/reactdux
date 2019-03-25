@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    Form, Col, FormGroup, Input, Label, Button, FormFeedback, Spinner
-} from 'reactstrap';
+import {Form, Col, FormGroup, Input, Label, Button, FormFeedback, Spinner} from 'reactstrap';
 
-export default function LeaveForm(props) {
-
+const LeaveForm = props => {
     const {leave, submitted, submitting, onChange, onSubmit} = props;
     const leavetypes = ["Special leave", "Paid leave", "Sick leave", "National Holidays", "Religious Holidays"];
     return (
@@ -72,7 +69,7 @@ export default function LeaveForm(props) {
             </div>
         </React.Fragment>
     )
-}
+};
 
 LeaveForm.propTypes = {
     onChange: PropTypes.func.isRequired,
@@ -81,3 +78,5 @@ LeaveForm.propTypes = {
     submitted: PropTypes.bool.isRequired,
     submitting: PropTypes.bool
 };
+
+export default LeaveForm;

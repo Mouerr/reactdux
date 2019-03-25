@@ -1,24 +1,16 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {datatableActions} from '../../_actions';
 import DataTableContainer from "../DataTable";
 import {leavestate} from '../../_helpers/const_state';
 
-class LeaveListContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            page: 1,
-            sizePerPage: 10,
-            totalSize: 100,
-            columns: leavestate
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleUpdate = this.handleUpdate.bind(this);
-        this.handleFilter = this.handleFilter.bind(this);
-        this.handleToggle = this.handleToggle.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
-    }
+class LeaveListContainer extends PureComponent {
+    state = {
+        page: 1,
+        sizePerPage: 10,
+        totalSize: 100,
+        columns: leavestate
+    };
 
     componentDidMount() {
         if (this.props.match.url === '/leave/list') {
@@ -29,24 +21,24 @@ class LeaveListContainer extends Component {
         }
     }
 
-    handleToggle() {
+    handleToggle = () => {
         this.props.dispatch(datatableActions.toggleModal());
-    }
+    };
 
-    handleDelete(id) {
+    handleDelete = id => {
         return (e) => this.props.dispatch(datatableActions.delete('leave', id));
-    }
+    };
 
-    handleSubmit(object) {
+    handleSubmit = object => {
         this.props.dispatch(datatableActions.create('leave', object));
         this.handleToggle();
-    }
+    };
 
-    handleUpdate(editedRow) {
+    handleUpdate = editedRow => {
         this.props.dispatch(datatableActions.update('leave', editedRow));
-    }
+    };
 
-    handleFilter(conditions, page, sizePerPage, totalSize) {
+    handleFilter = (conditions, page, sizePerPage, totalSize) => {
         this.props.dispatch(datatableActions.filter('leave', conditions));
 
         this.setState({
@@ -54,9 +46,10 @@ class LeaveListContainer extends Component {
             sizePerPage,
             totalSize
         });
-    }
+    };
 
     render() {
+        console.log('inside render');
         const {sizePerPage, page, totalSize} = this.state;
         const {items, loading, modal} = this.props;
 

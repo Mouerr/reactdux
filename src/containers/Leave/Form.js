@@ -5,25 +5,16 @@ import LeaveForm from '../../components/Leave/Form';
 import {leaveActions} from '../../_actions';
 
 class LeaveFormContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        const user = JSON.parse(localStorage.getItem('user'));
-
-        this.state = {
-            leave: {
-                fromdate: '',
-                todate: '',
-                leavetype: '',
-                cause: '',
-                userId: user.id
-            },
-            submitted: false
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    state = {
+        leave: {
+            fromdate: '',
+            todate: '',
+            leavetype: '',
+            cause: '',
+            userId: JSON.parse(localStorage.getItem('user')).id
+        },
+        submitted: false
+    };
 
     componentDidMount() {
         if (this.props.match.url !== '/leave/create') {
@@ -52,23 +43,23 @@ class LeaveFormContainer extends Component {
         }
     }
 
-    handleChange(event) {
-        const { name, value } = event.target;
-        const { leave } = this.state;
+    handleChange = event => {
+        const {name, value} = event.target;
+        const {leave} = this.state;
         this.setState({
             leave: {
                 ...leave,
                 [name]: value
             }
         });
-    }
+    };
 
-    handleSubmit(event) {
+    handleSubmit = event => {
         event.preventDefault();
 
-        this.setState({ submitted: true });
-        const { leave } = this.state;
-        const { dispatch } = this.props;
+        this.setState({submitted: true});
+        const {leave} = this.state;
+        const {dispatch} = this.props;
         if (leave.fromdate && leave.leavetype && leave.todate && leave.cause) {
             if (this.props.match.url === '/leave/create') {
                 dispatch(leaveActions.create(leave));
@@ -76,10 +67,10 @@ class LeaveFormContainer extends Component {
                 dispatch(leaveActions.update(leave));
             }
         }
-    }
+    };
 
     render() {
-        const { submitting } = this.props;
+        const {submitting} = this.props;
         return (
             <LeaveForm
                 {...this.state}

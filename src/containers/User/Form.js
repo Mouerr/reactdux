@@ -5,25 +5,18 @@ import UserForm from '../../components/User/Form';
 import {userActions} from '../../_actions';
 
 class UserFormContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            user: {
-                firstname: '',
-                lastname: '',
-                username: '',
-                email: '',
-                password: '',
-                token: ''
-            },
-            submitted: false
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
+    state = {
+        user: {
+            firstname: '',
+            lastname: '',
+            username: '',
+            email: '',
+            password: '',
+            token: ''
+        },
+        submitted: false
+    };
+    
     componentDidMount() {
         if (this.props.match.url !== '/user/create') {
             const userid = this.props.match.params.userid;
@@ -51,7 +44,7 @@ class UserFormContainer extends Component {
         }
     }
 
-    handleChange(event) {
+    handleChange = event => {
         const {name, value} = event.target;
         const {user} = this.state;
         this.setState({
@@ -60,9 +53,9 @@ class UserFormContainer extends Component {
                 [name]: value
             }
         });
-    }
+    };
 
-    handleSubmit(event) {
+    handleSubmit = event => {
         event.preventDefault();
 
         this.setState({submitted: true});
@@ -75,7 +68,7 @@ class UserFormContainer extends Component {
                 dispatch(userActions.update(user));
             }
         }
-    }
+    };
 
     render() {
         const {submitting} = this.props;

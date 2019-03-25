@@ -4,8 +4,7 @@ import {
     Form, Col, FormGroup, Input, Label, Card, Button, CardHeader, CardBody, CardTitle, FormFeedback, Spinner
 } from 'reactstrap';
 
-export default function LoginForm(props) {
-
+const LoginForm = props => {
     const {loggingIn, email, password, submitted, onChange, onSubmit} = props;
     const cardstyle = {margin: '15%'};
     return (
@@ -46,9 +45,9 @@ export default function LoginForm(props) {
             </CardBody>
         </Card>
     )
-}
+};
 
-const isEmail = function (props, propName, componentName) {
+const isEmail = (props, propName, componentName) => {
     const regex = /^((([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})))?$/;
 
     if (!regex.test(props[propName])) {
@@ -64,3 +63,5 @@ LoginForm.propTypes = {
     loggingIn: PropTypes.bool,
     submitted: PropTypes.bool.isRequired
 };
+
+export default LoginForm;

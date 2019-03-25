@@ -3,51 +3,22 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import filterFactory from 'react-bootstrap-table2-filter';
+import ModalC from '../components/Modal';
 import PropTypes from 'prop-types';
-
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Form,
-    Col,
-    FormGroup,
-    Input,
-    Label,
-    FormFeedback
-} from 'reactstrap';
-
-const cellEditProps = {
-    mode: 'dbclick'
-};
-
-function isEmpty(obj) {
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key) && obj[key] === '')
-            return true;
-    }
-    return false;
-}
+import {Button} from 'reactstrap';
 
 export default class DataTableContainer extends Component {
     constructor(props) {
         super(props);
 
         const dt_object = Object.assign.apply({}, this.props.columns.map((el) => ({[el.dataField]: ''})));
-        //delete dt_object['id'];
-
         this.state = {
             dt_object,
             submitted: false
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
+    handleChange = event => {
         const {name, value} = event.target;
         const {dt_object} = this.state;
         this.setState({
@@ -56,16 +27,16 @@ export default class DataTableContainer extends Component {
                 [name]: value
             }
         });
-    }
+    };
 
-    handleSubmit(event) {
+    handleSubmit = event => {
         event.preventDefault();
         const {name} = event.target;
 
         this.setState({submitted: true});
         const {dt_object} = this.state;
 
-        if (isEmpty(dt_object) === false) {
+        if (this.isEmpty(dt_object) === false) {
             this.props.onSubmit(dt_object);
             this.setState({
                 dt_object: {
@@ -74,7 +45,7 @@ export default class DataTableContainer extends Component {
                 }
             });
         }
-    }
+    };
 
     handleTableChange = (type, {page, sizePerPage, filters, sortField, sortOrder, cellEdit}) => {
         let {data} = this.props;
@@ -104,10 +75,17 @@ export default class DataTableContainer extends Component {
         }, 500);
     };
 
+    isEmpty = obj => {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key) && obj[key] === '')
+                return true;
+        }
+        return false;
+    };
+
     render() {
         const {data, columns, loading, page, sizePerPage, totalSize, modal, onToggle, onDelete} = this.props;
         const {dt_object, submitted} = this.state;
-
         const cols = [...columns, {
             dataField: "id",
             text: "Actions",
@@ -121,49 +99,16 @@ export default class DataTableContainer extends Component {
         return (
             <div className="container" style={{marginTop: 50}}>
                 <React.Fragment>
-                    <Button onClick={onToggle} color="primary">
-                        Add New Row
-                    </Button>
-                    <Modal isOpen={modal} toggle={onToggle}>
-                        <ModalHeader toggle={onToggle}>Add New Row</ModalHeader>
-                        <Form onSubmit={this.handleSubmit}>
-                            <ModalBody>
-                                {columns.map((val, index) =>
-                                    <FormGroup key={index} row>
-                                        {val.text !== 'Actions' && <Label sm={3}>{val.text}</Label>}
-                                        <Col sm={9}>
-
-                                            {val.type !== 'select' && val.text !== 'Actions' &&
-                                            <Input type={val.type} name={val.dataField} placeholder={val.text}
-                                                   value={dt_object[val.dataField]} onChange={this.handleChange}
-                                                   invalid={!!(submitted && !dt_object[val.dataField])}/>}
-
-                                            {val.type === 'select' &&
-                                            <Input type={val.type} name={val.dataField} placeholder={val.text}
-                                                   value={dt_object[val.dataField]} onChange={this.handleChange}
-                                                   invalid={!!(submitted && !dt_object[val.dataField])}>
-                                                <option value="0">Select option</option>
-                                                {val.editor.options.map((leavetype, index) =>
-                                                    <option value={leavetype.value}
-                                                            key={index}>{leavetype.label}</option>
-                                                )}
-                                            </Input>
-                                            }
-                                            {submitted && !dt_object[val.dataField] &&
-                                            <FormFeedback>{val.text} is required</FormFeedback>
-                                            }
-                                        </Col>
-                                    </FormGroup>
-                                )}
-                            </ModalBody>
-                            <ModalFooter>
-                                <FormGroup check row>
-                                    <Button color="primary" type='submit'>Submit</Button>{' '}</FormGroup>
-                                <Button color="secondary" onClick={onToggle}>Cancel</Button>
-                            </ModalFooter>
-                        </Form>
-                    </Modal>
-
+                    <ModalC
+                        title='Add New Row'
+                        columns={columns}
+                        dt_object={dt_object}
+                        submitted={submitted}
+                        modal={modal}
+                        onToggle={onToggle}
+                        onSubmit={this.handleSubmit}
+                        onChange={this.handleChange}
+                    />
                     <BootstrapTable
                         remote
                         bootstrap4
@@ -175,7 +120,7 @@ export default class DataTableContainer extends Component {
                         columns={cols}
                         filter={filterFactory()}
                         pagination={paginationFactory({page, sizePerPage, totalSize})}
-                        cellEdit={cellEditFactory(cellEditProps)}
+                        cellEdit={cellEditFactory({mode: 'dbclick'})}
                         onTableChange={this.handleTableChange}
                     />
                 </React.Fragment>
@@ -183,7 +128,6 @@ export default class DataTableContainer extends Component {
         )
     }
 }
-
 DataTableContainer.propTypes = {
     modal: PropTypes.bool,
     loading: PropTypes.bool,

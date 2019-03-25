@@ -6,7 +6,7 @@ import {Container, Row, Col, Alert} from 'reactstrap';
 import {history, registered_routes, PrivateRoute} from './_helpers';
 import {alertActions} from './_actions';
 import {LoginFormContainer} from './containers/Login/Form';
-import {NotFoundShowContainer} from './containers/NotFound';
+import PageNotFound from './components/PageNotFound';
 
 import AppNavbar from './components/AppNavbar'
 
@@ -48,7 +48,7 @@ class App extends Component {
                                                       container={route.container}/>
                                     )}
                                     <Route exact path="/login" component={LoginFormContainer}/>
-                                    <PrivateRoute path="" container={NotFoundShowContainer}/>
+                                    <PrivateRoute path="" container={PageNotFound}/>
                                 </Switch>
                             </div>
                         </Container>
