@@ -13,25 +13,21 @@ const selectOptions = {
 export const userstate = [{
     dataField: 'firstname',
     text: 'First Name',
-    type: 'text',
     sort: true,
     filter: textFilter()
 }, {
     dataField: 'lastname',
     text: 'Last Name',
-    type: 'text',
     sort: true,
     filter: textFilter()
 }, {
     dataField: 'username',
     text: 'User Name',
-    type: 'text',
     sort: true,
     filter: textFilter()
 }, {
     dataField: 'email',
     text: 'Email',
-    type: 'email',
     filter: textFilter()
 }];
 
@@ -40,7 +36,6 @@ export const leavestate = [
     {
         dataField: 'fromdate',
         text: 'From Date',
-        type: 'date',
         sort: true,
         filter: dateFilter({
             defaultValue: {comparator: Comparator.EQ}
@@ -52,7 +47,6 @@ export const leavestate = [
     {
         dataField: 'todate',
         text: 'To Date',
-        type: 'date',
         sort: true,
         filter: dateFilter({
             defaultValue: {comparator: Comparator.EQ}
@@ -64,7 +58,6 @@ export const leavestate = [
     {
         dataField: 'leavetype',
         text: 'Type',
-        type: 'select',
         sort: true,
         formatter: cell => selectOptions[cell],
         filter: selectFilter({
@@ -93,7 +86,6 @@ export const leavestate = [
     {
         dataField: 'cause',
         text: 'Cause',
-        type: 'textarea',
         filter: textFilter(),
         editor: {
             type: Type.TEXTAREA

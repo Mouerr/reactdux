@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {datatableActions} from '../../_actions';
 import DataTableContainer from "../DataTable";
 import {userstate} from '../../_helpers/const_state';
+import {userForm} from '../../forms/user';
 
 class UserListContainer extends PureComponent {
     state = {
         page: 1,
         sizePerPage: 10,
         totalSize: 100,
-        columns: userstate
     };
 
     componentDidMount() {
@@ -49,7 +49,8 @@ class UserListContainer extends PureComponent {
         return (
             <DataTableContainer
                 data={items}
-                columns={this.state.columns}
+                columns={userstate}
+                form={userForm}
                 loading={loading}
                 page={page}
                 sizePerPage={sizePerPage}

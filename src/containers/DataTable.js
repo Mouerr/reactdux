@@ -3,47 +3,53 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import filterFactory from 'react-bootstrap-table2-filter';
-import ModalC from '../components/Modal';
+import ModalC from '../components/UI/Modal';
 import PropTypes from 'prop-types';
 import {Button} from 'reactstrap';
+import {checkFormValidity} from "../_helpers/form-validator";
 
 export default class DataTableContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        const dt_object = Object.assign.apply({}, this.props.columns.map((el) => ({[el.dataField]: ''})));
-        this.state = {
-            dt_object,
-            submitted: false
-        };
-    }
-
-    handleChange = event => {
-        const {name, value} = event.target;
-        const {dt_object} = this.state;
-        this.setState({
-            dt_object: {
-                ...dt_object,
-                [name]: value
-            }
-        });
+    state = {
+        dt_object: this.props.form,
+        submitted: false,
+        formIsValid: false,
+        loading: false
     };
 
-    handleSubmit = event => {
+    handleChange = (event, inputIdentifier) => {
+        const updatedForm = {
+            ...this.state.dt_object
+        };
+        const updatedFormElement = {
+            ...updatedForm[inputIdentifier]
+        };
+
+        updatedFormElement.value = event.target.value;
+        const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.valid = checkValidity.isValid;
+        updatedFormElement.errorMessage = checkValidity.errorMessage;
+        updatedFormElement.touched = true;
+        updatedForm[inputIdentifier] = updatedFormElement;
+        //console.log(event.target.value);
+        let formIsValid = true;
+        for (let inputIdentifier in updatedForm) {
+            formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({dt_object: updatedForm, formIsValid: formIsValid});
+    };
+
+    handleSubmit = (event) => {
         event.preventDefault();
-        const {name} = event.target;
+        this.setState({loading: true});
 
-        this.setState({submitted: true});
-        const {dt_object} = this.state;
+        const formData = {};
+        for (let formElementIdentifier in this.state.dt_object) {
+            formData[formElementIdentifier] = this.state.dt_object[formElementIdentifier].value;
+        }
 
-        if (this.isEmpty(dt_object) === false) {
-            this.props.onSubmit(dt_object);
-            this.setState({
-                dt_object: {
-                    ...dt_object,
-                    [name]: ''
-                }
-            });
+        if (this.isEmpty(formData) === false) {
+            this.props.onSubmit(formData);
+            this.setState({loading: false});
         }
     };
 
@@ -85,7 +91,6 @@ export default class DataTableContainer extends Component {
 
     render() {
         const {data, columns, loading, page, sizePerPage, totalSize, modal, onToggle, onDelete} = this.props;
-        const {dt_object, submitted} = this.state;
         const cols = [...columns, {
             dataField: "id",
             text: "Actions",
@@ -101,10 +106,9 @@ export default class DataTableContainer extends Component {
                 <React.Fragment>
                     <ModalC
                         title='Add New Row'
-                        columns={columns}
-                        dt_object={dt_object}
-                        submitted={submitted}
+                        formElementsArray={this.state.dt_object}
                         modal={modal}
+                        formIsValid={this.state.formIsValid}
                         onToggle={onToggle}
                         onSubmit={this.handleSubmit}
                         onChange={this.handleChange}

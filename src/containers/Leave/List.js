@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {datatableActions} from '../../_actions';
 import DataTableContainer from "../DataTable";
 import {leavestate} from '../../_helpers/const_state';
+import {leaveForm} from '../../forms/leave';
 
 class LeaveListContainer extends PureComponent {
     state = {
         page: 1,
         sizePerPage: 10,
         totalSize: 100,
-        columns: leavestate
     };
 
     componentDidMount() {
@@ -55,7 +55,8 @@ class LeaveListContainer extends PureComponent {
         return (
             <DataTableContainer
                 data={items}
-                columns={this.state.columns}
+                columns={leavestate}
+                form={leaveForm}
                 loading={loading}
                 page={page}
                 sizePerPage={sizePerPage}
