@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {datatableActions} from '../../_actions';
 import DataTableContainer from "../DataTable";
-import {userstate} from '../../_helpers/const_state';
+import {dtUserConfig} from '../../_helpers/dt_obj_conf';
 import {userForm} from '../../forms/user';
 
 class UserListContainer extends PureComponent {
@@ -49,7 +49,7 @@ class UserListContainer extends PureComponent {
         return (
             <DataTableContainer
                 data={items}
-                columns={userstate}
+                columns={dtUserConfig}
                 form={userForm}
                 loading={loading}
                 page={page}

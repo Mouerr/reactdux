@@ -30,7 +30,6 @@ export default class DataTableContainer extends Component {
         updatedFormElement.errorMessage = checkValidity.errorMessage;
         updatedFormElement.touched = true;
         updatedForm[inputIdentifier] = updatedFormElement;
-        //console.log(event.target.value);
         let formIsValid = true;
         for (let inputIdentifier in updatedForm) {
             formIsValid = updatedForm[inputIdentifier].valid && formIsValid;

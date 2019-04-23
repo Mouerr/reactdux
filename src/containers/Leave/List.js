@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {datatableActions} from '../../_actions';
 import DataTableContainer from "../DataTable";
-import {leavestate} from '../../_helpers/const_state';
+import {dtLeaveConfig} from '../../_helpers/dt_obj_conf';
 import {leaveForm} from '../../forms/leave';
 
 class LeaveListContainer extends PureComponent {
@@ -55,7 +55,7 @@ class LeaveListContainer extends PureComponent {
         return (
             <DataTableContainer
                 data={items}
-                columns={leavestate}
+                columns={dtLeaveConfig}
                 form={leaveForm}
                 loading={loading}
                 page={page}

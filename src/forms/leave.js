@@ -6,7 +6,13 @@ export const leaveForm = {
             placeholder: 'From Date'
         },
         value: '',
-        label: 'From Date'
+        label: 'From Date',
+        validation: {
+            required: true
+        },
+        valid: false,
+        errorMessage:[],
+        touched: false
     },
     todate: {
         elementType: 'input',
@@ -15,9 +21,15 @@ export const leaveForm = {
             placeholder: 'To Date'
         },
         value: '',
-        label: 'To Date'
+        label: 'To Date',
+        validation: {
+            required: true
+        },
+        valid: false,
+        errorMessage:[],
+        touched: false
     },
-    type: {
+    leavetype: {
         elementType: 'select',
         elementConfig: {
             options: [
@@ -28,8 +40,14 @@ export const leaveForm = {
                 {value: 'Religious Holidays', displayValue: 'Religious Holidays'}
             ]
         },
-        value: '',
-        label: 'Type'
+        value: 'Paid leave',
+        label: 'Type',
+        validation: {
+            required: true
+        },
+        valid: false,
+        errorMessage:[],
+        touched: false
     },
     cause: {
         elementType: 'textarea',
@@ -38,6 +56,12 @@ export const leaveForm = {
             placeholder: 'Cause'
         },
         value: '',
-        label: 'Cause'
+        label: 'Cause',
+        validation: {
+            required: true
+        },
+        valid: false,
+        errorMessage:[],
+        touched: false
     }
 };

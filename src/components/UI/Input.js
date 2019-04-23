@@ -31,18 +31,18 @@ const input = (props) => {
                 </Input>
             );
             break;
-        /*case ('radio'):
+        case ('radio'):
             inputElement = (
                 props.elementConfig.options.map((option,index) => (
                     <FormGroup key={index} check>
                         <Label check>
-                            <Input type={props.elementType} value={props.value} name="radio" onChange={props.changed}/>{' '}
+                            <Input type={props.elementType} value={option.value} name="radio" onChange={props.changed}/>{' '}
                             {option.value}
                         </Label>
                     </FormGroup>
                 ))
             );
-            break;*/
+            break;
         default:
             inputElement = <Input
                 {...props.elementConfig}

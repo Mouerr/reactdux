@@ -10,7 +10,7 @@ const selectOptions = {
     'Religious Holidays': 'Religious Holidays',
 };
 
-export const userstate = [{
+export const dtUserConfig = [{
     dataField: 'firstname',
     text: 'First Name',
     sort: true,
@@ -32,7 +32,7 @@ export const userstate = [{
 }];
 
 
-export const leavestate = [
+export const dtLeaveConfig = [
     {
         dataField: 'fromdate',
         text: 'From Date',

@@ -77,7 +77,7 @@ export const userForm = {
         valid: false,
         errorMessage:[],
         touched: false
-    }/*,
+    },
     enabled: {
         elementType: 'radio',
         elementConfig: {
@@ -86,13 +86,13 @@ export const userForm = {
                 {value: 'Noo'},
             ]
         },
-        value: '',
-        label: 'enabled',
+        value: [],
+        label: 'Enabled',
         validation: {
             required: true
         },
         valid: false,
         errorMessage:[],
         touched: false
-    }*/
+    }
 };
