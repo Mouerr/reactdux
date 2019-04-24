@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input, FormFeedback, FormGroup, Label} from 'reactstrap';
 
-const input = (props) => {
+const InputC = (props) => {
 
     let inputElement = null;
     let feedbackErrors = (
@@ -17,31 +17,32 @@ const input = (props) => {
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed}
-                invalid={!!(props.invalid && props.shouldValidate && props.touched)}
-            />;
+                invalid={!!(props.invalid && props.shouldValidate && props.touched)}/>;
             break;
         case ('select'):
-            inputElement = (
-                <Input type={props.elementType} value={props.value} onChange={props.changed}>
-                    {props.elementConfig.options.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.displayValue}
-                        </option>
-                    ))}
-                </Input>
-            );
+            inputElement = <Input type={props.elementType}
+                                  value={props.value}
+                                  onChange={props.changed}
+                                  invalid={!!(props.invalid && props.shouldValidate && props.touched)}>
+                <option value="">Select an option</option>
+                {props.elementConfig.options.map(option => (
+                    <option key={option.value} value={option.value}>
+                        {option.displayValue}
+                    </option>
+                ))} </Input>;
             break;
+        case ('checkbox'):
         case ('radio'):
-            inputElement = (
-                props.elementConfig.options.map((option,index) => (
-                    <FormGroup key={index} check>
-                        <Label check>
-                            <Input type={props.elementType} value={option.value} name="radio" onChange={props.changed}/>{' '}
-                            {option.value}
-                        </Label>
-                    </FormGroup>
-                ))
-            );
+            inputElement = props.elementConfig.options.map((option, index) => (
+                <FormGroup key={index} check>
+                    <Label check>
+                        <Input type={props.elementType}
+                               value={option.value} name={props.name}
+                               onChange={props.changed}/>{' '}
+                        {option.value}
+                    </Label>
+                </FormGroup>
+            ));
             break;
         default:
             inputElement = <Input
@@ -53,4 +54,4 @@ const input = (props) => {
     return <div>{inputElement} {feedbackErrors}</div>;
 };
 
-export default React.memo(input);
+export default React.memo(InputC);

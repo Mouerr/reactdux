@@ -1,9 +1,8 @@
 import React from 'react';
-import Input from "../components/UI/Input";
+import InputC from "../components/UI/Input";
 import {FormGroup, Label, Col} from 'reactstrap';
 
-
-export const formGenerator = (objectForm,onChange) => {
+export const formGenerator = (objectForm, onChange) => {
 
     const formElementsArray = [];
     for (const key in objectForm) {
@@ -17,8 +16,9 @@ export const formGenerator = (objectForm,onChange) => {
         <FormGroup key={index} row>
             <Label sm={3}>{formElement.config.label}</Label>
             <Col sm={9}>
-                <Input
+                <InputC
                     key={formElement.id}
+                    name={formElement.id}
                     elementType={formElement.config.elementType}
                     elementConfig={formElement.config.elementConfig}
                     invalid={!formElement.config.valid}
@@ -26,7 +26,8 @@ export const formGenerator = (objectForm,onChange) => {
                     errorMessage={formElement.config.errorMessage}
                     touched={formElement.config.touched}
                     value={formElement.config.value}
-                    changed={(event) => onChange(event, formElement.id)}/>
+                    changed={(event) => onChange(event, formElement.id)}
+                />
             </Col>
         </FormGroup>
     ))

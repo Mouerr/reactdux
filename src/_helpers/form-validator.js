@@ -1,13 +1,14 @@
 export const checkFormValidity = (value, rules) => {
     let isValid = true;
-    let input_value = value.trim();
+    let input_value = value;
+    if(typeof value === 'string') input_value = value.trim();
     let errorMessage = [];
 
     if (!rules) {
         return true;
     }
 
-    if (rules.required && input_value === '') {
+    if (rules.required && (input_value === '' || Object.values(input_value).every(item => item === false))) {
         errorMessage.push('Field cannot be empty');
         isValid = false
     }
@@ -32,23 +33,23 @@ export const checkFormValidity = (value, rules) => {
         let validated = true;
 
         if (input_value.length < 8 || input_value.length > 24) {
-            errorMessage.push('should contain between 8 and 24 characters');
+            errorMessage.push('Should contain between 8 and 24 characters');
             validated = false;
         }
         if (!/\d/.test(input_value)) {
-            errorMessage.push('should contain at least one digit');
+            errorMessage.push('Should contain at least one digit');
             validated = false;
         }
         if (!/(?=.*[a-z])/.test(input_value)) {
-            errorMessage.push('should contain at least one lower case');
+            errorMessage.push('Should contain at least one lower case');
             validated = false;
         }
         if (!/(?=.*[A-Z])/.test(input_value)) {
-            errorMessage.push('should contain at least one upper case');
+            errorMessage.push('Should contain at least one upper case');
             validated = false;
         }
         if (!/(?=.*[#$^\-_+=!*()@%&])/.test(input_value)) {
-            errorMessage.push('should contain at least one special character #$^\\-_+=!*()@%&');
+            errorMessage.push('Should contain at least one special character #$^\\-_+=!*()@%&');
             validated = false;
         }
 

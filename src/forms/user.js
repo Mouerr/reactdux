@@ -78,6 +78,31 @@ export const userForm = {
         errorMessage:[],
         touched: false
     },
+    groups: {
+        elementType: 'checkbox',
+        elementConfig: {
+            options: [
+                {value: 'ATM'},
+                {value: 'GTX'},
+                {value: 'RBX'},
+                {value: 'SLK'},
+            ]
+            //options: ['Yes','Noo']
+        },
+        value: {
+            "ATM": false,
+            "GTX": false,
+            "RBX": false,
+            "SLK": false
+        },
+        label: 'Groups',
+        validation: {
+            required: true
+        },
+        valid: false,
+        errorMessage:[],
+        touched: false
+    },
     enabled: {
         elementType: 'radio',
         elementConfig: {
@@ -86,7 +111,7 @@ export const userForm = {
                 {value: 'Noo'},
             ]
         },
-        value: [],
+        value: '',
         label: 'Enabled',
         validation: {
             required: true

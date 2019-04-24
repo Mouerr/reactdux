@@ -40,7 +40,7 @@ export const leaveForm = {
                 {value: 'Religious Holidays', displayValue: 'Religious Holidays'}
             ]
         },
-        value: 'Paid leave',
+        value: '',
         label: 'Type',
         validation: {
             required: true

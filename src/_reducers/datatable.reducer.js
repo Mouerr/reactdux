@@ -71,7 +71,6 @@ export function datatable(state = {items:[], loading: false}, action) {
             return {
                 ...state,
                 modal: !state.modal,
-                //unmountOnClose: true
             };
 
         case datatableConstants.DELETE_REQUEST:
