@@ -1,31 +1,33 @@
 import React from 'react';
 import {
     Modal, ModalHeader, ModalBody, ModalFooter,
-    Form, FormGroup/*, Spinner*/, Button
+    Form, FormGroup, Spinner, Button
 } from 'reactstrap';
 
 import {formGenerator} from "../../_helpers/form-generator";
 
 const ModalC = props => {
-    const {onSubmit, onChange, onToggle, modal, formIsValid, title, formElementsArray} = props;
+    const {onSubmit, onChange, onToggle, modal,submitting, formIsValid, formElementsArray} = props;
 
     let form = formGenerator(formElementsArray, onChange);
-//<Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
-    return <div>
-        <Button onClick={onToggle} color="primary">{title}</Button>
+
+    return <React.Fragment>
         <Modal isOpen={modal} toggle={onToggle}>
-            <ModalHeader toggle={onToggle}>{title}</ModalHeader>
+            <ModalHeader toggle={onToggle}>Add New Row</ModalHeader>
             <Form onSubmit={onSubmit}>
                 <ModalBody>
                     {form}
                 </ModalBody>
                 <ModalFooter>
                     <FormGroup check row>
-                        <Button color="primary" type='submit' disabled={!formIsValid}>Submit</Button>{' '}</FormGroup>
+                        {submitting ? <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" /> :
+                            <Button color="primary" type='submit' disabled={!formIsValid}>Submit</Button>
+                        }{' '}
+                    </FormGroup>
                     <Button color="secondary" onClick={onToggle}>Cancel</Button>
                 </ModalFooter>
             </Form>
         </Modal>
-    </div>
+    </React.Fragment>
 };
 export default React.memo(ModalC);

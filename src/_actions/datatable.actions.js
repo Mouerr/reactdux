@@ -1,5 +1,4 @@
 import {datatableConstants} from '../_constants';
-import {userService, leaveService} from '../api';
 import {alertActions} from './';
 
 export const datatableActions = {
@@ -11,20 +10,20 @@ export const datatableActions = {
     delete: _delete
 };
 
-const service_indicator = {user: userService, leave: leaveService};
-
-function create(service_name, obj) {
+function create(service, obj) {
     return dispatch => {
         dispatch(request(obj));
 
-        service_indicator[service_name].create(obj)
+        service.api.create(obj)
             .then(
                 item => {
                     dispatch(success(item));
-                    dispatch(alertActions.success(service_name + ' successfully Created'));
+                    dispatch(toggleModal());
+                    dispatch(alertActions.success(service.objname + ' successfully Created'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
+                    dispatch(toggleModal());
                     dispatch(alertActions.error(error.toString()));
                 }
             );
@@ -41,17 +40,20 @@ function create(service_name, obj) {
     function failure(error) {
         return {type: datatableConstants.CREATE_FAILURE, error}
     }
+    function toggleModal() {
+        return {type: datatableConstants.TOGGLE_MODAL}
+    }
 }
 
-function update(service_name, obj) {
+function update(service, obj) {
     return dispatch => {
         dispatch(request());
 
-        service_indicator[service_name].update(obj)
+        service.api.update(obj)
             .then(
                 item => {
                     dispatch(success(item));
-                    dispatch(alertActions.success(service_name + ' successfully Updated'));
+                    dispatch(alertActions.success(service.objname + ' successfully Updated'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -73,11 +75,11 @@ function update(service_name, obj) {
     }
 }
 
-function getAll(service_name) {
+function getAll(service) {
     return dispatch => {
         dispatch(request());
 
-        service_indicator[service_name].getAll()
+        service.api.getAll()
             .then(
                 items => dispatch(success(items)),
                 error => {
@@ -100,7 +102,7 @@ function getAll(service_name) {
     }
 }
 
-function filter(service_name, conditions) {
+function filter(service, conditions) {
     const pagination_params = '?_page=' + conditions.page + '&_limit=' + conditions.sizePerPage;
     const sort_params = conditions.sortField ? '&_sort=' + conditions.sortField + '&_order=' + conditions.sortOrder : '';
     let filter_params = '';
@@ -118,7 +120,7 @@ function filter(service_name, conditions) {
         dispatch(request());
 
         const params_filters = pagination_params + filter_params + sort_params;
-        service_indicator[service_name].getByDataTableFilter(params_filters)
+        service.api.getByDataTableFilter(params_filters)
             .then(
                 results => dispatch(success(results)),
                 error => {
@@ -151,15 +153,15 @@ function toggleModal() {
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(service_name, id) {
+function _delete(service, id) {
     return dispatch => {
         dispatch(request(id));
 
-        service_indicator[service_name].delete(id)
+        service.api.delete(id)
             .then(
                 item => {
                     dispatch(success(id));
-                    dispatch(alertActions.success(service_name + ' successfully Deleted'));
+                    dispatch(alertActions.success(service.objname + ' successfully Deleted'));
                 },
                 error => {
                     dispatch(failure(id, error.toString()));

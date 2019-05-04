@@ -1,6 +1,8 @@
 import {datatableConstants} from '../_constants';
 
-export function datatable(state = {items:[], loading: false}, action) {
+const initialState = {items: [], loading: false};
+
+export function datatable(state = initialState, action) {
     switch (action.type) {
         case datatableConstants.CREATE_REQUEST:
             return {
@@ -14,56 +16,74 @@ export function datatable(state = {items:[], loading: false}, action) {
                 submitting: false
             };
         case datatableConstants.CREATE_FAILURE:
-            return {error: action.error};
+            return {
+                ...state,
+                submitting: false,
+                error: action.error
+            };
 
         case datatableConstants.UPDATE_REQUEST:
             return {
                 ...state,
-                submitting: true,
+                loading: true,
             };
         case datatableConstants.UPDATE_SUCCESS:
             return {
+                ...state,
                 items: state.items.map((item, index) => {
                     if (item.id !== action.item.id) {
                         // This isn't the item we care about - keep it as-is
                         return item
                     }
-
                     // Otherwise, this is the one we want - return an updated value
                     return {
                         ...item,
                         ...action.item
                     }
                 }),
-                submitting: false
+                loading: false
             };
         case datatableConstants.UPDATE_FAILURE:
-            return {error: action.error};
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
 
         case datatableConstants.FILTER_REQUEST:
             return {
                 ...state,
-                submitting: true
+                loading: true
             };
         case datatableConstants.FILTER_SUCCESS:
             return {
+                ...state,
+                loading: false,
                 items: action.results
             };
         case datatableConstants.FILTER_FAILURE:
-            return {error: action.error};
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
 
         case datatableConstants.GETALL_REQUEST:
             return {
+                ...state,
                 loading: true,
                 items: []
             };
         case datatableConstants.GETALL_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 items: action.items
             };
         case datatableConstants.GETALL_FAILURE:
             return {
+                ...state,
+                loading: false,
                 error: action.error
             };
 
@@ -77,31 +97,20 @@ export function datatable(state = {items:[], loading: false}, action) {
             // add 'deleting:true' property to item being deleted
             return {
                 ...state,
-                items: state.items.map(item =>
-                    item.id === action.id
-                        ? {...item, deleting: true}
-                        : item
-                )
+                loading: true
             };
         case datatableConstants.DELETE_SUCCESS:
             // remove deleted item from state
             return {
+                ...state,
+                loading: false,
                 items: state.items.filter(item => item.id !== action.id)
             };
         case datatableConstants.DELETE_FAILURE:
-            // remove 'deleting:true' property and add 'deleteError:[error]' property to item
             return {
                 ...state,
-                items: state.items.map(item => {
-                    if (item.id === action.id) {
-                        // make copy of item without 'deleting:true' property
-                        const {deleting, ...itemCopy} = item;
-                        // return copy of item with 'deleteError:[error]' property
-                        return {...itemCopy, deleteError: action.error};
-                    }
-
-                    return item;
-                })
+                loading: false,
+                error: action.error
             };
         default:
             return state

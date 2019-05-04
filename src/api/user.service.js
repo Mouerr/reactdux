@@ -1,4 +1,4 @@
-import {authHeader} from '../_helpers';
+//import {authHeader} from '../_helpers';
 
 const apiurl = process.env.REACT_APP_API_URL;
 
@@ -17,18 +17,18 @@ export const userService = {
 function header_params(methodType, object = '') {
     let header = {
         method: methodType,
-        headers: {'Content-Type': 'application/json', headers: authHeader()},
+        headers: {'Content-Type': 'application/json'/*, headers: authHeader()*/},
         credentials: 'same-origin',
     };
     if (object !== '') {
-        header = Object.assign({body: JSON.stringify(object)}, header)
+        header = Object.assign({}, {body: JSON.stringify(object)}, header);
     }
     return header;
 }
 
 function login(email, password) {
 
-    return fetch(apiurl+`/users/authenticate?username=${email}&password=${password}`,
+    return fetch(apiurl + `/users/authenticate?username=${email}&password=${password}`,
         header_params('GET'))
         .then(handleResponse)
         .then(user => {
@@ -70,7 +70,7 @@ function loginAsRegistered(email, password) {
                     apiuser.email = apiuser.username;
                     apiuser.password = password;
 
-                    return fetch(apiurl+`/user/create`,
+                    return fetch(apiurl + `/user/create`,
                         header_params('POST', apiuser)).then(handleResponse).then(user => {
                         localStorage.setItem('user', JSON.stringify(user));
                         return user;
@@ -87,31 +87,31 @@ function logout() {
 }
 
 function getAll() {
-    return fetch(apiurl+`/users?_limit=10`, header_params('GET')).then(handleResponse).then(users => {
+    return fetch(apiurl + `/users?_limit=10`, header_params('GET')).then(handleResponse).then(users => {
         localStorage.setItem('stored_users', JSON.stringify(users));
         return users;
     });
 }
 
 function getById(id) {
-    return fetch(apiurl+`/users/${id}`, header_params('GET')).then(handleResponse);
+    return fetch(apiurl + `/users/${id}`, header_params('GET')).then(handleResponse);
 }
 
 function getByDataTableFilter(params_filters) {
-    return fetch(apiurl+`/users${params_filters}`, header_params('GET')).then(handleResponse);
+    return fetch(apiurl + `/users${params_filters}`, header_params('GET')).then(handleResponse);
 }
 
 function create(user) {
-    return fetch(apiurl+`/user/create`,header_params('POST', user)).then(handleResponse);
+    return fetch(apiurl + `/user/create`, header_params('POST', user)).then(handleResponse);
 }
 
 function update(user) {
-    return fetch(apiurl+`/users/${user.id}`, header_params('PUT', user)).then(handleResponse);
+    return fetch(apiurl + `/users/${user.id}`, header_params('PUT', user)).then(handleResponse);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
-    return fetch(apiurl+`/users/${id}`, header_params('DELETE')).then(handleResponse);
+    return fetch(apiurl + `/users/${id}`, header_params('DELETE')).then(handleResponse);
 }
 
 function handleResponse(response) {
@@ -121,7 +121,7 @@ function handleResponse(response) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 logout();
-                window.location.reload(true);
+                window.location.reload();
             }
 
             let error;

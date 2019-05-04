@@ -9,35 +9,6 @@
       "password": "gms2019."
     },
     {
-      "id": 2,
-      "username": "badr",
-      "firstname": "badr",
-      "lastname": "badr",
-      "email": "badr@gmpanel.net",
-      "password": "gms2019."
-    },
-    {
-      "id": 3,
-      "username": "jaouad",
-      "firstname": "jaouad",
-      "lastname": "jaouad",
-      "email": "jaouad@gmpanel.net",
-      "password": "gms2019."
-    },
-    {
-      "id": 4,
-      "username": "alpha@gmpanel.net",
-      "firstname": "alpha",
-      "lastname": "alpha",
-      "email": "alpha@gmpanel.net",
-      "password": "123456",
-      "is_staff": true,
-      "is_superuser": false,
-      "routes": [
-        "/user/list"
-      ]
-    },
-    {
       "id": 5,
       "firstname": "albert",
       "lastname": "albert",
@@ -83,23 +54,8 @@
         "/user/:userid/leaves",
         "/user/update/:userid",
         "/leave/update/:leaveid"
-      ]
-    },
-    {
-      "firstname": "hghghghghg",
-      "lastname": "dandelyon",
-      "username": "hghghghghg",
-      "email": "hghghghghg@fggg.com",
-      "password": "hghghghghg",
-      "id": 49
-    },
-    {
-      "firstname": "hghghghghg",
-      "lastname": "hghghghghg",
-      "username": "hghghghghg",
-      "email": "hghghghghg@fggg.ff",
-      "password": "hghghghghg",
-      "id": 50
+      ],
+      "status": "Enabled"
     },
     {
       "firstname": "coco",
@@ -132,22 +88,6 @@
       "email": "cambox@gmgmg.ff",
       "password": "cambox",
       "id": 54
-    },
-    {
-      "firstname": "mpoiu",
-      "lastname": "mpoiu",
-      "username": "mpoiu",
-      "email": "mpoiu@ggg.hhh",
-      "password": "mpoiu",
-      "id": 55
-    },
-    {
-      "firstname": "jjjjjj",
-      "lastname": "jjjjjj",
-      "username": "jjjjjj",
-      "email": "jjjjjj@jjjjjj.ff",
-      "password": "jjjjjj",
-      "id": 56
     },
     {
       "firstname": "endos",
@@ -213,6 +153,126 @@
         "/leave/update/:leaveid"
       ],
       "id": 71
+    },
+    {
+      "firstname": "kaki",
+      "lastname": "kaki",
+      "username": "kaki",
+      "email": "kaki@kaki.com",
+      "password": "kakikaki",
+      "id": 72
+    },
+    {
+      "firstname": "nextState",
+      "lastname": "nextState",
+      "username": "nextState",
+      "email": "nextState@test.com",
+      "password": "nextState",
+      "token": "",
+      "checks": {
+        "One": false,
+        "Two": true,
+        "Three": true
+      },
+      "id": 73
+    },
+    {
+      "firstname": "corombo",
+      "lastname": "corombo",
+      "username": "corombo",
+      "email": "corombo@gg.cc",
+      "password": "Corombo9@",
+      "status": "Disabled",
+      "id": 74
+    },
+    {
+      "firstname": "bbnbnbnb",
+      "lastname": "bbnbnbnb",
+      "username": "bbnbnbnb",
+      "email": "bbnbnbnb@gf.ff",
+      "password": "Azerty@123",
+      "status": "Disabled",
+      "id": 75
+    },
+    {
+      "firstname": "Mouad",
+      "lastname": "Errahmouni",
+      "username": "mouerr95",
+      "email": "mouer95@gmail.com",
+      "password": "Azerty@123456",
+      "groups": {
+        "ATM": false,
+        "GTX": true,
+        "RBX": true,
+        "SLK": false
+      },
+      "status": "Enabled",
+      "id": 76
+    },
+    {
+      "firstname": "babilion",
+      "lastname": "babilion",
+      "username": "babilion",
+      "email": "babilion@ter.ss",
+      "password": "babilion@123A",
+      "groups": {
+        "ATM": true,
+        "GTX": false,
+        "RBX": false,
+        "SLK": false
+      },
+      "status": "Disabled",
+      "id": 77
+    }
+  ],
+  "route_roles": [
+    {
+      "id": 1,
+      "userId": 39,
+      "route_name": "user_list",
+      "role": "role_admin"
+    },
+    {
+      "id": 2,
+      "userId": 39,
+      "route_name": "user_create",
+      "role": "role_admin"
+    },
+    {
+      "id": 3,
+      "userId": 39,
+      "route_name": "user_update",
+      "role": "role_admin"
+    },
+    {
+      "id": 4,
+      "userId": 39,
+      "route_name": "leave_list",
+      "role": "role_admin"
+    },
+    {
+      "id": 5,
+      "userId": 39,
+      "route_name": "leave_create",
+      "role": "role_admin"
+    },
+    {
+      "id": 6,
+      "userId": 39,
+      "route_name": "leave_update",
+      "role": "role_admin"
+    },
+    {
+      "id": 7,
+      "userId": 71,
+      "route_name": "user_list",
+      "role": "role_user"
+    },
+    {
+      "id": 8,
+      "userId": 71,
+      "route_name": "leave_list",
+      "role": "role_user"
     }
   ],
   "leaves": [
@@ -222,22 +282,6 @@
       "fromdate": "2019-02-02",
       "todate": "2019-03-06",
       "leavetype": "Special leave",
-      "cause": "travel the world"
-    },
-    {
-      "id": 2,
-      "userId": 2,
-      "fromdate": "2019-02-03",
-      "todate": "2019-02-15",
-      "leavetype": "National Holidays",
-      "cause": "travel the world"
-    },
-    {
-      "id": 3,
-      "userId": 4,
-      "fromdate": "2019-02-04",
-      "todate": "2019-02-18",
-      "leavetype": "Religious Holidays",
       "cause": "travel the world"
     },
     {
@@ -257,28 +301,12 @@
       "id": 5
     },
     {
-      "fromdate": "2019-02-19",
-      "todate": "2019-02-28",
-      "leavetype": "Sick leave",
-      "cause": "mehlooooooooooookkk",
-      "userId": 39,
-      "id": 6
-    },
-    {
       "fromdate": "2019-02-05",
       "todate": "2019-02-05",
       "leavetype": "Special leave",
       "cause": "663",
       "userId": 39,
       "id": 7
-    },
-    {
-      "fromdate": "2019-02-05",
-      "todate": "2019-03-08",
-      "leavetype": "Special leave",
-      "cause": "66666666",
-      "userId": 39,
-      "id": 8
     },
     {
       "fromdate": "2019-01-30",
@@ -310,13 +338,6 @@
       "cause": "0600409502",
       "userId": 39,
       "id": 13
-    },
-    {
-      "fromdate": "2019-03-01",
-      "todate": "2019-03-29",
-      "leavetype": "Sick leave",
-      "cause": "nhytgbcffr",
-      "id": 14
     },
     {
       "fromdate": "2019-03-13",
@@ -352,6 +373,13 @@
       "leavetype": "Religious Holidays",
       "cause": "rrrrrrrr",
       "id": 19
+    },
+    {
+      "fromdate": "2019-04-20",
+      "todate": "2019-04-27",
+      "type": "Sick leave",
+      "cause": "ggggg",
+      "id": 20
     }
   ],
   "results": [

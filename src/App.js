@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Container, Row, Col, Alert} from 'reactstrap';
+import {registered_routes, PrivateRoute} from './config/routes';
 
 import {history, registered_routes, PrivateRoute} from './_helpers';
 import {alertActions} from './_actions';
@@ -44,8 +44,10 @@ class App extends Component {
                                 <Switch>
                                     {user && registered_routes.map((route, index) =>
                                         user.routes && user.routes.indexOf(route.path) !== -1 &&
-                                        <PrivateRoute key={index} exact path={route.path}
-                                                      container={route.container}/>
+                                        <PrivateRoute key={index} exact
+                                                      path={route.path}
+                                                      container={route.container} apiservice={route.apiservice}
+                                                      formconfig={route.formconfig} dtconfig={route.dtconfig}/>
                                     )}
                                     <Route exact path="/login" component={LoginFormContainer}/>
                                     <PrivateRoute path="" container={PageNotFound}/>

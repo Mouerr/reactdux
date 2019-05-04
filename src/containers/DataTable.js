@@ -1,22 +1,46 @@
 import React, {Component} from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
-import cellEditFactory from 'react-bootstrap-table2-editor';
-import filterFactory from 'react-bootstrap-table2-filter';
+import {connect} from 'react-redux';
 import ModalC from '../components/UI/Modal';
 import PropTypes from 'prop-types';
-import {Button} from 'reactstrap';
 import {checkFormValidity} from "../_helpers/form-validator";
+import {datatableActions} from "../_actions/datatable.actions";
+import DataTable from "../components/DataTable/DataTable";
+import DataTableButtons from "../components/DataTable/DataTableButtons";
 
-export default class DataTableContainer extends Component {
+class DataTableContainer extends Component {
     state = {
-        dt_object: this.props.form,
-        submitted: false,
+        dt_object: this.props.formconfig,
         formIsValid: false,
-        loading: false
+        page: 1,
+        sizePerPage: 10,
+        totalSize: 100,
+        deleteRowId: ''
     };
 
-    handleChange = (event, inputIdentifier) => {
+    componentDidMount() {
+        this.props.dispatch(datatableActions.getAll(this.props.api));
+    }
+
+    handleDelete = () => {
+        if (this.state.deleteRowId !== ''){
+            this.props.dispatch(datatableActions.delete(this.props.api, this.state.deleteRowId));
+            this.setState({deleteRowId: ''})
+        }
+    };
+
+    handleToggle = () => {
+        this.props.dispatch(datatableActions.toggleModal());
+    };
+
+    handleUpdate = editedRow => {
+        this.props.dispatch(datatableActions.update(this.props.api, editedRow));
+    };
+
+    handleFilter = conditions => {
+        this.props.dispatch(datatableActions.filter(this.props.api, conditions));
+    };
+
+    handleFormChange = (event, inputIdentifier) => {
         const updatedForm = {
             ...this.state.dt_object
         };
@@ -42,24 +66,17 @@ export default class DataTableContainer extends Component {
         this.setState({dt_object: updatedForm, formIsValid: formIsValid});
     };
 
-    handleSubmit = (event) => {
+    handleFormSubmit = (event) => {
         event.preventDefault();
-        this.setState({loading: true});
 
         const formData = {};
         for (let formElementIdentifier in this.state.dt_object) {
             formData[formElementIdentifier] = this.state.dt_object[formElementIdentifier].value;
         }
-
-        if (this.isEmpty(formData) === false) {
-            this.props.onSubmit(formData);
-            this.setState({loading: false});
-        }
+        this.props.dispatch(datatableActions.create(this.props.api, formData))
     };
 
     handleTableChange = (type, {page, sizePerPage, filters, sortField, sortOrder, cellEdit}) => {
-        let {data} = this.props;
-        const {onUpdate, onFilter} = this.props;
         const conditions = {page, sizePerPage, filters, sortField, sortOrder};
 
         console.log('change', type, {page, sizePerPage, filters, sortField, sortOrder, cellEdit});
@@ -68,7 +85,7 @@ export default class DataTableContainer extends Component {
             if (type === 'cellEdit') {
                 const {rowId, dataField, newValue} = cellEdit;
                 let editedRow = '';
-                data = data.map((row) => {
+                this.props.items.map((row) => {
                     if (row.id === rowId) {
                         const newRow = {...row};
                         newRow[dataField] = newValue;
@@ -77,75 +94,73 @@ export default class DataTableContainer extends Component {
                     }
                     return row;
                 });
-                onUpdate(editedRow);
+                this.handleUpdate(editedRow);
             } else {
                 const totalSize = 100;
-                onFilter(conditions, page, sizePerPage, totalSize);
+                this.handleFilter(conditions);
+                this.setState({
+                    page,
+                    sizePerPage,
+                    totalSize
+                });
             }
         }, 500);
     };
 
-    isEmpty = obj => {
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key) && obj[key] === '')
-                return true;
+    handleOnSelect = (row, isSelect) => {
+        if (isSelect) {
+            this.setState({deleteRowId: row.id});
+            // return true or dont return to approve current select action
+            return true;
         }
-        return false;
     };
 
     render() {
-        const {data, columns, loading, page, sizePerPage, totalSize, modal, onToggle, onDelete} = this.props;
-        const cols = [...columns, {
-            dataField: "id",
-            text: "Actions",
-            formatter: (cellContent) => {
-                return <div>
-                    <Button color="danger" onClick={onDelete(cellContent)}>Delete</Button>
-                </div>
-            }
-        }];
-
+        const {page, sizePerPage, totalSize} = this.state;
         return (
             <div className="container" style={{marginTop: 50}}>
                 <React.Fragment>
-                    <ModalC
-                        title='Add New Row'
-                        formElementsArray={this.state.dt_object}
-                        modal={modal}
-                        formIsValid={this.state.formIsValid}
-                        onToggle={onToggle}
-                        onSubmit={this.handleSubmit}
-                        onChange={this.handleChange}
+                    <DataTableButtons
+                        onToggle={this.handleToggle}
+                        onDelete={this.handleDelete}
+                        disableDelete={this.state.deleteRowId}
                     />
-                    <BootstrapTable
-                        remote
-                        bootstrap4
-                        hover
-                        condensed
-                        keyField="id"
-                        loading={loading}
-                        data={data}
-                        columns={cols}
-                        filter={filterFactory()}
-                        pagination={paginationFactory({page, sizePerPage, totalSize})}
-                        cellEdit={cellEditFactory({mode: 'dbclick'})}
+                    <ModalC
+                        formElementsArray={this.state.dt_object}
+                        modal={this.props.modal}
+                        formIsValid={this.state.formIsValid}
+                        submitting={this.props.submitting}
+                        onToggle={this.handleToggle}
+                        onSubmit={this.handleFormSubmit}
+                        onChange={this.handleFormChange}
+                    />
+                    <DataTable
+                        columns={this.props.dtconfig}
+                        data={this.props.items}
                         onTableChange={this.handleTableChange}
+                        onSelect={this.handleOnSelect}
+                        page={page}
+                        loading={this.props.loading}
+                        sizePerPage={sizePerPage}
+                        totalSize={totalSize}
                     />
                 </React.Fragment>
             </div>
         )
     }
 }
+
+const mapStateToProps = state => {
+    const {items, submitting, loading, modal} = state.datatable;
+    return {
+        items, submitting, loading, modal
+    };
+};
+
+const connectedDataTableContainer = connect(mapStateToProps)(DataTableContainer);
+export {connectedDataTableContainer as DataTableContainer};
+
 DataTableContainer.propTypes = {
-    modal: PropTypes.bool,
-    loading: PropTypes.bool,
-    data: PropTypes.array.isRequired,
-    page: PropTypes.number.isRequired,
-    totalSize: PropTypes.number.isRequired,
-    sizePerPage: PropTypes.number.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    onUpdate: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-    onToggle: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    dtconfig: PropTypes.array.isRequired,
+    formconfig: PropTypes.object.isRequired,
 };

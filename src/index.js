@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './assets/css/bootstrap.min.css';
-import './assets/css/custom.css';
+import './assets/css/bootstrap.min.css'
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
+import './assets/css/custom.css'
 import { Provider } from 'react-redux'
 import App from './App'
 import { store } from './_helpers'

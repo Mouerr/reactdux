@@ -1,13 +1,18 @@
-//import React from 'react';
+import React from 'react';
 import {textFilter, dateFilter, selectFilter, Comparator} from 'react-bootstrap-table2-filter';
 import {Type} from 'react-bootstrap-table2-editor';
+import {Badge} from 'reactstrap';
 
-const selectOptions = {
+const leaveSelectTypeOptions = {
     'Special leave': 'Special leave',
     'Paid leave': 'Paid leave',
     'Sick leave': 'Sick leave',
     'National Holidays': 'National Holidays',
     'Religious Holidays': 'Religious Holidays',
+};
+const userEnabledOptions = {
+    'Enabled': 'Enabled',
+    'Disabled': 'Disabled'
 };
 
 export const dtUserConfig = [{
@@ -29,7 +34,39 @@ export const dtUserConfig = [{
     dataField: 'email',
     text: 'Email',
     filter: textFilter()
-}];
+}, {
+    dataField: 'status',
+    text: 'Status',
+    filter: selectFilter({
+        options: userEnabledOptions
+    }),
+    editor: {
+        type: Type.SELECT,
+        options: [{
+            value: 'Enabled',
+            label: 'Enabled'
+        }, {
+            value: 'Disabled',
+            label: 'Disabled'
+        }]
+    },
+    formatter: (cellContent, row) => {
+        if (row.status === 'Enabled') {
+            return (
+                <h5>
+                    <Badge color="success">Enabled</Badge>
+                </h5>
+            );
+        }
+        return (
+            <h5>
+                <Badge color="danger">Disabled</Badge>
+            </h5>
+        );
+
+    }
+}
+];
 
 
 export const dtLeaveConfig = [
@@ -59,9 +96,9 @@ export const dtLeaveConfig = [
         dataField: 'leavetype',
         text: 'Type',
         sort: true,
-        formatter: cell => selectOptions[cell],
+        formatter: cell => leaveSelectTypeOptions[cell],
         filter: selectFilter({
-            options: selectOptions
+            options: leaveSelectTypeOptions
         }),
         editor: {
             type: Type.SELECT,

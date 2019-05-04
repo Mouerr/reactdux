@@ -87,7 +87,7 @@ export const userForm = {
                 {value: 'RBX'},
                 {value: 'SLK'},
             ]
-            //options: ['Yes','Noo']
+            //options: ['Enabled','Disabled']
         },
         value: {
             "ATM": false,
@@ -103,16 +103,16 @@ export const userForm = {
         errorMessage:[],
         touched: false
     },
-    enabled: {
+    status: {
         elementType: 'radio',
         elementConfig: {
             options: [
-                {value: 'Yes'},
-                {value: 'Noo'},
+                {value: 'Enabled'},
+                {value: 'Disabled'},
             ]
         },
         value: '',
-        label: 'Enabled',
+        label: 'Status',
         validation: {
             required: true
         },
