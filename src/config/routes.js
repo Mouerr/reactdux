@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
+import {TimelineContainer} from "../containers/Timeline";
 import {DataTableContainer,} from '../containers/DataTable';
 import {LeaveFormContainer} from '../containers/Leave';
 import {UserFormContainer} from '../containers/User';
@@ -21,6 +22,15 @@ const PrivateRoute = ({container: Component, ...rest}) => {
 
 const registered_routes = [
     {
+        path: '/',
+        container: TimelineContainer,
+        /*formconfig: userForm,
+        dtconfig: dtUserConfig,*/
+        apiservice: {api:leaveService,objname:'leave'},
+        navbar: false,
+        label: 'Dashboard',
+        field: 'user_list'
+    },{
         path: '/user/list',
         container: DataTableContainer,
         formconfig: userForm,

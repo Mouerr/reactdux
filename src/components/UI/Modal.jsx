@@ -11,7 +11,7 @@ const ModalC = props => {
 
     let form = formGenerator(formElementsArray, onChange);
 
-    return <React.Fragment>
+    return <>
         <Modal isOpen={modal} toggle={onToggle}>
             <ModalHeader toggle={onToggle}>Add New Row</ModalHeader>
             <Form onSubmit={onSubmit}>
@@ -28,6 +28,6 @@ const ModalC = props => {
                 </ModalFooter>
             </Form>
         </Modal>
-    </React.Fragment>
+    </>
 };
 export default React.memo(ModalC);

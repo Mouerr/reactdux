@@ -7,10 +7,10 @@ const AppNavbar = props => {
     const {loggedIn, user, registered_routes} = props;
 
     return (
-        <React.Fragment>
+        <>
             {loggedIn &&
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand href="#">REACT</NavbarBrand>
+                <NavbarBrand href="/">REACT</NavbarBrand>
                 <Nav navbar>
                     {user && registered_routes.map((route, index) =>
                         user.routes && user.routes.indexOf(route.path) !== -1 && route.navbar &&
@@ -24,7 +24,7 @@ const AppNavbar = props => {
                         className="glyphicon glyphicon-log-out"/> Logout</NavLink></NavItem>
                 </Nav>
             </Navbar>}
-        </React.Fragment>
+        </>
     )
 };
 

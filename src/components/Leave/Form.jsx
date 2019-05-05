@@ -6,7 +6,7 @@ const LeaveForm = props => {
     const {leave, submitted, submitting, onChange, onSubmit} = props;
     const leavetypes = ["Special leave", "Paid leave", "Sick leave", "National Holidays", "Religious Holidays"];
     return (
-        <React.Fragment>
+        <>
             <div className="row">
                 <div className="col-md-8">
                     <div className='pb-2 mt-4 mb-2'>
@@ -67,7 +67,7 @@ const LeaveForm = props => {
                     </Form>
                 </div>
             </div>
-        </React.Fragment>
+        </>
     )
 };
 

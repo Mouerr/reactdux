@@ -119,7 +119,7 @@ class DataTableContainer extends Component {
         const {page, sizePerPage, totalSize} = this.state;
         return (
             <div className="container" style={{marginTop: 50}}>
-                <React.Fragment>
+                <>
                     <DataTableButtons
                         onToggle={this.handleToggle}
                         onDelete={this.handleDelete}
@@ -144,7 +144,7 @@ class DataTableContainer extends Component {
                         sizePerPage={sizePerPage}
                         totalSize={totalSize}
                     />
-                </React.Fragment>
+                </>
             </div>
         )
     }

@@ -13,7 +13,8 @@ const tableSpinner = <div style={{
     left: '50%',
     /*MozTransform: 'translateX(-50%) translateY(-50%)',
     WebkitTransform: 'translateX(-50%) translateY(-50%)',*/
-    transform: 'translateX(-50%) translateY(-50%)'
+    transform: 'translateX(-50%) translateY(-50%)',
+    zIndex: '10000'
 }}>
     <Spinner style={{width: '5rem', height: '5rem'}}/>
 </div>;
@@ -21,7 +22,7 @@ const tableSpinner = <div style={{
 const DataTable = props => {
     const {page, sizePerPage, totalSize, data, columns, onSelect, onTableChange} = props;
 
-    return <React.Fragment>
+    return <>
         {props.loading && tableSpinner}
         <BootstrapTable
             bootstrap4
@@ -44,6 +45,6 @@ const DataTable = props => {
             })}*/
             //noDataIndication={() => tableSpinner}
         />
-    </React.Fragment>
+    </>
 };
 export default React.memo(DataTable);
