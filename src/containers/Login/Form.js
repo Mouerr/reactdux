@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LoginForm from '../../components/Login/Form';
 
-import {userActions} from '../../_actions';
+import {userActions} from '../../store/_actions';
 
 class LoginFormContainer extends Component {
     constructor(props) {

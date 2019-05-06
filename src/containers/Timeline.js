@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {datatableActions} from '../../src/_actions';
+import {datatableActions} from '../store/_actions';
 import TimelineItem from "../components/Timeline";
 import {Spinner} from 'reactstrap';
 

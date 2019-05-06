@@ -47,6 +47,7 @@
       "email": "test100@iportal.com",
       "password": "gm1436..",
       "routes": [
+        "/",
         "/user/list",
         "/user/create",
         "/leave/list",

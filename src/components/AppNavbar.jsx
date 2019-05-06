@@ -10,7 +10,7 @@ const AppNavbar = props => {
         <>
             {loggedIn &&
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand href="/">REACT</NavbarBrand>
+                <NavbarBrand tag={Link} to="/">REACT</NavbarBrand>
                 <Nav navbar>
                     {user && registered_routes.map((route, index) =>
                         user.routes && user.routes.indexOf(route.path) !== -1 && route.navbar &&

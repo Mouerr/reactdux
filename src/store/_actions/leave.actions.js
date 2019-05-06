@@ -1,7 +1,7 @@
 import {leaveConstants} from '../_constants';
-import {leaveService} from '../api';
-import { alertActions } from './';
-import { history } from '../_helpers';
+import {leaveService} from '../../api';
+import { alertActions } from './index';
+import { history } from '../../_helpers';
 
 export const leaveActions = {
     create,

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import UserForm from '../../components/User/Form';
 
-import {userActions} from '../../_actions';
+import {userActions} from '../../store/_actions';
 
 class UserFormContainer extends Component {
     state = {

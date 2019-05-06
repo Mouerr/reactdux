@@ -1,5 +1,5 @@
 import {datatableConstants} from '../_constants';
-import {alertActions} from './';
+import {alertActions} from './index';
 
 export const datatableActions = {
     create,

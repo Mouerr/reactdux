@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LeaveForm from '../../components/Leave/Form';
 
-import {leaveActions} from '../../_actions';
+import {leaveActions} from '../../store/_actions';
 
 class LeaveFormContainer extends Component {
     state = {
