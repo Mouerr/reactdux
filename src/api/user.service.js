@@ -1,46 +1,25 @@
-//import {authHeader} from '../_helpers';
+import {handleResponse, headerParams} from '../_helpers/utility';
 
 const apiurl = process.env.REACT_APP_API_URL;
 
-export const userService = {
-    login,
-    logout,
-    create,
-    getAll,
-    loginAsRegistered,
-    getByDataTableFilter,
-    getById,
-    update,
-    delete: _delete
-};
-
-function header_params(methodType, object = '') {
-    let header = {
-        method: methodType,
-        headers: {'Content-Type': 'application/json'/*, headers: authHeader()*/},
-        credentials: 'same-origin',
-    };
-    if (object !== '') {
-        header = Object.assign({}, {body: JSON.stringify(object)}, header);
-    }
-    return header;
-}
-
-function login(email, password) {
-
+const login = (email, password) => {
     return fetch(apiurl + `/users/authenticate?username=${email}&password=${password}`,
-        header_params('GET'))
+        headerParams('GET'))
         .then(handleResponse)
         .then(user => {
             if (user.length) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+                const expirationDate = new Date(new Date().getTime() + user[0].expirationTime * 1000);
                 localStorage.setItem('user', JSON.stringify(user[0]));
-                return user;
+                localStorage.setItem('userId', user[0].id);
+                localStorage.setItem('token', user[0].token);
+                localStorage.setItem('expirationDate', expirationDate);
+                return user[0];
             }
         });
-}
+};
 
-function loginAsRegistered(email, password) {
+const loginAsRegistered = (email, password) => {
 
     const header = {
         method: 'POST',
@@ -71,76 +50,55 @@ function loginAsRegistered(email, password) {
                     apiuser.password = password;
 
                     return fetch(apiurl + `/user/create`,
-                        header_params('POST', apiuser)).then(handleResponse).then(user => {
+                        headerParams('POST', apiuser)).then(handleResponse).then(user => {
                         localStorage.setItem('user', JSON.stringify(user));
                         return user;
                     });
                 }
             }
         });
-}
+};
 
-function logout() {
+const logout = () => {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
-    localStorage.removeItem('storedusers');
-}
+    localStorage.clear();
+};
 
-function getAll() {
-    return fetch(apiurl + `/users?_limit=10`, header_params('GET')).then(handleResponse).then(users => {
-        localStorage.setItem('stored_users', JSON.stringify(users));
+const getAll = () => {
+    return fetch(apiurl + `/users?_limit=10`, headerParams('GET')).then(handleResponse).then(users => {
         return users;
     });
-}
+};
 
-function getById(id) {
-    return fetch(apiurl + `/users/${id}`, header_params('GET')).then(handleResponse);
-}
+const getById = (id) => {
+    return fetch(apiurl + `/users/${id}`, headerParams('GET')).then(handleResponse);
+};
 
-function getByDataTableFilter(params_filters) {
-    return fetch(apiurl + `/users${params_filters}`, header_params('GET')).then(handleResponse);
-}
+const getByDataTableFilter = (params_filters) => {
+    return fetch(apiurl + `/users${params_filters}`, headerParams('GET')).then(handleResponse);
+};
 
-function create(user) {
-    return fetch(apiurl + `/user/create`, header_params('POST', user)).then(handleResponse);
-}
+const create = (user) => {
+    return fetch(apiurl + `/user/create`, headerParams('POST', user)).then(handleResponse);
+};
 
-function update(user) {
-    return fetch(apiurl + `/users/${user.id}`, header_params('PUT', user)).then(handleResponse);
-}
+const update = (user) => {
+    return fetch(apiurl + `/users/${user.id}`, headerParams('PUT', user)).then(handleResponse);
+};
 
 // prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-    return fetch(apiurl + `/users/${id}`, header_params('DELETE')).then(handleResponse);
-}
+const _delete = (id) => {
+    return fetch(apiurl + `/users/${id}`, headerParams('DELETE')).then(handleResponse);
+};
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout();
-                window.location.reload();
-            }
-
-            let error;
-            if (response.url.endsWith('/api/users/api-token-auth/')) {
-                error = (data && data.non_field_errors[0]) || response.statusText;
-            } else {
-                error = (data && data.message) || response.statusText;
-            }
-            return Promise.reject(error);
-        }
-        if (response.url.match(new RegExp(/\/users\/authenticate(\?|&)([^=]+)=([^&]+)/))) {
-            if (data.length) {
-                return data;
-            } else {
-                const error = 'Username or password is incorrect';
-                return Promise.reject(error);
-            }
-        } else {
-            return data;
-        }
-    });
-}
+export const userService = {
+    login,
+    logout,
+    create,
+    getAll,
+    loginAsRegistered,
+    getByDataTableFilter,
+    getById,
+    update,
+    delete: _delete
+};

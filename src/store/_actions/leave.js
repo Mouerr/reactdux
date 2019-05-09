@@ -1,9 +1,9 @@
 import {leaveConstants} from '../_constants';
 import {leaveService} from '../../api';
-import { alertActions } from './index';
+import { alert } from './index';
 import { history } from '../../_helpers';
 
-export const leaveActions = {
+export const leave = {
     create,
     update,
     getAll,
@@ -21,11 +21,11 @@ function create(leave) {
                 leave => {
                     dispatch(success());
                     history.push('/leave/list');
-                    dispatch(alertActions.success('Leave successfully created'));
+                    dispatch(alert.success('Leave successfully created'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alert.error(error.toString()));
                 }
             );
     };
@@ -44,11 +44,11 @@ function update(leave) {
                 leave => {
                     dispatch(success());
                     //history.push('/leave/list');
-                    dispatch(alertActions.success('Leave successfully Updated'));
+                    dispatch(alert.success('Leave successfully Updated'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alert.error(error.toString()));
                 }
             );
     };
@@ -83,7 +83,7 @@ function getById(leaveid) {
                 leave => dispatch(success(leave)),
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alert.error(error.toString()));
                 });
     };
 
@@ -117,11 +117,11 @@ function _delete(id) {
             .then(
                 leave => {
                     dispatch(success(id));
-                    dispatch(alertActions.success('Leave successfully Deleted'));
+                    dispatch(alert.success('Leave successfully Deleted'));
                 },
                 error => {
                     dispatch(failure(id, error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alert.error(error.toString()));
                 }
             );
     };

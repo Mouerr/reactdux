@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {registered_routes, PrivateRoute} from './config/routes';
+import {history} from './_helpers';
 
-import {history, registered_routes, PrivateRoute} from './_helpers';
-import {alertActions} from './_actions';
+import {alert} from './store/_actions';
+import {authentication} from './store/_actions';
 import {LoginFormContainer} from './containers/Login/Form';
+import {LogoutContainer} from './containers/Login/Logout';
 import PageNotFound from './components/PageNotFound';
-
+import {Container, Row, Col, Alert} from 'reactstrap';
 import AppNavbar from './components/AppNavbar'
 
 class App extends Component {
@@ -17,8 +19,11 @@ class App extends Component {
         const {dispatch} = this.props;
         history.listen((location, action) => {
             // clear alert on location change
-            dispatch(alertActions.clear());
+            dispatch(alert.clear());
         });
+    }
+    componentDidMount () {
+        this.props.dispatch(authentication.authCheckState());
     }
 
     render() {
@@ -28,7 +33,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Router history={history}>
-                    <React.Fragment>
+                    <>
 
                         <AppNavbar loggedIn={loggedIn} user={user} registered_routes={registered_routes}/>
 
@@ -49,12 +54,13 @@ class App extends Component {
                                                       container={route.container} apiservice={route.apiservice}
                                                       formconfig={route.formconfig} dtconfig={route.dtconfig}/>
                                     )}
+                                    <Route exact path="/logout" component={LogoutContainer}/>
                                     <Route exact path="/login" component={LoginFormContainer}/>
                                     <PrivateRoute path="" container={PageNotFound}/>
                                 </Switch>
                             </div>
                         </Container>
-                    </React.Fragment>
+                    </>
                 </Router>
             </div>
         );

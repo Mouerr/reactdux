@@ -2,15 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LoginForm from '../../components/Login/Form';
 
-import {userActions} from '../../store/_actions';
+import {authentication} from '../../store/_actions';
 
 class LoginFormContainer extends Component {
     constructor(props) {
         super(props);
-
-        // reset login status
-        this.props.dispatch(userActions.logout());
-        this.props.dispatch(userActions.getAll());
 
         this.state = {
             email: '',
@@ -34,7 +30,7 @@ class LoginFormContainer extends Component {
         const {email, password} = this.state;
         const {dispatch} = this.props;
         if (email && password) {
-            dispatch(userActions.login(email, password));
+            dispatch(authentication.login(email, password));
         }
     }
 

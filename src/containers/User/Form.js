@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import UserForm from '../../components/User/Form';
 
-import {userActions} from '../../store/_actions';
+import {user} from '../../store/_actions';
 
 class UserFormContainer extends Component {
     state = {
@@ -20,7 +20,7 @@ class UserFormContainer extends Component {
     componentDidMount() {
         if (this.props.match.url !== '/user/create') {
             const userid = this.props.match.params.userid;
-            this.props.dispatch(userActions.getById(userid));
+            this.props.dispatch(user.getById(userid));
         }
     }
 
@@ -63,9 +63,9 @@ class UserFormContainer extends Component {
         const {dispatch} = this.props;
         if (user.firstname && user.lastname && user.username && user.password && user.email) {
             if (this.props.match.url === '/user/create') {
-                dispatch(userActions.create(user));
+                dispatch(user.create(user));
             } else {
-                dispatch(userActions.update(user));
+                dispatch(user.update(user));
             }
         }
     };

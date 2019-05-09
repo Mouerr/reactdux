@@ -1,53 +1,7 @@
 import {userConstants} from '../_constants';
 import {userService} from '../../api';
-import {alertActions} from './index';
+import {alert} from './index';
 import {history} from '../../_helpers';
-
-export const userActions = {
-    login,
-    logout,
-    create,
-    update,
-    getAll,
-    getById,
-    delete: _delete
-};
-
-function login(email, password) {
-    return dispatch => {
-        dispatch(request({email}));
-
-        //userService.loginAsRegistered(email, password)
-        userService.login(email, password)
-            .then(
-                user => {
-                    dispatch(success(user));
-                    history.push('/user/list');
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
-                }
-            );
-    };
-
-    function request(user) {
-        return {type: userConstants.LOGIN_REQUEST, user}
-    }
-
-    function success(user) {
-        return {type: userConstants.LOGIN_SUCCESS, user}
-    }
-
-    function failure(error) {
-        return {type: userConstants.LOGIN_FAILURE, error}
-    }
-}
-
-function logout() {
-    userService.logout();
-    return {type: userConstants.LOGOUT};
-}
 
 function create(user) {
     return dispatch => {
@@ -58,11 +12,11 @@ function create(user) {
                 user => {
                     dispatch(success());
                     history.push('/user/list');
-                    dispatch(alertActions.success('User successfully Created'));
+                    dispatch(alert.success('User successfully Created'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alert.error(error.toString()));
                 }
             );
     };
@@ -89,11 +43,11 @@ function update(user) {
                 user => {
                     dispatch(success());
                     //history.push('/user/list');
-                    dispatch(alertActions.success('User successfully Updated'));
+                    dispatch(alert.success('User successfully Updated'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alert.error(error.toString()));
                 }
             );
     };
@@ -144,7 +98,7 @@ function getById(userid) {
                 user => dispatch(success(user)),
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alert.error(error.toString()));
                 });
     };
 
@@ -170,11 +124,11 @@ function _delete(id) {
             .then(
                 user => {
                     dispatch(success(id));
-                    dispatch(alertActions.success('User successfully Deleted'));
+                    dispatch(alert.success('User successfully Deleted'));
                 },
                 error => {
                     dispatch(failure(id, error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alert.error(error.toString()));
                 }
             );
     };
@@ -191,3 +145,11 @@ function _delete(id) {
         return {type: userConstants.DELETE_FAILURE, id, error}
     }
 }
+
+export const user = {
+    create,
+    update,
+    getAll,
+    getById,
+    delete: _delete
+};

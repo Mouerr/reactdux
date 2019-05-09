@@ -1,5 +1,5 @@
 import {datatableConstants} from '../_constants';
-import {updateObject} from '../utility';
+import {updateObject} from '../../_helpers/utility';
 
 const initialState = {items: [], loading: false};
 
@@ -51,7 +51,7 @@ export function datatable(state = initialState, action) {
         case datatableConstants.FILTER_REQUEST:
             return updateObject(state, {loading: true});
         case datatableConstants.FILTER_SUCCESS:
-            return updateObject(state, {loading: false, items: action.results});
+            return updateObject(state, {loading: false, items: action.items});
         case datatableConstants.FILTER_FAILURE:
             return updateObject(state, {error: action.error, loading: false});
 

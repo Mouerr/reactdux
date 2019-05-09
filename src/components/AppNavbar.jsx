@@ -20,7 +20,7 @@ const AppNavbar = props => {
                     )}
                 </Nav>
                 <Nav className="ml-auto" navbar>
-                    <NavItem><NavLink tag={Link} to="/login"><span
+                    <NavItem><NavLink tag={Link} to="/logout"><span
                         className="glyphicon glyphicon-log-out"/> Logout</NavLink></NavItem>
                 </Nav>
             </Navbar>}

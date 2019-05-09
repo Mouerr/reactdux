@@ -7,6 +7,11 @@ export function alert(state = {}, action) {
         type: 'success',
         message: action.message
       };
+    case alertConstants.WARNING:
+      return {
+        type: 'warning',
+        message: action.message
+      };
     case alertConstants.ERROR:
       return {
         type: 'danger',
