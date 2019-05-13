@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ModalC from '../components/UI/Modal';
 import PropTypes from 'prop-types';
-import {checkFormValidity} from "../_helpers/form-validator";
+import {checkFormValidity} from "../forms/fValidator";
 import {datatable} from "../store/_actions/datatable";
 import DataTable from "../components/DataTable/DataTable";
 import DataTableButtons from "../components/DataTable/DataTableButtons";

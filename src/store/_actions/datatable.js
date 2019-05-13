@@ -1,7 +1,7 @@
 import {datatableConstants} from '../_constants';
 import {alert} from './index';
 
-const create = (service, obj) =>{
+const create = (service, obj) => {
     return dispatch => {
         dispatch(request(obj));
 
@@ -19,6 +19,7 @@ const create = (service, obj) =>{
                 }
             );
     };
+
     function request(item) {
         return {type: datatableConstants.CREATE_REQUEST, item}
     }
@@ -32,7 +33,7 @@ const create = (service, obj) =>{
     }
 };
 
-const update =(service, obj) =>{
+const update = (service, obj) => {
     return dispatch => {
         dispatch(request());
 
@@ -62,7 +63,7 @@ const update =(service, obj) =>{
     }
 };
 
-const getAll=(service)=> {
+const getAll = (service) => {
     return dispatch => {
         dispatch(request());
 
@@ -89,7 +90,7 @@ const getAll=(service)=> {
     }
 };
 
-const filter=(service, conditions)=> {
+const filter = (service, conditions) => {
     const pagination_params = '?_page=' + conditions.page + '&_limit=' + conditions.sizePerPage;
     const sort_params = conditions.sortField ? '&_sort=' + conditions.sortField + '&_order=' + conditions.sortOrder : '';
     let filter_params = '';
@@ -134,7 +135,7 @@ const toggleModal = () => {
 };
 
 // prefixed function name with underscore because delete is a reserved word in javascript
-const _delete =(service, id) =>{
+const _delete = (service, id) => {
     return dispatch => {
         dispatch(request(id));
 

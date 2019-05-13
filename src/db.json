@@ -56,7 +56,9 @@
         "/user/update/:userid",
         "/leave/update/:leaveid"
       ],
-      "status": "Enabled"
+      "status": "Enabled",
+      "token": "Kt3adg459f24g54mdg4d",
+      "expirationTime": 3600
     },
     {
       "firstname": "coco",

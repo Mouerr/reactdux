@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {registered_routes, PrivateRoute} from './config/routes';
+import {registered_routes, PrivateRoute} from './config/mapping';
 import {history} from './_helpers';
 
 import {alert} from './store/_actions';

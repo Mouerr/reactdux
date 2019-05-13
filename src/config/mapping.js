@@ -6,7 +6,7 @@ import {DataTableContainer,} from '../containers/DataTable';
 import {LeaveFormContainer} from '../containers/Leave';
 import {UserFormContainer} from '../containers/User';
 
-import {dtLeaveConfig, dtUserConfig} from '../_helpers/dt_obj_conf';
+import {dtLeaveConfig, dtUserConfig} from './dataTableConfig';
 import {userForm} from '../forms/user';
 import {leaveForm} from "../forms/leave";
 

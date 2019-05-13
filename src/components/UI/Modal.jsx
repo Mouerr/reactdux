@@ -4,7 +4,7 @@ import {
     Form, FormGroup, Spinner, Button
 } from 'reactstrap';
 
-import {formGenerator} from "../../_helpers/form-generator";
+import {formGenerator} from "../../forms/fGenerator";
 
 const ModalC = props => {
     const {onSubmit, onChange, onToggle, modal,submitting, formIsValid, formElementsArray} = props;
