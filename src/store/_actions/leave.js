@@ -1,18 +1,9 @@
 import {leaveConstants} from '../_constants';
 import {leaveService} from '../../api';
-import { alert } from './index';
-import { history } from '../../_helpers';
+import {alertActions} from './index';
+import {history} from '../../_helpers';
 
-export const leave = {
-    create,
-    update,
-    getAll,
-    getById,
-    getByUserid,
-    delete: _delete
-};
-
-function create(leave) {
+const create = (leave) => {
     return dispatch => {
         dispatch(request(leave));
 
@@ -21,21 +12,29 @@ function create(leave) {
                 leave => {
                     dispatch(success());
                     history.push('/leave/list');
-                    dispatch(alert.success('Leave successfully created'));
+                    dispatch(alertActions.success('Leave successfully created'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
 
-    function request(leave) { return { type: leaveConstants.CREATE_REQUEST, leave } }
-    function success(leave) { return { type: leaveConstants.CREATE_SUCCESS, leave } }
-    function failure(error) { return { type: leaveConstants.CREATE_FAILURE, error } }
-}
+    function request(leave) {
+        return {type: leaveConstants.CREATE_REQUEST, leave}
+    }
 
-function update(leave) {
+    function success(leave) {
+        return {type: leaveConstants.CREATE_SUCCESS, leave}
+    }
+
+    function failure(error) {
+        return {type: leaveConstants.CREATE_FAILURE, error}
+    }
+};
+
+const update = (leave) => {
     return dispatch => {
         dispatch(request(leave));
 
@@ -44,21 +43,29 @@ function update(leave) {
                 leave => {
                     dispatch(success());
                     //history.push('/leave/list');
-                    dispatch(alert.success('Leave successfully Updated'));
+                    dispatch(alertActions.success('Leave successfully Updated'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
 
-    function request(leave) { return { type: leaveConstants.UPDATE_REQUEST, leave } }
-    function success(leave) { return { type: leaveConstants.UPDATE_SUCCESS, leave } }
-    function failure(error) { return { type: leaveConstants.UPDATE_FAILURE, error } }
-}
+    function request(leave) {
+        return {type: leaveConstants.UPDATE_REQUEST, leave}
+    }
 
-function getAll() {
+    function success(leave) {
+        return {type: leaveConstants.UPDATE_SUCCESS, leave}
+    }
+
+    function failure(error) {
+        return {type: leaveConstants.UPDATE_FAILURE, error}
+    }
+};
+
+const getAll = () => {
     return dispatch => {
         dispatch(request());
 
@@ -69,12 +76,20 @@ function getAll() {
             );
     };
 
-    function request() { return { type: leaveConstants.GETALL_REQUEST } }
-    function success(leaves) { return { type: leaveConstants.GETALL_SUCCESS, leaves } }
-    function failure(error) { return { type: leaveConstants.GETALL_FAILURE, error } }
-}
+    function request() {
+        return {type: leaveConstants.GETALL_REQUEST}
+    }
 
-function getById(leaveid) {
+    function success(leaves) {
+        return {type: leaveConstants.GETALL_SUCCESS, leaves}
+    }
+
+    function failure(error) {
+        return {type: leaveConstants.GETALL_FAILURE, error}
+    }
+};
+
+const getById = (leaveid) => {
     return dispatch => {
         dispatch(request(leaveid));
 
@@ -83,16 +98,24 @@ function getById(leaveid) {
                 leave => dispatch(success(leave)),
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 });
     };
 
-    function request(leaveid) { return { type: leaveConstants.GETBYID_REQUEST, leaveid } }
-    function success(leave) { return { type: leaveConstants.GETBYID_SUCCESS, leave } }
-    function failure(error) { return { type: leaveConstants.GETBYID_FAILURE, error } }
-}
+    function request(leaveid) {
+        return {type: leaveConstants.GETBYID_REQUEST, leaveid}
+    }
 
-function getByUserid(userid) {
+    function success(leave) {
+        return {type: leaveConstants.GETBYID_SUCCESS, leave}
+    }
+
+    function failure(error) {
+        return {type: leaveConstants.GETBYID_FAILURE, error}
+    }
+};
+
+const getByUserid = (userid) => {
     return dispatch => {
         dispatch(request(userid));
 
@@ -103,13 +126,21 @@ function getByUserid(userid) {
             );
     };
 
-    function request(userid) { return { type: leaveConstants.GETALL_REQUEST, userid } }
-    function success(leaves) { return { type: leaveConstants.GETALL_SUCCESS, leaves, userid } }
-    function failure(error) { return { type: leaveConstants.GETALL_FAILURE, error } }
-}
+    function request(userid) {
+        return {type: leaveConstants.GETALL_REQUEST, userid}
+    }
+
+    function success(leaves) {
+        return {type: leaveConstants.GETALL_SUCCESS, leaves, userid}
+    }
+
+    function failure(error) {
+        return {type: leaveConstants.GETALL_FAILURE, error}
+    }
+};
 
 // prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
+const _delete = (id) => {
     return dispatch => {
         dispatch(request(id));
 
@@ -117,16 +148,34 @@ function _delete(id) {
             .then(
                 leave => {
                     dispatch(success(id));
-                    dispatch(alert.success('Leave successfully Deleted'));
+                    dispatch(alertActions.success('Leave successfully Deleted'));
                 },
                 error => {
                     dispatch(failure(id, error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
 
-    function request(id) { return { type: leaveConstants.DELETE_REQUEST, id } }
-    function success(id) { return { type: leaveConstants.DELETE_SUCCESS, id } }
-    function failure(id, error) { return { type: leaveConstants.DELETE_FAILURE, id, error } }
-}
+    function request(id) {
+        return {type: leaveConstants.DELETE_REQUEST, id}
+    }
+
+    function success(id) {
+        return {type: leaveConstants.DELETE_SUCCESS, id}
+    }
+
+    function failure(id, error) {
+        return {type: leaveConstants.DELETE_FAILURE, id, error}
+    }
+};
+
+
+export const leaveActions = {
+    create,
+    update,
+    getAll,
+    getById,
+    getByUserid,
+    delete: _delete
+};

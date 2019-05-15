@@ -1,37 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {Navbar, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap';
+import {Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse} from 'reactstrap';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {mapping} from "../config/mapping";
 
-const AppNavbar = props => {
-    const {loggedIn, user, registered_routes} = props;
+class AppNavbar extends React.Component {
+    state = {
+        collapsed: true
+    };
+    toggleNavbar=() =>{
+        this.setState({
+            collapsed: !this.state.collapsed
+        });
+    };
 
-    return (
-        <>
+    render() {
+        const {loggedIn, user} = this.props;
+        const appTitle=  process.env.REACT_APP_TITLE;
+        return <>
             {loggedIn &&
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={Link} to="/">REACT</NavbarBrand>
-                <Nav navbar>
-                    {user && registered_routes.map((route, index) =>
-                        user.routes && user.routes.indexOf(route.path) !== -1 && route.navbar &&
-                        <NavItem key={index}>
-                            <NavLink tag={Link} to={route.path}>{route.label}</NavLink>
+                <NavbarBrand tag={Link} to="/">{appTitle}</NavbarBrand>
+                <NavbarToggler onClick={this.toggleNavbar} className="mr-2"/>
+                <Collapse isOpen={!this.state.collapsed} navbar>
+                    <Nav navbar>
+                        {user && mapping.map((route, index) =>
+                            user.roles && user.roles.hasOwnProperty(route.roleName) && route.navbar &&
+                            <NavItem key={index}>
+                                <NavLink tag={Link} to={route.reactPath}>{route.roleName}</NavLink>
+                            </NavItem>
+                        )}
+                    </Nav>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem><NavLink tag={Link} to="/logout">
+                            <FontAwesomeIcon icon="sign-out-alt" size="lg"/> Logout</NavLink>
                         </NavItem>
-                    )}
-                </Nav>
-                <Nav className="ml-auto" navbar>
-                    <NavItem><NavLink tag={Link} to="/logout"><span
-                        className="glyphicon glyphicon-log-out"/> Logout</NavLink></NavItem>
-                </Nav>
+                    </Nav>
+                </Collapse>
             </Navbar>}
         </>
-    )
-};
+    }
+}
 
 AppNavbar.propTypes = {
     loggedIn: PropTypes.bool,
     user: PropTypes.object,
-    registered_routes: PropTypes.array.isRequired
 };
 
 export default AppNavbar;

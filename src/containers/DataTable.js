@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import ModalC from '../components/UI/Modal';
 import PropTypes from 'prop-types';
 import {checkFormValidity} from "../forms/fValidator";
-import {datatable} from "../store/_actions/datatable";
+import {datatableActions} from "../store/_actions/datatable";
 import DataTable from "../components/DataTable/DataTable";
 import DataTableButtons from "../components/DataTable/DataTableButtons";
 
@@ -18,26 +18,26 @@ class DataTableContainer extends Component {
     };
 
     componentDidMount() {
-        this.props.dispatch(datatable.getAll(this.props.api));
+        this.props.dispatch(datatableActions.getAll(this.props.apiservice));
     }
 
     handleDelete = () => {
         if (this.state.deleteRowId !== ''){
-            this.props.dispatch(datatable.delete(this.props.api, this.state.deleteRowId));
+            this.props.dispatch(datatableActions.delete(this.props.apiservice, this.state.deleteRowId));
             this.setState({deleteRowId: ''})
         }
     };
 
     handleToggle = () => {
-        this.props.dispatch(datatable.toggleModal());
+        this.props.dispatch(datatableActions.toggleModal());
     };
 
     handleUpdate = editedRow => {
-        this.props.dispatch(datatable.update(this.props.api, editedRow));
+        this.props.dispatch(datatableActions.update(this.props.apiservice, editedRow));
     };
 
     handleFilter = conditions => {
-        this.props.dispatch(datatable.filter(this.props.api, conditions));
+        this.props.dispatch(datatableActions.filter(this.props.apiservice, conditions));
     };
 
     handleFormChange = (event, inputIdentifier) => {
@@ -73,7 +73,7 @@ class DataTableContainer extends Component {
         for (let formElementIdentifier in this.state.dt_object) {
             formData[formElementIdentifier] = this.state.dt_object[formElementIdentifier].value;
         }
-        this.props.dispatch(datatable.create(this.props.api, formData))
+        this.props.dispatch(datatableActions.create(this.props.apiservice, formData))
     };
 
     handleTableChange = (type, {page, sizePerPage, filters, sortField, sortOrder, cellEdit}) => {
@@ -120,7 +120,11 @@ class DataTableContainer extends Component {
         return (
             <div className="container" style={{marginTop: 50}}>
                 <>
+
                     <DataTableButtons
+                        data={this.props.items}
+                        icons={this.props.icons}
+                        objname={this.props.apiservice.objname}
                         onToggle={this.handleToggle}
                         onDelete={this.handleDelete}
                         disableDelete={this.state.deleteRowId}

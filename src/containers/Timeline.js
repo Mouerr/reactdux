@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {datatable} from '../store/_actions';
+import {datatableActions} from '../store/_actions';
 import TimelineItem from "../components/Timeline";
 import {Spinner} from 'reactstrap';
 
@@ -15,7 +15,7 @@ const TLSpinner = <div style={{
 class TimelineContainer extends Component {
 
     componentDidMount() {
-        this.props.dispatch(datatable.getAll(this.props.api));
+        this.props.dispatch(datatableActions.getAll(this.props.apiservice));
     }
 
     render() {

@@ -1,6 +1,6 @@
 import {userConstants} from '../_constants';
 import {userService} from '../../api';
-import {alert} from './index';
+import {alertActions} from './index';
 import {history} from '../../_helpers';
 
 function create(user) {
@@ -12,11 +12,11 @@ function create(user) {
                 user => {
                     dispatch(success());
                     history.push('/user/list');
-                    dispatch(alert.success('User successfully Created'));
+                    dispatch(alertActions.success('User successfully Created'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -43,11 +43,11 @@ function update(user) {
                 user => {
                     dispatch(success());
                     //history.push('/user/list');
-                    dispatch(alert.success('User successfully Updated'));
+                    dispatch(alertActions.success('User successfully Updated'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -98,7 +98,7 @@ function getById(userid) {
                 user => dispatch(success(user)),
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 });
     };
 
@@ -124,11 +124,11 @@ function _delete(id) {
             .then(
                 user => {
                     dispatch(success(id));
-                    dispatch(alert.success('User successfully Deleted'));
+                    dispatch(alertActions.success('User successfully Deleted'));
                 },
                 error => {
                     dispatch(failure(id, error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -146,7 +146,7 @@ function _delete(id) {
     }
 }
 
-export const user = {
+export const userActions = {
     create,
     update,
     getAll,

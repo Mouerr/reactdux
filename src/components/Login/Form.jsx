@@ -1,42 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    Form, Col, FormGroup, Input, Label, Card, Button, CardHeader, CardBody, CardTitle, FormFeedback, Spinner
+    Form, Col, FormGroup, Input, Label, Card, Button, CardHeader, CardBody, CardTitle, FormFeedback, Spinner,InputGroup,InputGroupAddon,InputGroupText
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const LoginForm = props => {
     const {loggingIn, email, password, submitted, onChange, onSubmit} = props;
-    const cardstyle = {margin: '15%'};
     return (
-        <Card style={cardstyle}>
+        <Card style={{margin: '15%'}}>
             <CardHeader><h4><strong>Login</strong></h4></CardHeader>
             <CardBody>
                 <CardTitle>Sign In to your account</CardTitle>
 
                 <Form onSubmit={onSubmit}>
+
                     <FormGroup row>
                         <Label sm={2}>Email</Label>
                         <Col sm={6}>
-                            <Input type="email" name="email" placeholder="email@exmaple.com" value={email}
-                                   onChange={onChange} invalid={!!(submitted && !email)}/>
-                            {submitted && !email &&
-                            <FormFeedback>Email is required</FormFeedback>
-                            }
+                            <InputGroup>
+                                <InputGroupAddon addonType="prepend">
+                                    <InputGroupText>
+                                        <FontAwesomeIcon icon="user-secret" size="lg"/>
+                                    </InputGroupText>
+                                </InputGroupAddon>
+                                <Input type="email" name="email" placeholder="email@exmaple.com" value={email}
+                                       onChange={onChange} invalid={!!(submitted && !email)}/>
+                                {submitted && !email &&
+                                <FormFeedback>Email is required</FormFeedback>
+                                }
+                            </InputGroup>
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label sm={2}>Password</Label>
                         <Col sm={6}>
+                            <InputGroup>
+                                <InputGroupAddon addonType="prepend">
+                                    <InputGroupText>
+                                        <FontAwesomeIcon icon="key" size="lg"/>
+                                    </InputGroupText>
+                                </InputGroupAddon>
                             <Input type="password" name="password" placeholder="*************"
                                    value={password} onChange={onChange} invalid={!!(submitted && !password)}/>
                             {submitted && !password &&
                             <FormFeedback>Password is required</FormFeedback>
                             }
+                            </InputGroup>
                         </Col>
                     </FormGroup>
                     <FormGroup check row>
-                        <Col sm={{size: 6, offset: 2}}>
-                            <Button color='primary'>Login</Button>
+                        <Col sm={{offset: 2}}>
+                            <Button color='primary'><FontAwesomeIcon icon="door-open" size="lg"/>Login</Button>
                             {loggingIn &&
                             <Spinner color="primary"/>}
                         </Col>

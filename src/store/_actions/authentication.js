@@ -1,6 +1,6 @@
 import {authenticationConstants} from '../_constants';
 import {userService} from '../../api';
-import {alert} from './index';
+import {alertActions} from './index';
 import {history} from '../../_helpers';
 
 const loginRequest = (user) => {
@@ -29,7 +29,7 @@ const login = (email, password) => {
                 },
                 error => {
                     dispatch(loginFailure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -44,7 +44,7 @@ const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logout());
-            dispatch(alert.warning('Session Expired'));
+            dispatch(alertActions.warning('Session Expired'));
         }, expirationTime * 1000);
     };
 };
@@ -67,7 +67,7 @@ const authCheckState = () => {
     };
 };
 
-export const authentication = {
+export const authenticationActions = {
     login,
     logout,
     authCheckState

@@ -39,23 +39,23 @@
     {
       "id": 39,
       "is_active": true,
-      "username": "test100@iportal.com",
+      "username": "test@portal.com",
       "is_staff": true,
       "is_superuser": true,
       "firstname": "test100",
       "lastname": "test100",
-      "email": "test100@iportal.com",
+      "email": "test@portal.com",
       "password": "gm1436..",
-      "routes": [
-        "/",
-        "/user/list",
-        "/user/create",
-        "/leave/list",
-        "/leave/create",
-        "/user/:userid/leaves",
-        "/user/update/:userid",
-        "/leave/update/:leaveid"
-      ],
+      "roles": {
+        "Dashboard": "role_admin",
+        "User List": "role_admin",
+        "User Create": "role_manager",
+        "User Update": "role_manager",
+        "Leave List": "role_user",
+        "User Leaves": "role_user",
+        "Leave Create": "role_manager",
+        "Leave Update": "role_admin"
+      },
       "status": "Enabled",
       "token": "Kt3adg459f24g54mdg4d",
       "expirationTime": 3600
@@ -71,7 +71,7 @@
     {
       "firstname": "bravo",
       "lastname": "bravo",
-      "username": "bravo",
+      "username": "bravo.",
       "email": "bravo@ooo.cc",
       "password": "bravo",
       "id": 52
@@ -79,7 +79,7 @@
     {
       "firstname": "krimo",
       "lastname": "krimo",
-      "username": "krimo",
+      "username": "krimox",
       "email": "krimo@poi.gg",
       "password": "krimo",
       "id": 53
@@ -91,14 +91,6 @@
       "email": "cambox@gmgmg.ff",
       "password": "cambox",
       "id": 54
-    },
-    {
-      "firstname": "endos",
-      "lastname": "endos",
-      "username": "endos",
-      "email": "endos@ppmm.gg",
-      "password": "endos",
-      "id": 58
     },
     {
       "firstname": "gogo",
@@ -146,15 +138,16 @@
       "username": "ahammar@gmpanel.net",
       "email": "ahammar@gmpanel.net",
       "password": "ahammar2019",
-      "routes": [
-        "/user/list",
-        "/user/create",
-        "/leave/list",
-        "/leave/create",
-        "/user/:userid/leaves",
-        "/user/update/:userid",
-        "/leave/update/:leaveid"
-      ],
+      "roles": {
+        "Dashboard": "role_admin",
+        "User List": "role_admin",
+        "User create": "role_manager",
+        "User update": "role_manager",
+        "Leave list": "role_user",
+        "User leaves": "role_user",
+        "Leave create": "role_manager",
+        "Leave update": "role_admin"
+      },
       "id": 71
     },
     {
@@ -189,15 +182,6 @@
       "id": 74
     },
     {
-      "firstname": "bbnbnbnb",
-      "lastname": "bbnbnbnb",
-      "username": "bbnbnbnb",
-      "email": "bbnbnbnb@gf.ff",
-      "password": "Azerty@123",
-      "status": "Disabled",
-      "id": 75
-    },
-    {
       "firstname": "Mouad",
       "lastname": "Errahmouni",
       "username": "mouerr95",
@@ -226,6 +210,72 @@
       },
       "status": "Disabled",
       "id": 77
+    },
+    {
+      "firstname": "byong",
+      "lastname": "byong",
+      "username": "byong",
+      "email": "byong@mail.com",
+      "password": "Azerty@123456",
+      "groups": {
+        "ATM": false,
+        "GTX": false,
+        "RBX": false,
+        "SLK": true
+      },
+      "status": "Enabled",
+      "id": 78
+    },
+    {
+      "firstname": "maloma",
+      "lastname": "maloma",
+      "username": "maloma",
+      "email": "maloma@mail.com",
+      "password": "Maloma@123",
+      "groups": {
+        "ATM": false,
+        "GTX": false,
+        "RBX": true,
+        "SLK": false
+      },
+      "status": "Enabled",
+      "id": 79
+    },
+    {
+      "firstname": "youyou",
+      "lastname": "youyou",
+      "username": "youyou",
+      "email": "youyou@momo.ff",
+      "password": "youyoua33@rR",
+      "groups": {
+        "ATM": false,
+        "GTX": true,
+        "RBX": true,
+        "SLK": false
+      },
+      "status": "Enabled",
+      "id": 80
+    },
+    {
+      "id": 81,
+      "firstname": "albania",
+      "lastname": "albania",
+      "username": "albania@test.com",
+      "email": "albania@test.com",
+      "password": "albania",
+      "roles": {
+        "Dashboard": "role_admin",
+        "User List": "role_admin",
+        "User create": "role_manager",
+        "User update": "role_manager",
+        "Leave list": "role_user",
+        "User leaves": "role_user",
+        "Leave create": "role_manager",
+        "Leave update": "role_admin"
+      },
+      "status": "Enabled",
+      "token": "Kt3adg459f24g54mdg4d",
+      "expirationTime": 3600
     }
   ],
   "route_roles": [

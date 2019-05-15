@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LeaveForm from '../../components/Leave/Form';
 
-import {leave} from '../../store/_actions';
+import {leaveActions} from '../../store/_actions';
 
 class LeaveFormContainer extends Component {
     state = {
@@ -19,7 +19,7 @@ class LeaveFormContainer extends Component {
     componentDidMount() {
         if (this.props.match.url !== '/leave/create') {
             const leaveid = this.props.match.params.leaveid;
-            this.props.dispatch(leave.getById(leaveid));
+            this.props.dispatch(leaveActions.getById(leaveid));
         }
     }
 
@@ -62,9 +62,9 @@ class LeaveFormContainer extends Component {
         const {dispatch} = this.props;
         if (leave.fromdate && leave.leavetype && leave.todate && leave.cause) {
             if (this.props.match.url === '/leave/create') {
-                dispatch(leave.create(leave));
+                dispatch(leaveActions.create(leave));
             } else {
-                dispatch(leave.update(leave));
+                dispatch(leaveActions.update(leave));
             }
         }
     };

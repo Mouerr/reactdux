@@ -15,75 +15,76 @@ import {userService, leaveService} from '../api';
 const PrivateRoute = ({container: Component, ...rest}) => {
     return <Route {...rest} render={props => (
         localStorage.getItem('user')
-            ? <Component {...props} formconfig={rest.formconfig} dtconfig={rest.dtconfig} api={rest.apiservice}/>
+            ? <Component {...props} formconfig={rest.formconfig} dtconfig={rest.dtconfig} apiservice={rest.apiservice} icons={rest.icons}/>
             : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
     )}/>
 };
 
-const registered_routes = [
+const mapping = [
     {
-        path: '/',
+        reactPath: '/',
         container: TimelineContainer,
         /*formconfig: userForm,
         dtconfig: dtUserConfig,*/
-        apiservice: {api:leaveService,objname:'leave'},
+        apiservice: {api: leaveService, objname: 'leave'},
         navbar: false,
-        label: 'Dashboard',
-        field: 'user_list'
-    },{
-        path: '/user/list',
+        roleName: 'Dashboard'
+    }, {
+        reactPath: '/user/list',
         container: DataTableContainer,
         formconfig: userForm,
         dtconfig: dtUserConfig,
-        apiservice: {api:userService,objname:'user'},
+        apiservice: {api: userService, objname: 'user'},
         navbar: true,
-        label: 'User List',
-        field: 'user_list'
+        roleName: 'User List',
+        icons:['user-plus','user-minus']
     },
     {
-        path: '/user/create',
+        reactPath: '/user/create',
         container: UserFormContainer,
-        apiservice: {api:userService,objname:'user'},
+        apiservice: {api: userService, objname: 'user'},
         navbar: true, label: 'User Create',
-        field: 'user_create'
+        roleName: 'User Create'
     },
     {
-        path: '/user/update/:userid',
+        reactPath: '/user/update/:userid',
         container: UserFormContainer,
-        apiservice: {api:userService,objname:'user'},
+        apiservice: {api: userService, objname: 'user'},
         navbar: false,
-        label: 'User Update',
-        field: 'user_update'
+        roleName: 'User Update'
     },
     {
-        path: '/leave/list',
+        reactPath: '/leave/list',
         container: DataTableContainer,
         formconfig: leaveForm,
         dtconfig: dtLeaveConfig,
-        apiservice: {api:leaveService,objname:'leave'},
+        apiservice: {api: leaveService, objname: 'leave'},
         navbar: true,
-        label: 'Leave List',
-        field: 'leave_list'
+        roleName: 'Leave List',
+        icons: ['calendar-plus','calendar-minus']
     },
     {
-        path: '/user/:userid/leaves',
+        reactPath: '/user/:userid/leaves',
         container: DataTableContainer,
         formconfig: leaveForm,
         dtconfig: dtLeaveConfig,
-        apiservice: {api:leaveService,objname:'leave'},
+        apiservice: {api: leaveService, objname: 'leave'},
         navbar: false,
-        label: 'User Leaves',
-        field: 'user_leaves'
+        roleName: 'User Leaves'
     },
-    {path: '/leave/create', container: LeaveFormContainer, navbar: true, label: 'Leave Create', field: 'leave_create'},
     {
-        path: '/leave/update/:leaveid',
+        reactPath: '/leave/create',
         container: LeaveFormContainer,
-        apiservice: {api:leaveService,objname:'leave'},
+        navbar: true,
+        roleName: 'Leave Create'
+    },
+    {
+        reactPath: '/leave/update/:leaveid',
+        container: LeaveFormContainer,
+        apiservice: {api: leaveService, objname: 'leave'},
         navbar: false,
-        label: 'Leave Update',
-        field: 'leave_update'
+        roleName: 'Leave Update'
     },
 ];
 
-export {PrivateRoute, registered_routes};
+export {PrivateRoute, mapping};

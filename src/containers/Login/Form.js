@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LoginForm from '../../components/Login/Form';
 
-import {authentication} from '../../store/_actions';
+import {authenticationActions} from '../../store/_actions';
 
 class LoginFormContainer extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class LoginFormContainer extends Component {
         const {email, password} = this.state;
         const {dispatch} = this.props;
         if (email && password) {
-            dispatch(authentication.login(email, password));
+            dispatch(authenticationActions.login(email, password));
         }
     }
 

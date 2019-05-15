@@ -1,5 +1,5 @@
 import {datatableConstants} from '../_constants';
-import {alert} from './index';
+import {alertActions} from './index';
 
 const create = (service, obj) => {
     return dispatch => {
@@ -10,12 +10,12 @@ const create = (service, obj) => {
                 item => {
                     dispatch(success(item));
                     dispatch(toggleModal());
-                    dispatch(alert.success(service.objname + ' successfully Created'));
+                    dispatch(alertActions.success(service.objname + ' successfully Created'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
                     dispatch(toggleModal());
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -41,11 +41,11 @@ const update = (service, obj) => {
             .then(
                 item => {
                     dispatch(success(item));
-                    dispatch(alert.success(service.objname + ' successfully Updated'));
+                    dispatch(alertActions.success(service.objname + ' successfully Updated'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -72,7 +72,7 @@ const getAll = (service) => {
                 items => dispatch(success(items)),
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -113,7 +113,7 @@ const filter = (service, conditions) => {
                 items => dispatch(success(items)),
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 });
     };
 
@@ -143,11 +143,11 @@ const _delete = (service, id) => {
             .then(
                 item => {
                     dispatch(success(id));
-                    dispatch(alert.success(service.objname + ' successfully Deleted'));
+                    dispatch(alertActions.success(service.objname + ' successfully Deleted'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alert.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -165,7 +165,7 @@ const _delete = (service, id) => {
     }
 };
 
-export const datatable = {
+export const datatableActions = {
     create,
     update,
     getAll,
