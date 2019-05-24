@@ -7,11 +7,11 @@ import {
 import {formGenerator} from "../../forms/fGenerator";
 
 const ModalC = props => {
-    const {onSubmit, onChange, onToggle, modal,submitting, formIsValid, formElementsArray} = props;
+    const {onSubmit, onChange, onInjectValue, onToggle, modal, submitting, formIsValid, formElementsArray} = props;
 
-    let form = formGenerator(formElementsArray, onChange);
+    let form = formGenerator(formElementsArray, onChange, onInjectValue);
 
-    return <>
+    return (
         <Modal isOpen={modal} toggle={onToggle}>
             <ModalHeader toggle={onToggle}>Add New Row</ModalHeader>
             <Form onSubmit={onSubmit}>
@@ -20,14 +20,13 @@ const ModalC = props => {
                 </ModalBody>
                 <ModalFooter>
                     <FormGroup check row>
-                        {submitting ? <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" /> :
+                        {submitting ? <Spinner style={{width: '3rem', height: '3rem'}} type="grow"/> :
                             <Button color="primary" type='submit' disabled={!formIsValid}>Submit</Button>
                         }{' '}
                     </FormGroup>
                     <Button color="secondary" onClick={onToggle}>Cancel</Button>
                 </ModalFooter>
             </Form>
-        </Modal>
-    </>
+        </Modal>)
 };
 export default React.memo(ModalC);

@@ -16,13 +16,21 @@ class DataTableContainer extends Component {
         totalSize: 100,
         deleteRowId: ''
     };
+    baseObjState = this.state.dt_object;
+
+    resetForm = () => {
+        this.setState({
+            dt_object: this.baseObjState,
+            formIsValid: false
+        })
+    };
 
     componentDidMount() {
         this.props.dispatch(datatableActions.getAll(this.props.apiservice));
     }
 
     handleDelete = () => {
-        if (this.state.deleteRowId !== ''){
+        if (this.state.deleteRowId !== '') {
             this.props.dispatch(datatableActions.delete(this.props.apiservice, this.state.deleteRowId));
             this.setState({deleteRowId: ''})
         }
@@ -73,13 +81,14 @@ class DataTableContainer extends Component {
         for (let formElementIdentifier in this.state.dt_object) {
             formData[formElementIdentifier] = this.state.dt_object[formElementIdentifier].value;
         }
-        this.props.dispatch(datatableActions.create(this.props.apiservice, formData))
+        this.props.dispatch(datatableActions.create(this.props.apiservice, formData));
+        this.resetForm();
     };
 
     handleTableChange = (type, {page, sizePerPage, filters, sortField, sortOrder, cellEdit}) => {
         const conditions = {page, sizePerPage, filters, sortField, sortOrder};
 
-        console.log('change', type, {page, sizePerPage, filters, sortField, sortOrder, cellEdit});
+        //console.log('change', type, {page, sizePerPage, filters, sortField, sortOrder, cellEdit});
         setTimeout(() => {
             // Handle cell editing
             if (type === 'cellEdit') {
@@ -115,12 +124,32 @@ class DataTableContainer extends Component {
         }
     };
 
+    injectValue = (inputIdentifier, value) => {
+        const updatedForm = {
+            ...this.state.dt_object
+        };
+        const updatedFormElement = {
+            ...updatedForm[inputIdentifier]
+        };
+        updatedFormElement.value = value;
+
+        const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.valid = checkValidity.isValid;
+        updatedFormElement.errorMessage = checkValidity.errorMessage;
+        updatedFormElement.touched = true;
+        updatedForm[inputIdentifier] = updatedFormElement;
+        let formIsValid = true;
+        for (let inputIdentifier in updatedForm) {
+            formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({dt_object: updatedForm, formIsValid: formIsValid});
+    };
+
     render() {
         const {page, sizePerPage, totalSize} = this.state;
         return (
             <div className="container" style={{marginTop: 50}}>
                 <>
-
                     <DataTableButtons
                         data={this.props.items}
                         icons={this.props.icons}
@@ -137,6 +166,7 @@ class DataTableContainer extends Component {
                         onToggle={this.handleToggle}
                         onSubmit={this.handleFormSubmit}
                         onChange={this.handleFormChange}
+                        onInjectValue={this.injectValue}
                     />
                     <DataTable
                         columns={this.props.dtconfig}

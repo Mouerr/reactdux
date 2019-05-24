@@ -1,13 +1,12 @@
 import React from 'react';
 import {Input, FormFeedback, FormGroup, Label} from 'reactstrap';
+import CheckboxRadioC from "../UI/CheckboxRadio";
 
 const InputC = (props) => {
 
     let inputElement = null;
-    let feedbackErrors = (
-        props.errorMessage.map((val, key) =>
-            <FormFeedback key={key}>{val}</FormFeedback>
-        )
+    let feedbackErrors = props.errorMessage.map((val, key) =>
+        <FormFeedback key={key}>{val}</FormFeedback>
     );
 
     switch (props.elementType) {
@@ -43,6 +42,14 @@ const InputC = (props) => {
                     </Label>
                 </FormGroup>
             ));
+            break;
+        case ('checkbox-radio'):
+            inputElement = <CheckboxRadioC
+                name={props.name}
+                labels={props.elementConfig.labels}
+                options={props.elementConfig.options}
+                onInjectValue={props.onInjectValue}
+            />;
             break;
         default:
             inputElement = <Input

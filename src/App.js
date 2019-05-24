@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {mapping, PrivateRoute} from './config/mapping';
+import {PrivateRoute} from './config/mapping';
+import {routing} from './config/routing';
 import {history} from './_helpers';
-import Layout from "./components/Layout";
+import Layout from "./components/UI/Layout";
 import {alertActions, authenticationActions} from './store/_actions';
-import {LoginFormContainer} from './containers/Login/Form';
-import {LogoutContainer} from './containers/Login/Logout';
+import {LoginFormContainer} from './containers/Auth/Login';
+import {LogoutContainer} from './containers/Auth/Logout';
 import PageNotFound from './components/PageNotFound';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
-    faUserSecret, faKey, faDoorOpen, faSignOutAlt,faFileCsv,
+    faUserSecret, faKey, faDoorOpen, faSignOutAlt, faFileCsv,
     faArrowCircleDown, faArrowCircleUp, faUserMinus, faUserPlus, faCalendarPlus, faCalendarMinus,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUserSecret, faArrowCircleDown, faArrowCircleUp, faKey, faDoorOpen, faUserMinus, faUserPlus, faCalendarPlus, faCalendarMinus, faSignOutAlt,faFileCsv);
-
+library.add(faUserSecret, faArrowCircleDown, faArrowCircleUp, faKey, faDoorOpen, faUserMinus, faUserPlus, faCalendarPlus, faCalendarMinus, faSignOutAlt, faFileCsv);
 
 class App extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ class App extends Component {
                 <Router history={history}>
                     <Layout alert={alert} user={user} loggedIn={loggedIn}>
                         <Switch>
-                            {user && mapping.map((route, index) =>
+                            {user && routing.map((route, index) =>
                                 user.roles.hasOwnProperty(route.roleName) &&
                                 <PrivateRoute key={index} exact
                                               path={route.reactPath} icons={route.icons}

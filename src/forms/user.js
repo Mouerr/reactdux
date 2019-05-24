@@ -1,3 +1,5 @@
+const routing = JSON.parse(localStorage.getItem('app_roles'));
+
 export const userForm = {
     firstname: {
         elementType: 'input',
@@ -96,6 +98,21 @@ export const userForm = {
             "SLK": false
         },
         label: 'Groups',
+        validation: {
+            required: true
+        },
+        valid: false,
+        errorMessage:[],
+        touched: false
+    },
+    roles: {
+        elementType: 'checkbox-radio',
+        elementConfig: {
+            labels: Object.assign.apply({}, routing.map((el) => ({[el]: 'role_user'}))),
+            options: ['role_user', 'role_manager', 'role_admin']
+        },
+        value: '',
+        label: 'Roles',
         validation: {
             required: true
         },

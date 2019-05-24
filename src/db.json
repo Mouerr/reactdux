@@ -276,6 +276,131 @@
       "status": "Enabled",
       "token": "Kt3adg459f24g54mdg4d",
       "expirationTime": 3600
+    },
+    {
+      "firstname": "roles",
+      "lastname": "roles",
+      "username": "roles",
+      "email": "roles@mail.com",
+      "password": "Roles@123456",
+      "groups": {
+        "ATM": true,
+        "GTX": false,
+        "RBX": false,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role_manager",
+        "User List": "role_manager",
+        "User Create": "role_admin",
+        "User Update": "role_user",
+        "Leave List": "role_admin",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_admin"
+      },
+      "status": "Enabled",
+      "id": 82
+    },
+    {
+      "firstname": "ramadan",
+      "lastname": "ramadan",
+      "username": "ramadan",
+      "email": "ramadan@mail.com",
+      "password": "Ramadan@12345",
+      "groups": {
+        "ATM": true,
+        "GTX": false,
+        "RBX": false,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role_manager",
+        "User List": "role_user",
+        "User Create": "role_user",
+        "User Update": "role_user",
+        "Leave List": "role_user",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_admin"
+      },
+      "status": "Enabled",
+      "id": 83
+    },
+    {
+      "firstname": "karama",
+      "lastname": "karama",
+      "username": "karama",
+      "email": "karama@maz.cc",
+      "password": "karamaA@4",
+      "groups": {
+        "ATM": false,
+        "GTX": true,
+        "RBX": true,
+        "SLK": true
+      },
+      "roles": {
+        "Dashboard": "role_user",
+        "User List": "role_user",
+        "User Create": "role_user",
+        "User Update": "role_user",
+        "Leave List": "role_manager",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_user"
+      },
+      "status": "Enabled",
+      "id": 84
+    },
+    {
+      "firstname": "coconut",
+      "lastname": "coconut",
+      "username": "coconut",
+      "email": "coconut@kjkj.gg",
+      "password": "coconutA@3",
+      "groups": {
+        "ATM": true,
+        "GTX": true,
+        "RBX": true,
+        "SLK": true
+      },
+      "roles": {
+        "Dashboard": "role_manager",
+        "User List": "role_manager",
+        "User Create": "role_user",
+        "User Update": "role_user",
+        "Leave List": "role_user",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_user"
+      },
+      "status": "Enabled",
+      "id": 85
+    },
+    {
+      "firstname": "train",
+      "lastname": "train",
+      "username": "train",
+      "email": "train@mail.com",
+      "password": "trainA@411",
+      "groups": {
+        "ATM": true,
+        "GTX": false,
+        "RBX": false,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role_manager",
+        "User List": "role_user",
+        "User Create": "role_user",
+        "User Update": "role_user",
+        "Leave List": "role_user",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_user"
+      },
+      "status": "Enabled",
+      "id": 86
     }
   ],
   "route_roles": [

@@ -2,8 +2,7 @@ import React from 'react';
 import InputC from "../components/UI/Input";
 import {FormGroup, Label, Col} from 'reactstrap';
 
-export const formGenerator = (objectForm, onChange) => {
-
+export const formGenerator = (objectForm, onChange, onInjectValue) => {
     const formElementsArray = [];
     for (const key in objectForm) {
         formElementsArray.push({
@@ -27,6 +26,7 @@ export const formGenerator = (objectForm, onChange) => {
                     touched={formElement.config.touched}
                     value={formElement.config.value}
                     changed={(event) => onChange(event, formElement.id)}
+                    onInjectValue={onInjectValue}
                 />
             </Col>
         </FormGroup>

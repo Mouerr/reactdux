@@ -2,8 +2,8 @@ import React from 'react';
 import AppNavbar from "./AppNavbar";
 
 import {Container} from 'reactstrap';
-import BreadcrumbC from "./UI/Breadcrumb";
-import AlertC from "./UI/Alert";
+import BreadcrumbC from "./Breadcrumb";
+import AlertC from "./Alert";
 
 const Layout = props => {
     const {loggedIn, user, alert} = props;
