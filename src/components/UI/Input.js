@@ -1,11 +1,11 @@
 import React from 'react';
 import {Input, FormFeedback, FormGroup, Label} from 'reactstrap';
 import CheckboxRadioC from "../UI/CheckboxRadio";
+import CheckboxC from "./Checkbox";
 
 const InputC = (props) => {
-
     let inputElement = null;
-    let feedbackErrors = props.errorMessage.map((val, key) =>
+    let feedbackErrors = props.errorMessage && props.errorMessage.map((val, key) =>
         <FormFeedback key={key}>{val}</FormFeedback>
     );
 
@@ -31,14 +31,22 @@ const InputC = (props) => {
                 ))} </Input>;
             break;
         case ('checkbox'):
+            inputElement = <CheckboxC
+                name={props.name}
+                options={props.elementConfig.options}
+                selectedValues={props.value}
+                onInjectValue={props.onInjectValue}
+            />;
+            break;
         case ('radio'):
             inputElement = props.elementConfig.options.map((option, index) => (
                 <FormGroup key={index} check>
                     <Label check>
                         <Input type={props.elementType}
-                               value={option.value} name={props.name}
+                               checked={props.value === option}
+                               value={option} name={props.name}
                                onChange={props.changed}/>{' '}
-                        {option.value}
+                        {option}
                     </Label>
                 </FormGroup>
             ));
@@ -48,6 +56,7 @@ const InputC = (props) => {
                 name={props.name}
                 labels={props.elementConfig.labels}
                 options={props.elementConfig.options}
+                selectedValues={props.value}
                 onInjectValue={props.onInjectValue}
             />;
             break;

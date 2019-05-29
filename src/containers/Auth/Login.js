@@ -5,25 +5,18 @@ import LoginForm from '../../components/Auth/Login';
 import {authenticationActions} from '../../store/_actions';
 
 class LoginFormContainer extends Component {
-    constructor(props) {
-        super(props);
+    state = {
+        email: '',
+        password: '',
+        submitted: false
+    };
 
-        this.state = {
-            email: '',
-            password: '',
-            submitted: false
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(e) {
+    handleChange = (e) => {
         const {name, value} = e.target;
         this.setState({[name]: value});
-    }
+    };
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault();
 
         this.setState({submitted: true});
@@ -32,7 +25,7 @@ class LoginFormContainer extends Component {
         if (email && password) {
             dispatch(authenticationActions.login(email, password));
         }
-    }
+    };
 
     render() {
         const {loggingIn} = this.props;

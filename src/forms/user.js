@@ -13,7 +13,7 @@ export const userForm = {
             required: true
         },
         valid: false,
-        errorMessage:[],
+        errorMessage: [],
         touched: false
     },
     lastname: {
@@ -28,7 +28,7 @@ export const userForm = {
             required: true
         },
         valid: false,
-        errorMessage:[],
+        errorMessage: [],
         touched: false
     },
     username: {
@@ -45,7 +45,7 @@ export const userForm = {
             maxLength: 15,
         },
         valid: false,
-        errorMessage:[],
+        errorMessage: [],
         touched: false
     },
     email: {
@@ -61,7 +61,7 @@ export const userForm = {
             isEmail: true
         },
         valid: false,
-        errorMessage:[],
+        errorMessage: [],
         touched: false
     },
     password: {
@@ -77,39 +77,28 @@ export const userForm = {
             isPassword: true
         },
         valid: false,
-        errorMessage:[],
+        errorMessage: [],
         touched: false
     },
     groups: {
         elementType: 'checkbox',
         elementConfig: {
-            options: [
-                {value: 'ATM'},
-                {value: 'GTX'},
-                {value: 'RBX'},
-                {value: 'SLK'},
-            ]
-            //options: ['Enabled','Disabled']
+            options: ['ATM', 'GTX', 'RBX', 'SLK']
         },
-        value: {
-            "ATM": false,
-            "GTX": false,
-            "RBX": false,
-            "SLK": false
-        },
+        value: '',
         label: 'Groups',
         validation: {
             required: true
         },
         valid: false,
-        errorMessage:[],
+        errorMessage: [],
         touched: false
     },
     roles: {
         elementType: 'checkbox-radio',
         elementConfig: {
-            labels: Object.assign.apply({}, routing.map((el) => ({[el]: 'role_user'}))),
-            options: ['role_user', 'role_manager', 'role_admin']
+            labels: routing ? Object.assign.apply({}, routing.map((el) => ({[el]: 'role denied'}))) : null,
+            options: ['role denied', 'role user', 'role manager', 'role admin']
         },
         value: '',
         label: 'Roles',
@@ -117,16 +106,13 @@ export const userForm = {
             required: true
         },
         valid: false,
-        errorMessage:[],
+        errorMessage: [],
         touched: false
     },
     status: {
         elementType: 'radio',
         elementConfig: {
-            options: [
-                {value: 'Enabled'},
-                {value: 'Disabled'},
-            ]
+            options: ['Enabled','Disabled'],
         },
         value: '',
         label: 'Status',
@@ -134,7 +120,7 @@ export const userForm = {
             required: true
         },
         valid: false,
-        errorMessage:[],
+        errorMessage: [],
         touched: false
     }
 };

@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {Button, ButtonGroup} from 'reactstrap';
 import CollapseC from './Collapse';
 
-class CheckboxRadioC extends Component {
-
+class CheckboxRadioC extends PureComponent {
     state = {
         results: this.props.labels
     };
@@ -27,18 +26,19 @@ class CheckboxRadioC extends Component {
     render() {
         return (
             <>
-                {Object.keys(this.state.results).map((value, index) => {
-                    const label = value.toUpperCase();
+                {Object.keys(this.props.labels).map((value, index) => {
                     return <CollapseC key={index} children={
                         <ButtonGroup key={index}>
                             {this.props.options.map((value1, index1) => {
                                 return <Button key={index1} color="primary"
                                                name={value} value={value1}
                                                onClick={this.onRadioCheckboxBtnClick}
-                                               active={this.state.results[value] === value1}>{value1}</Button>
+                                               active={(this.props.selectedValues ? this.props.selectedValues[value] : this.state.results[value]) === value1}
+                                >
+                                    {value1}</Button>
                             })}
                         </ButtonGroup>}
-                                      label={label}>
+                                      label={value.toUpperCase()}>
                     </CollapseC>
                 })}
             </>

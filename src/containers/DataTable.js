@@ -55,13 +55,7 @@ class DataTableContainer extends Component {
         const updatedFormElement = {
             ...updatedForm[inputIdentifier]
         };
-
-        if (event.target.type === 'checkbox') {
-            const checkboxname = event.target.value;
-            updatedFormElement.value[checkboxname] = !updatedFormElement.value[checkboxname];
-        } else {
-            updatedFormElement.value = event.target.value;
-        }
+        updatedFormElement.value = event.target.value;
         const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.valid = checkValidity.isValid;
         updatedFormElement.errorMessage = checkValidity.errorMessage;

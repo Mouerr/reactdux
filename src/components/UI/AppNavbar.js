@@ -26,7 +26,7 @@ class AppNavbar extends React.Component {
                 <Collapse isOpen={!this.state.collapsed} navbar>
                     <Nav navbar>
                         {user && routing.map((route, index) =>
-                            user.roles && user.roles.hasOwnProperty(route.roleName) && route.navbar &&
+                            user.roles && user.roles.hasOwnProperty(route.roleName) && route.navbar && user.roles[route.roleName] !== 'role denied' &&
                             <NavItem key={index}>
                                 <NavLink tag={Link} to={route.reactPath}>{route.roleName}</NavLink>
                             </NavItem>
