@@ -43,8 +43,8 @@ class App extends Component {
                         <Switch>
                             {user && routing.map((route, index) =>
                                 user.roles.hasOwnProperty(route.roleName) && user.roles[route.roleName] !== 'role denied' &&
-                                <PrivateRoute key={index} exact
-                                              path={route.reactPath} icons={route.icons}
+                                <PrivateRoute key={index} exact icons={route.icons}
+                                              path={route.reactPath} action={route.action}
                                               container={route.container} apiservice={route.apiservice}
                                               formconfig={route.formconfig} dtconfig={route.dtconfig}/>
                             )}

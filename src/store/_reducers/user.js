@@ -1,76 +1,63 @@
-import { userConstants } from '../_constants';
+import {userConstants} from '../_constants';
 
-export function users(state = {items: [],loading: false}, action) {
-  switch (action.type) {
-    case userConstants.CREATE_REQUEST:
-      return { submitting: true };
-    case userConstants.CREATE_SUCCESS:
-      return {};
-    case userConstants.CREATE_FAILURE:
-      return {};
-    case userConstants.UPDATE_REQUEST:
-      return { submitting: true };
-    case userConstants.UPDATE_SUCCESS:
-      return {};
-    case userConstants.UPDATE_FAILURE:
-      return {};
-    case userConstants.GETALL_REQUEST:
-      return {
-        loading: true
-      };
-    case userConstants.GETALL_SUCCESS:
-      return {
-        loading: false,
-        items: action.users
-      };
-    case userConstants.GETALL_FAILURE:
-      return { 
-        error: action.error
-      };
-    case userConstants.GETBYID_REQUEST:
-      return {
-        loading: true,
-        user: action.user
-      };
-    case userConstants.GETBYID_SUCCESS:
-      return {
-        item: action.user
-      };
-    case userConstants.GETBYID_FAILURE:
-      return {
-        error: action.error
-      };
-    case userConstants.DELETE_REQUEST:
-      // add 'deleting:true' property to user being deleted
-      return {
-        ...state,
-        items: state.items.map(user =>
-          user.id === action.id
-            ? { ...user, deleting: true }
-            : user
-        )
-      };
-    case userConstants.DELETE_SUCCESS:
-      // remove deleted user from state
-      return {
-        items: state.items.filter(user => user.id !== action.id)
-      };
-    case userConstants.DELETE_FAILURE:
-      // remove 'deleting:true' property and add 'deleteError:[error]' property to user 
-      return {
-        ...state,
-        items: state.items.map(user => {
-          if (user.id === action.id) {
-            // make copy of user without 'deleting:true' property
-            const { deleting, ...userCopy } = user;
-            // return copy of user with 'deleteError:[error]' property
-            return { ...userCopy, deleteError: action.error };
-          }
+export const user = (state = {items: [], loading: false, submitting: false}, action) => {
+    switch (action.type) {
+        case userConstants.CREATE_REQUEST:
+            return {submitting: true};
+        case userConstants.CREATE_SUCCESS:
+            return {submitting: false};
+        case userConstants.CREATE_FAILURE:
+            return {
+                error: action.error
+            };
 
-          return user;
-        })
-      };
-    default:
-      return state
-  }
-}
+        case userConstants.UPDATE_REQUEST:
+            return {submitting: true};
+        case userConstants.UPDATE_SUCCESS:
+            return {submitting: false};
+        case userConstants.UPDATE_FAILURE:
+            return {
+                error: action.error
+            };
+
+        case userConstants.GET_ALL_REQUEST:
+            return {
+                loading: true
+            };
+        case userConstants.GET_ALL_SUCCESS:
+            return {
+                loading: false,
+                items: action.result
+            };
+        case userConstants.GET_ALL_FAILURE:
+            return {
+                error: action.error
+            };
+
+        case userConstants.READ_REQUEST:
+            return {submitting: true};
+        case userConstants.READ_SUCCESS:
+            return {
+                submitting: false,
+                item: action.result
+            };
+        case userConstants.READ_FAILURE:
+            return {
+                submitting: false,
+                error: action.error
+            };
+
+        case userConstants.DELETE_REQUEST:
+            return {deleting: true};
+
+        case userConstants.DELETE_SUCCESS:
+            return {deleting: false};
+        case userConstants.DELETE_FAILURE:
+            return {
+                deleting: false,
+                error: action.error
+            };
+        default:
+            return state
+    }
+};

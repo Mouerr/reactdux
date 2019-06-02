@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 
 import { authentication } from './authentication';
-import { leaves } from './leave';
-import { users } from './user';
+import { leave } from './leave';
+import { user } from './user';
 import { datatable } from './datatable';
 import { alert } from './alert';
 
 const appReducer = combineReducers({
   authentication,
-  leaves,
-  users,
+  leave,
+  user,
   datatable,
   alert
 });

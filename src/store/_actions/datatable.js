@@ -78,15 +78,15 @@ const getAll = (service) => {
     };
 
     function request() {
-        return {type: datatableConstants.GETALL_REQUEST}
+        return {type: datatableConstants.GET_ALL_REQUEST}
     }
 
     function success(items) {
-        return {type: datatableConstants.GETALL_SUCCESS, items}
+        return {type: datatableConstants.GET_ALL_SUCCESS, items}
     }
 
     function failure(error) {
-        return {type: datatableConstants.GETALL_FAILURE, error}
+        return {type: datatableConstants.GET_ALL_FAILURE, error}
     }
 };
 

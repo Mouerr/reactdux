@@ -6,11 +6,11 @@ const getAll = () => {
     return fetch(apiurl + `/leaves?_limit=10`, headerParams('GET')).then(handleResponse);
 };
 
-const getById = (id) => {
+const read = (id) => {
     return fetch(apiurl + `/leaves/${id}`, headerParams('GET')).then(handleResponse);
 };
 
-const getByUserid = (userid) => {
+const getByUserId = (userid) => {
     return fetch(apiurl + `/users/${userid}/leaves`, headerParams('GET')).then(handleResponse);
 };
 
@@ -35,8 +35,8 @@ export const leaveService = {
     create,
     getAll,
     getByDataTableFilter,
-    getById,
-    getByUserid,
+    read,
+    getByUserId,
     update,
     delete: _delete
 };

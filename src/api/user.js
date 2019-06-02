@@ -70,7 +70,7 @@ const getAll = () => {
     });
 };
 
-const getById = (id) => {
+const read = (id) => {
     return fetch(apiurl + `/users/${id}`, headerParams('GET')).then(handleResponse);
 };
 
@@ -98,7 +98,7 @@ export const userService = {
     getAll,
     loginAsRegistered,
     getByDataTableFilter,
-    getById,
+    read,
     update,
     delete: _delete
 };

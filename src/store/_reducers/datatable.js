@@ -3,14 +3,14 @@ import {updateObject} from '../../_helpers/utility';
 
 const initialState = {items: [], loading: false};
 
-export function datatable(state = initialState, action) {
+export const datatable = (state = initialState, action) => {
     switch (action.type) {
 
-        case datatableConstants.GETALL_REQUEST:
+        case datatableConstants.GET_ALL_REQUEST:
             return updateObject(state, {loading: true});
-        case datatableConstants.GETALL_SUCCESS:
+        case datatableConstants.GET_ALL_SUCCESS:
             return updateObject(state, {loading: false, items: action.items});
-        case datatableConstants.GETALL_FAILURE:
+        case datatableConstants.GET_ALL_FAILURE:
             return updateObject(state, {error: action.error, loading: false});
 
         case datatableConstants.CREATE_REQUEST:
@@ -61,4 +61,4 @@ export function datatable(state = initialState, action) {
         default:
             return state
     }
-}
+};

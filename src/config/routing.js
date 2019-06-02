@@ -3,17 +3,16 @@ import {leaveService, userService} from "../api";
 import {DataTableContainer} from "../containers/DataTable";
 import {userForm} from "../forms/user";
 import {dtLeaveConfig, dtUserConfig} from "./dataTableConfig";
-import {UserFormContainer} from "../containers/User";
+import {FormBuilderContainer} from "../containers/FormBuilder";
 import {leaveForm} from "../forms/leave";
-import {LeaveFormContainer} from "../containers/Leave";
+import {globalActions} from "../store/_actions";
+import {leaveConstants, userConstants} from "../store/_constants";
 
 export const routing =
     [
         {
             reactPath: '/',
             container: TimelineContainer,
-            /*formconfig: userForm,
-            dtconfig: dtUserConfig,*/
             apiservice: {api: leaveService, objname: 'leave'},
             navbar: false,
             roleName: 'Dashboard'
@@ -30,15 +29,19 @@ export const routing =
         },
         {
             reactPath: '/user/create',
-            container: UserFormContainer,
-            apiservice: {api: userService, objname: 'user'},
+            container: FormBuilderContainer,
+            action: globalActions,
+            formconfig: userForm,
+            apiservice: {api: userService, objname: 'user', constant: userConstants},
             navbar: true, label: 'User Create',
             roleName: 'User Create'
         },
         {
-            reactPath: '/user/update/:userid',
-            container: UserFormContainer,
-            apiservice: {api: userService, objname: 'user'},
+            reactPath: '/user/update/:objId',
+            container: FormBuilderContainer,
+            action: globalActions,
+            formconfig: userForm,
+            apiservice: {api: userService, objname: 'user', constant: userConstants},
             navbar: false,
             roleName: 'User Update'
         },
@@ -53,7 +56,7 @@ export const routing =
             icons: ['calendar-plus', 'calendar-minus']
         },
         {
-            reactPath: '/user/:userid/leaves',
+            reactPath: '/user/:objId/leaves',
             container: DataTableContainer,
             formconfig: leaveForm,
             dtconfig: dtLeaveConfig,
@@ -63,14 +66,19 @@ export const routing =
         },
         {
             reactPath: '/leave/create',
-            container: LeaveFormContainer,
+            container: FormBuilderContainer,
+            action: globalActions,
+            formconfig: leaveForm,
+            apiservice: {api: leaveService, objname: 'leave', constant: leaveConstants},
             navbar: true,
             roleName: 'Leave Create'
         },
         {
-            reactPath: '/leave/update/:leaveid',
-            container: LeaveFormContainer,
-            apiservice: {api: leaveService, objname: 'leave'},
+            reactPath: '/leave/update/:objId',
+            container: FormBuilderContainer,
+            action: globalActions,
+            formconfig: leaveForm,
+            apiservice: {api: leaveService, objname: 'leave', constant: leaveConstants},
             navbar: false,
             roleName: 'Leave Update'
         },
