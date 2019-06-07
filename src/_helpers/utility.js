@@ -1,5 +1,6 @@
 import {history} from './history';
 import {authHeader} from "./auth-header";
+import {checkFormValidity} from "../forms/fValidator";
 
 export const updateObject = (oldObject, updatedProperties) => {
     return {
@@ -8,8 +9,7 @@ export const updateObject = (oldObject, updatedProperties) => {
     };
 };
 
-
-export const headerParams = (methodType, object = '') =>{
+export const headerParams = (methodType, object = '') => {
     let header = {
         method: methodType,
         headers: {'Content-Type': 'application/json', Accept: 'application/json', ...authHeader()},
@@ -18,7 +18,6 @@ export const headerParams = (methodType, object = '') =>{
     header = object ? Object.assign({}, {body: JSON.stringify(object)}, header) : header;
     return header;
 };
-
 
 export const handleResponse = response => {
     return response.text().then(text => {
@@ -39,4 +38,44 @@ export const handleResponse = response => {
         }
         return data;
     });
+};
+
+export const jsUcFirst = string => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export const populateFormObject = (eventValue, formObject, inputIdentifier, handlerType = 'Change') => {
+    let response = {};
+    const updatedForm = {
+        ...formObject
+    };
+    const updatedFormElement = {
+        ...updatedForm[inputIdentifier]
+    };
+    if (handlerType === 'Inject') {
+        updatedFormElement.value = eventValue;
+    } else if (typeof eventValue.type === 'undefined') {
+        if (typeof eventValue.length === 'undefined') {
+            updatedFormElement.value = eventValue.value;
+        } else {
+            let arr = [];
+            eventValue.map(res => arr.push(res.value));
+            updatedFormElement.value = arr;
+        }
+    } else {
+        updatedFormElement.value = eventValue.target.value;
+    }
+    const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
+    updatedFormElement.valid = checkValidity.isValid;
+    updatedFormElement.errorMessage = checkValidity.errorMessage;
+    updatedFormElement.touched = true;
+    updatedForm[inputIdentifier] = updatedFormElement;
+    let formIsValid = true;
+    for (let inputIdentifier in updatedForm) {
+        formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
+    }
+    response['updatedForm'] = updatedForm;
+    response['formIsValid'] = formIsValid;
+    return response;
+
 };

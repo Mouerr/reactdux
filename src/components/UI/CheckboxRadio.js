@@ -19,7 +19,7 @@ class CheckboxRadioC extends PureComponent {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevState.results !== this.state.results) {
-            this.props.onInjectValue(this.props.name, this.state.results);
+            this.props.onInjectValue(this.state.results , this.props.name);
         }
     }
 

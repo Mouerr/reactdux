@@ -81,9 +81,14 @@ export const userForm = {
         touched: false
     },
     groups: {
-        elementType: 'checkbox',
+        elementType: 'reactMultiSelect',
         elementConfig: {
-            options: ['ATM', 'GTX', 'RBX', 'SLK']
+            options: [
+                { value: 'ATM', label: 'ATM'},
+                { value: 'GTX', label: 'GTX'},
+                { value: 'RBX', label: 'RBX'},
+                { value: 'SLK', label: 'SLK'},
+            ]
         },
         value: '',
         label: 'Groups',

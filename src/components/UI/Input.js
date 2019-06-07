@@ -2,6 +2,8 @@ import React from 'react';
 import {Input, FormFeedback, FormGroup, Label} from 'reactstrap';
 import CheckboxRadioC from "../UI/CheckboxRadio";
 import CheckboxC from "./Checkbox";
+import Select from 'react-select';
+import {jsUcFirst} from "../../_helpers/utility";
 
 const InputC = (props) => {
     let inputElement = null;
@@ -29,6 +31,30 @@ const InputC = (props) => {
                         {option.displayValue}
                     </option>
                 ))} </Input>;
+            break;
+        case ('reactMultiSelect'):
+            const multiSelectValue = props.value && Object.assign([], props.value.map(val =>({value: val, label: jsUcFirst(val)})));
+
+            inputElement = <Select
+                name={props.name}
+                value={multiSelectValue}
+                isMulti
+                isSearchable
+                options={props.elementConfig.options}
+                onChange={props.changed}
+            />;
+            break;
+        case ('reactSelect'):
+            const selectValue = [{value: props.value, label: jsUcFirst(props.value)}];
+            inputElement = <Select
+                name={props.name}
+                placeholder='test'
+                value={selectValue}
+                onChange={props.changed}
+                options={props.elementConfig.options}
+                isSearchable
+                isClearable
+            />;
             break;
         case ('checkbox'):
             inputElement = <CheckboxC
@@ -70,4 +96,4 @@ const InputC = (props) => {
     return <div>{inputElement} {feedbackErrors}</div>;
 };
 
-export default React.memo(InputC);
+export default InputC;

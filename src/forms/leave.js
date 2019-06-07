@@ -30,14 +30,14 @@ export const leaveForm = {
         touched: false
     },
     leavetype: {
-        elementType: 'select',
+        elementType: 'reactSelect',
         elementConfig: {
             options: [
-                {value: 'Special leave', displayValue: 'Special leave'},
-                {value: 'Paid leave', displayValue: 'Paid leave'},
-                {value: 'Sick leave', displayValue: 'Sick leave'},
-                {value: 'National Holidays', displayValue: 'National Holidays'},
-                {value: 'Religious Holidays', displayValue: 'Religious Holidays'}
+                {value: 'Special leave', label: 'Special leave'},
+                {value: 'Paid leave', label: 'Paid leave'},
+                {value: 'Sick leave', label: 'Sick leave'},
+                {value: 'National Holidays', label: 'National Holidays'},
+                {value: 'Religious Holidays', label: 'Religious Holidays'}
             ]
         },
         value: '',

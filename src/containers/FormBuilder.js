@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import FormC from '../components/FormC';
 import {checkFormValidity} from "../forms/fValidator";
+import {populateFormObject} from "../_helpers/utility";
 
 class FormBuilderContainer extends Component {
     state = {
-        dt_object: this.props.formconfig,
+        formObject: this.props.formconfig,
         formIsValid: false,
     };
 
@@ -22,10 +23,10 @@ class FormBuilderContainer extends Component {
             if (item !== prevProps.item) {
                 if (typeof item !== "undefined") {
                     const updatedForm = {
-                        ...this.state.dt_object
+                        ...this.state.formObject
                     };
                     for (const key in item) {
-                        if (this.state.dt_object.hasOwnProperty(key)) {
+                        if (this.state.formObject.hasOwnProperty(key)) {
                             const updatedFormElement = {
                                 ...updatedForm[key]
                             };
@@ -49,39 +50,23 @@ class FormBuilderContainer extends Component {
                     for (let inputIdentifier in updatedForm) {
                         formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
                     }
-                    this.setState({dt_object: updatedForm, formIsValid: formIsValid});
+                    this.setState({formObject: updatedForm, formIsValid: formIsValid});
                 }
             }
         }
     }
 
     handleFormChange = (event, inputIdentifier) => {
-        const updatedForm = {
-            ...this.state.dt_object
-        };
-        const updatedFormElement = {
-            ...updatedForm[inputIdentifier]
-        };
-
-        updatedFormElement.value = event.target.value;
-        const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.valid = checkValidity.isValid;
-        updatedFormElement.errorMessage = checkValidity.errorMessage;
-        updatedFormElement.touched = true;
-        updatedForm[inputIdentifier] = updatedFormElement;
-        let formIsValid = true;
-        for (let inputIdentifier in updatedForm) {
-            formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
-        }
-        this.setState({dt_object: updatedForm, formIsValid: formIsValid});
+        const formPopulation = populateFormObject(event, this.state.formObject, inputIdentifier);
+        this.setState({formObject: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
     };
 
     handleFormSubmit = (event) => {
         event.preventDefault();
 
         const formData = {};
-        for (let formElementIdentifier in this.state.dt_object) {
-            formData[formElementIdentifier] = this.state.dt_object[formElementIdentifier].value;
+        for (let formElementIdentifier in this.state.formObject) {
+            formData[formElementIdentifier] = this.state.formObject[formElementIdentifier].value;
         }
         if (this.props.match.url === '/' + this.props.apiservice.objname + '/create') {
             this.props.dispatch(this.props.action.create(this.props.apiservice, formData));
@@ -90,25 +75,9 @@ class FormBuilderContainer extends Component {
         }
     };
 
-    injectValue = (inputIdentifier, value) => {
-        const updatedForm = {
-            ...this.state.dt_object
-        };
-        const updatedFormElement = {
-            ...updatedForm[inputIdentifier]
-        };
-        updatedFormElement.value = value;
-
-        const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.valid = checkValidity.isValid;
-        updatedFormElement.errorMessage = checkValidity.errorMessage;
-        updatedFormElement.touched = true;
-        updatedForm[inputIdentifier] = updatedFormElement;
-        let formIsValid = true;
-        for (let inputIdentifier in updatedForm) {
-            formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
-        }
-        this.setState({dt_object: updatedForm, formIsValid: formIsValid});
+    injectValue = (value, inputIdentifier) => {
+        const formPopulation = populateFormObject(value, this.state.formObject, inputIdentifier, 'Inject');
+        this.setState({formObject: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
     };
 
     render() {

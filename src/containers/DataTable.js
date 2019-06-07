@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ModalC from '../components/UI/Modal';
 import PropTypes from 'prop-types';
-import {checkFormValidity} from "../forms/fValidator";
 import {datatableActions} from "../store/_actions/datatable";
 import DataTable from "../components/DataTable/DataTable";
 import DataTableButtons from "../components/DataTable/DataTableButtons";
+import {populateFormObject} from "../_helpers/utility";
 
 class DataTableContainer extends Component {
     state = {
@@ -49,23 +49,8 @@ class DataTableContainer extends Component {
     };
 
     handleFormChange = (event, inputIdentifier) => {
-        const updatedForm = {
-            ...this.state.dt_object
-        };
-        const updatedFormElement = {
-            ...updatedForm[inputIdentifier]
-        };
-        updatedFormElement.value = event.target.value;
-        const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.valid = checkValidity.isValid;
-        updatedFormElement.errorMessage = checkValidity.errorMessage;
-        updatedFormElement.touched = true;
-        updatedForm[inputIdentifier] = updatedFormElement;
-        let formIsValid = true;
-        for (let inputIdentifier in updatedForm) {
-            formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
-        }
-        this.setState({dt_object: updatedForm, formIsValid: formIsValid});
+        const formPopulation = populateFormObject(event, this.state.dt_object, inputIdentifier);
+        this.setState({dt_object: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
     };
 
     handleFormSubmit = (event) => {
@@ -118,25 +103,9 @@ class DataTableContainer extends Component {
         }
     };
 
-    injectValue = (inputIdentifier, value) => {
-        const updatedForm = {
-            ...this.state.dt_object
-        };
-        const updatedFormElement = {
-            ...updatedForm[inputIdentifier]
-        };
-        updatedFormElement.value = value;
-
-        const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.valid = checkValidity.isValid;
-        updatedFormElement.errorMessage = checkValidity.errorMessage;
-        updatedFormElement.touched = true;
-        updatedForm[inputIdentifier] = updatedFormElement;
-        let formIsValid = true;
-        for (let inputIdentifier in updatedForm) {
-            formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
-        }
-        this.setState({dt_object: updatedForm, formIsValid: formIsValid});
+    injectValue = (value, inputIdentifier) => {
+        const formPopulation = populateFormObject(value, this.state.dt_object, inputIdentifier, 'Inject');
+        this.setState({dt_object: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
     };
 
     render() {
