@@ -48,4 +48,4 @@ AppNavbar.propTypes = {
     user: PropTypes.object,
 };
 
-export default AppNavbar;
+export default React.memo(AppNavbar);

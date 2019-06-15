@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import LoginForm from '../../components/Auth/Login';
 
 import {authenticationActions} from '../../store/_actions';
 
-class LoginFormContainer extends Component {
+class LoginFormContainer extends PureComponent {
     state = {
         email: '',
         password: '',

@@ -21,10 +21,11 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        const {dispatch} = this.props;
         history.listen((location, action) => {
+
+            //console.log('aaa', action, location);
             // clear alert on location change
-            dispatch(alertActions.clear());
+            this.props.dispatch(alertActions.clear());
         });
     }
 
@@ -59,13 +60,13 @@ class App extends Component {
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
     const {alert} = state;
     const {loggedIn} = state.authentication;
 
     return {
         alert, loggedIn
     };
-}
+};
 
 export default connect(mapStateToProps)(App);

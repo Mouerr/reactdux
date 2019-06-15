@@ -46,30 +46,32 @@ export const jsUcFirst = string => {
 
 export const populateFormObject = (eventValue, formObject, inputIdentifier, handlerType = 'Change') => {
     let response = {};
-    const updatedForm = {
-        ...formObject
-    };
-    const updatedFormElement = {
-        ...updatedForm[inputIdentifier]
-    };
+    let value = '';
     if (handlerType === 'Inject') {
-        updatedFormElement.value = eventValue;
+        value = eventValue;
     } else if (typeof eventValue.type === 'undefined') {
         if (typeof eventValue.length === 'undefined') {
-            updatedFormElement.value = eventValue.value;
+            value = eventValue.value;
         } else {
             let arr = [];
             eventValue.map(res => arr.push(res.value));
-            updatedFormElement.value = arr;
+            value = arr;
         }
     } else {
-        updatedFormElement.value = eventValue.target.value;
+        value = eventValue.target.value;
     }
-    const checkValidity = checkFormValidity(updatedFormElement.value, updatedFormElement.validation);
-    updatedFormElement.valid = checkValidity.isValid;
-    updatedFormElement.errorMessage = checkValidity.errorMessage;
-    updatedFormElement.touched = true;
-    updatedForm[inputIdentifier] = updatedFormElement;
+
+    const checkValidity = checkFormValidity(value, formObject[inputIdentifier].validation);
+    const updatedFormElement = updateObject(formObject[inputIdentifier], {
+        value: value,
+        valid: checkValidity.isValid,
+        errorMessage: checkValidity.errorMessage,
+        touched: true
+    });
+    const updatedForm = updateObject(formObject, {
+        [inputIdentifier]: updatedFormElement
+    });
+
     let formIsValid = true;
     for (let inputIdentifier in updatedForm) {
         formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
@@ -77,5 +79,4 @@ export const populateFormObject = (eventValue, formObject, inputIdentifier, hand
     response['updatedForm'] = updatedForm;
     response['formIsValid'] = formIsValid;
     return response;
-
 };

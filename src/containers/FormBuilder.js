@@ -17,6 +17,10 @@ class FormBuilderContainer extends Component {
         }
     }
 
+    shouldComponentUpdate ( nextProps, nextState ) {
+        return nextState.formObject !== this.state.formObject || nextProps.item !== this.props.item;
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.match.url !== '/' + this.props.apiservice.objname + '/create') {
             const {item} = this.props;
@@ -36,16 +40,17 @@ class FormBuilderContainer extends Component {
                             updatedFormElement.errorMessage = checkValidity.errorMessage;
                             updatedFormElement.touched = true;
                             updatedForm[key] = updatedFormElement;
+                        }else{
+                            updatedForm[key] = {
+                                value: item[key],
+                                elementConfig: {
+                                    //type: 'number',
+                                    hidden: true
+                                },
+                                valid: !!item[key],
+                            };
                         }
                     }
-                    updatedForm['id'] = {
-                        value: item['id'],
-                        elementConfig: {
-                            type: 'number',
-                            hidden: true
-                        },
-                        valid: !!item['id'],
-                    };
                     let formIsValid = true;
                     for (let inputIdentifier in updatedForm) {
                         formIsValid = updatedForm[inputIdentifier].valid && formIsValid;

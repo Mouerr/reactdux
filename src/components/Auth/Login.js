@@ -79,4 +79,4 @@ LoginForm.propTypes = {
     submitted: PropTypes.bool.isRequired
 };
 
-export default LoginForm;
+export default React.memo(LoginForm);

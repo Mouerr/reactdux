@@ -108,6 +108,14 @@ class DataTableContainer extends Component {
         this.setState({dt_object: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
     };
 
+    shouldComponentUpdate ( nextProps, nextState ) {
+        return nextState.dt_object !== this.state.dt_object ||
+            nextProps.items !== this.props.items ||
+            nextState.deleteRowId !== this.state.deleteRowId ||
+            nextProps.modal !== this.props.modal
+            ;
+    }
+
     render() {
         const {page, sizePerPage, totalSize} = this.state;
         return (
@@ -147,6 +155,7 @@ class DataTableContainer extends Component {
     }
 }
 
+//DataTableContainer.whyDidYouRender = true;
 const mapStateToProps = state => {
     const {items, submitting, loading, modal} = state.datatable;
     return {

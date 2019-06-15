@@ -9,6 +9,12 @@ import { store } from './store/store'
 import * as serviceWorker from './serviceWorker'
 require('dotenv').config();
 
+if (process.env.NODE_ENV !== 'production') {
+    const whyDidYouRender = require('@welldone-software/why-did-you-render');
+    whyDidYouRender(React);
+    //whyDidYouRender(React, { include: [/^ConnectFunction$/] })
+}
+
 ReactDOM.render(
     <Provider store={store}>
         <App />
