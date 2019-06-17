@@ -1,0 +1,923 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "mouerr",
+      "firstname": "mouerr",
+      "lastname": "mouerr",
+      "email": "mouad@gmpanel.net",
+      "password": "gms2019."
+    },
+    {
+      "id": 5,
+      "firstname": "albert",
+      "lastname": "albert",
+      "username": "albert@gmail.com",
+      "email": "albert@gmail.com",
+      "password": "albert",
+      "routes": [
+        "/user/list",
+        "/user/create"
+      ]
+    },
+    {
+      "firstname": "end",
+      "lastname": "end",
+      "username": "end",
+      "email": "end@email.cim",
+      "password": "endend",
+      "id": 6
+    },
+    {
+      "firstname": "casandra",
+      "lastname": "casandra",
+      "username": "casandra",
+      "email": "casandra@fgff0ff.ff",
+      "password": "Casandra@Queen2019",
+      "groups": [
+        "SLK",
+        "RBX"
+      ],
+      "roles": {
+        "Dashboard": "role manager",
+        "User List": "role denied",
+        "User Create": "role denied",
+        "User Update": "role denied",
+        "Leave List": "role denied",
+        "User Leaves": "role denied",
+        "Leave Create": "role denied",
+        "Leave Update": "role denied"
+      },
+      "status": "Enabled",
+      "id": 7
+    },
+    {
+      "id": 39,
+      "firstname": "test100",
+      "lastname": "test100",
+      "username": "test@portal.com",
+      "email": "test@portal.com",
+      "password": "Gms@1995",
+      "groups": [
+        "ATM",
+        "GTX",
+        "RBX",
+        "SLK"
+      ],
+      "roles": {
+        "Dashboard": "role admin",
+        "User List": "role admin",
+        "User Create": "role manager",
+        "User Update": "role manager",
+        "Leave List": "role admin",
+        "User Leaves": "role user",
+        "Leave Create": "role manager",
+        "Leave Update": "role admin"
+      },
+      "status": "Enabled",
+      "token": "Kt3adg459f24g54mdg4d",
+      "expirationTime": 3600
+    },
+    {
+      "firstname": "coco",
+      "lastname": "coco99",
+      "username": "coco",
+      "email": "coco@ggg.cc",
+      "password": "coco",
+      "id": 51
+    },
+    {
+      "firstname": "bravo",
+      "lastname": "bravo",
+      "username": "bravo.3",
+      "email": "bravo@ooo.cc",
+      "password": "bravo",
+      "id": 52
+    },
+    {
+      "firstname": "krimo",
+      "lastname": "krimo",
+      "username": "krimox",
+      "email": "krimo@poi.gg",
+      "password": "krimo",
+      "id": 53
+    },
+    {
+      "firstname": "cambox",
+      "lastname": "cambox",
+      "username": "cambox",
+      "email": "cambox@gmgmg.ff",
+      "password": "cambox",
+      "id": 54
+    },
+    {
+      "firstname": "gogo",
+      "lastname": "gogo",
+      "username": "gogo",
+      "email": "gogo@kamihamiha.com",
+      "password": "gogo",
+      "id": 66
+    },
+    {
+      "firstname": "yhngn",
+      "lastname": "yhngn",
+      "username": "yhngn",
+      "email": "yhngn@hhghg.cc",
+      "password": "yhngn",
+      "id": 67
+    },
+    {
+      "firstname": "963258",
+      "lastname": "963258",
+      "username": "963258",
+      "email": "963258@hh.vvv",
+      "password": "963258",
+      "id": 68
+    },
+    {
+      "firstname": "abanban",
+      "lastname": "abanban",
+      "username": "abanban",
+      "email": "abanban@test.ma",
+      "password": "abanban",
+      "id": 69
+    },
+    {
+      "firstname": "baseball",
+      "lastname": "baseball",
+      "username": "baseball",
+      "email": "baseball@ball.com",
+      "password": "baseball",
+      "id": 70
+    },
+    {
+      "firstname": "Yassine",
+      "lastname": "Ahammar",
+      "username": "ahammar@gmpanel.net",
+      "email": "ahammar@gmpanel.net",
+      "password": "ahammar2019",
+      "roles": {
+        "Dashboard": "role_admin",
+        "User List": "role_admin",
+        "User create": "role_manager",
+        "User update": "role_manager",
+        "Leave list": "role_user",
+        "User leaves": "role_user",
+        "Leave create": "role_manager",
+        "Leave update": "role_admin"
+      },
+      "id": 71
+    },
+    {
+      "firstname": "kaki",
+      "lastname": "kaki",
+      "username": "kaki",
+      "email": "kaki@kaki.com",
+      "password": "kakikaki",
+      "id": 72
+    },
+    {
+      "firstname": "nextState",
+      "lastname": "nextState",
+      "username": "nextState",
+      "email": "nextState@test.com",
+      "password": "nextState",
+      "token": "",
+      "checks": {
+        "One": false,
+        "Two": true,
+        "Three": true
+      },
+      "id": 73
+    },
+    {
+      "firstname": "corombo",
+      "lastname": "corombo",
+      "username": "corombo",
+      "email": "corombo@gg.cc",
+      "password": "Corombo9@",
+      "status": "Disabled",
+      "id": 74
+    },
+    {
+      "firstname": "Mouad",
+      "lastname": "Errahmouni",
+      "username": "mouerr95",
+      "email": "mouer95@gmail.com",
+      "password": "Azerty@123456",
+      "groups": {
+        "ATM": false,
+        "GTX": true,
+        "RBX": true,
+        "SLK": false
+      },
+      "status": "Enabled",
+      "id": 76
+    },
+    {
+      "firstname": "babilion",
+      "lastname": "babilion",
+      "username": "babilion",
+      "email": "babilion@ter.ss",
+      "password": "babilion@123A",
+      "groups": {
+        "ATM": true,
+        "GTX": false,
+        "RBX": false,
+        "SLK": false
+      },
+      "status": "Disabled",
+      "id": 77
+    },
+    {
+      "firstname": "byong",
+      "lastname": "byong",
+      "username": "byong",
+      "email": "byong@mail.com",
+      "password": "Azerty@123456",
+      "groups": {
+        "ATM": false,
+        "GTX": false,
+        "RBX": false,
+        "SLK": true
+      },
+      "status": "Enabled",
+      "id": 78
+    },
+    {
+      "firstname": "maloma",
+      "lastname": "maloma",
+      "username": "maloma",
+      "email": "maloma@mail.com",
+      "password": "Maloma@123",
+      "groups": {
+        "ATM": false,
+        "GTX": false,
+        "RBX": true,
+        "SLK": false
+      },
+      "status": "Enabled",
+      "id": 79
+    },
+    {
+      "firstname": "youyou",
+      "lastname": "youyou",
+      "username": "youyou",
+      "email": "youyou@momo.ff",
+      "password": "youyoua33@rR",
+      "groups": {
+        "ATM": false,
+        "GTX": true,
+        "RBX": true,
+        "SLK": false
+      },
+      "status": "Enabled",
+      "id": 80
+    },
+    {
+      "id": 81,
+      "firstname": "albania",
+      "lastname": "albania",
+      "username": "albania@test.com",
+      "email": "albania@test.com",
+      "password": "albania",
+      "roles": {
+        "Dashboard": "role_admin",
+        "User List": "role_admin",
+        "User create": "role_manager",
+        "User update": "role_manager",
+        "Leave list": "role_user",
+        "User leaves": "role_user",
+        "Leave create": "role_manager",
+        "Leave update": "role_admin"
+      },
+      "status": "Enabled",
+      "token": "Kt3adg459f24g54mdg4d",
+      "expirationTime": 3600
+    },
+    {
+      "firstname": "roles",
+      "lastname": "roles",
+      "username": "roles",
+      "email": "roles@mail.com",
+      "password": "Roles@123456",
+      "groups": {
+        "ATM": true,
+        "GTX": false,
+        "RBX": false,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role_manager",
+        "User List": "role_manager",
+        "User Create": "role_admin",
+        "User Update": "role_user",
+        "Leave List": "role_admin",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_admin"
+      },
+      "status": "Enabled",
+      "id": 82
+    },
+    {
+      "firstname": "ramadan",
+      "lastname": "ramadan",
+      "username": "ramadan",
+      "email": "ramadan@mail.com",
+      "password": "Ramadan@12345",
+      "groups": {
+        "ATM": true,
+        "GTX": false,
+        "RBX": false,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role_manager",
+        "User List": "role_user",
+        "User Create": "role_user",
+        "User Update": "role_user",
+        "Leave List": "role_user",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_admin"
+      },
+      "status": "Enabled",
+      "id": 83
+    },
+    {
+      "firstname": "karama",
+      "lastname": "karama",
+      "username": "karama",
+      "email": "karama@maz.cc",
+      "password": "karamaA@4",
+      "groups": {
+        "ATM": false,
+        "GTX": true,
+        "RBX": true,
+        "SLK": true
+      },
+      "roles": {
+        "Dashboard": "role_user",
+        "User List": "role_user",
+        "User Create": "role_user",
+        "User Update": "role_user",
+        "Leave List": "role_manager",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_user"
+      },
+      "status": "Enabled",
+      "id": 84
+    },
+    {
+      "firstname": "coconut",
+      "lastname": "coconut",
+      "username": "coconut",
+      "email": "coconut@kjkj.gg",
+      "password": "coconutA@3",
+      "groups": {
+        "ATM": true,
+        "GTX": true,
+        "RBX": true,
+        "SLK": true
+      },
+      "roles": {
+        "Dashboard": "role_manager",
+        "User List": "role_manager",
+        "User Create": "role_user",
+        "User Update": "role_user",
+        "Leave List": "role_user",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_user"
+      },
+      "status": "Enabled",
+      "id": 85
+    },
+    {
+      "firstname": "train",
+      "lastname": "train",
+      "username": "train",
+      "email": "train@mail.com",
+      "password": "trainA@411",
+      "groups": {
+        "ATM": true,
+        "GTX": false,
+        "RBX": false,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role_manager",
+        "User List": "role_user",
+        "User Create": "role_user",
+        "User Update": "role_user",
+        "Leave List": "role_user",
+        "User Leaves": "role_user",
+        "Leave Create": "role_user",
+        "Leave Update": "role_user"
+      },
+      "status": "Enabled",
+      "id": 86
+    },
+    {
+      "firstname": "alta777",
+      "lastname": "alta777",
+      "username": "alta777",
+      "email": "alta777@mail.com",
+      "password": "alta777A@.63",
+      "groups": {
+        "ATM": true,
+        "GTX": true,
+        "RBX": false,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role admin",
+        "User List": "role user",
+        "User Create": "role user",
+        "User Update": "role user",
+        "Leave List": "role user",
+        "User Leaves": "role user",
+        "Leave Create": "role user",
+        "Leave Update": "role user"
+      },
+      "status": "Enabled",
+      "id": 87
+    },
+    {
+      "firstname": "alta777",
+      "lastname": "alta777",
+      "username": "alta777",
+      "email": "alta777@hh.gg",
+      "password": "alta777A@636",
+      "groups": {
+        "ATM": false,
+        "GTX": true,
+        "RBX": false,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role admin",
+        "User List": "role user",
+        "User Create": "role user",
+        "User Update": "role user",
+        "Leave List": "role user",
+        "User Leaves": "role user",
+        "Leave Create": "role user",
+        "Leave Update": "role user"
+      },
+      "status": "Enabled",
+      "id": 88
+    },
+    {
+      "firstname": "cabaylos",
+      "lastname": "cabaylos",
+      "username": "cabaylos",
+      "email": "cabaylos@hghg.ff",
+      "password": "cabaylos@3.@A",
+      "groups": {
+        "ATM": false,
+        "GTX": false,
+        "RBX": true,
+        "SLK": false
+      },
+      "roles": {
+        "Dashboard": "role user",
+        "User List": "role user",
+        "User Create": "role admin",
+        "User Update": "role user",
+        "Leave List": "role user",
+        "User Leaves": "role user",
+        "Leave Create": "role user",
+        "Leave Update": "role user"
+      },
+      "status": "Enabled",
+      "id": 89
+    },
+    {
+      "firstname": "checo",
+      "lastname": "checo",
+      "username": "checo",
+      "email": "checo@kjhh.ff",
+      "password": "@6checo63S",
+      "groups": [
+        "ATM",
+        "RBX",
+        "SLK"
+      ],
+      "roles": {
+        "Dashboard": "role admin",
+        "User List": "role user",
+        "User Create": "role user",
+        "User Update": "role user",
+        "Leave List": "role user",
+        "User Leaves": "role user",
+        "Leave Create": "role user",
+        "Leave Update": "role user"
+      },
+      "status": "Enabled",
+      "id": 91
+    },
+    {
+      "firstname": "alternion",
+      "lastname": "alternion",
+      "username": "alternion",
+      "email": "alternion@zara.com",
+      "password": "Alta1995@",
+      "groups": [
+        "RBX",
+        "GTX"
+      ],
+      "roles": {
+        "Dashboard": "role admin",
+        "User List": "role denied",
+        "User Create": "role denied",
+        "User Update": "role denied",
+        "Leave List": "role denied",
+        "User Leaves": "role denied",
+        "Leave Create": "role denied",
+        "Leave Update": "role denied"
+      },
+      "status": "Enabled",
+      "id": 92
+    },
+    {
+      "firstname": "ablebo",
+      "lastname": "ablebo",
+      "username": "ablebo",
+      "email": "ablebo@mail.com",
+      "password": "Aablebo@3",
+      "groups": [
+        "GTX"
+      ],
+      "roles": {
+        "Dashboard": "role denied",
+        "User List": "role denied",
+        "User Create": "role denied",
+        "User Update": "role denied",
+        "Leave List": "role denied",
+        "User Leaves": "role denied",
+        "Leave Create": "role denied",
+        "Leave Update": "role admin"
+      },
+      "status": "Enabled",
+      "id": 93
+    },
+    {
+      "firstname": "shortcut",
+      "lastname": "shortcut",
+      "username": "shortcut",
+      "email": "shortcut@mail.com",
+      "password": "1zerty@12354H",
+      "groups": [
+        "ATM"
+      ],
+      "roles": {
+        "Dashboard": "role admin",
+        "User List": "role denied",
+        "User Create": "role denied",
+        "User Update": "role denied",
+        "Leave List": "role denied",
+        "User Leaves": "role denied",
+        "Leave Create": "role denied",
+        "Leave Update": "role denied"
+      },
+      "status": "Disabled",
+      "id": 94
+    },
+    {
+      "firstname": "calculator",
+      "lastname": "calculator",
+      "username": "calculator",
+      "email": "calculator@mail.com",
+      "password": "Calculator@2019",
+      "groups": [
+        "GTX"
+      ],
+      "roles": {
+        "Dashboard": "role manager",
+        "User List": "role denied",
+        "User Create": "role denied",
+        "User Update": "role denied",
+        "Leave List": "role denied",
+        "User Leaves": "role denied",
+        "Leave Create": "role denied",
+        "Leave Update": "role denied"
+      },
+      "status": "Enabled",
+      "id": 95
+    },
+    {
+      "firstname": "rendereeee",
+      "lastname": "rendereeee",
+      "username": "rendereeee",
+      "email": "rendereeee@ff.cc",
+      "password": "rendereeeeA@55",
+      "groups": [
+        "GTX",
+        "SLK"
+      ],
+      "roles": {
+        "Dashboard": "role denied",
+        "User List": "role denied",
+        "User Create": "role denied",
+        "User Update": "role denied",
+        "Leave List": "role denied",
+        "User Leaves": "role denied",
+        "Leave Create": "role denied",
+        "Leave Update": "role manager"
+      },
+      "status": "Enabled",
+      "id": 96
+    }
+  ],
+  "route_roles": [
+    {
+      "id": 1,
+      "userId": 39,
+      "route_name": "user_list",
+      "role": "role_admin"
+    },
+    {
+      "id": 2,
+      "userId": 39,
+      "route_name": "user_create",
+      "role": "role_admin"
+    },
+    {
+      "id": 3,
+      "userId": 39,
+      "route_name": "user_update",
+      "role": "role_admin"
+    },
+    {
+      "id": 4,
+      "userId": 39,
+      "route_name": "leave_list",
+      "role": "role_admin"
+    },
+    {
+      "id": 5,
+      "userId": 39,
+      "route_name": "leave_create",
+      "role": "role_admin"
+    },
+    {
+      "id": 6,
+      "userId": 39,
+      "route_name": "leave_update",
+      "role": "role_admin"
+    },
+    {
+      "id": 7,
+      "userId": 71,
+      "route_name": "user_list",
+      "role": "role_user"
+    },
+    {
+      "id": 8,
+      "userId": 71,
+      "route_name": "leave_list",
+      "role": "role_user"
+    }
+  ],
+  "leaves": [
+    {
+      "fromdate": "2019-06-24",
+      "todate": "2019-07-04",
+      "leavetype": "Paid leave",
+      "cause": "travel the worlds forever",
+      "id": 1
+    },
+    {
+      "fromdate": "2019-01-30",
+      "todate": "2019-01-31",
+      "leavetype": "Sick leave",
+      "cause": "9999",
+      "userId": 39,
+      "id": 4
+    },
+    {
+      "fromdate": "2019-01-02",
+      "todate": "2019-01-11",
+      "leavetype": "Religious Holidays",
+      "cause": "9996633",
+      "userId": 39,
+      "id": 5
+    },
+    {
+      "fromdate": "2019-02-05",
+      "todate": "2019-02-05",
+      "leavetype": "Special leave",
+      "cause": "663",
+      "userId": 39,
+      "id": 7
+    },
+    {
+      "fromdate": "2019-01-30",
+      "todate": "2019-02-02",
+      "leavetype": "Paid leave",
+      "cause": "66",
+      "userId": 39,
+      "id": 9
+    },
+    {
+      "fromdate": "2019-01-31",
+      "todate": "2019-02-21",
+      "leavetype": "National Holidays",
+      "cause": "666666666",
+      "userId": 39,
+      "id": 10
+    },
+    {
+      "fromdate": "2019-03-12",
+      "todate": "2019-03-22",
+      "leavetype": "Paid leave",
+      "cause": "travel to dakhla",
+      "id": 12
+    },
+    {
+      "fromdate": "2019-03-12",
+      "todate": "2019-03-15",
+      "leavetype": "Special leave",
+      "cause": "0600409502",
+      "userId": 39,
+      "id": 13
+    },
+    {
+      "fromdate": "2019-03-13",
+      "todate": "2019-03-22",
+      "leavetype": "Special leave",
+      "cause": "3636363",
+      "id": 15
+    },
+    {
+      "fromdate": "2019-03-18",
+      "todate": "2019-03-22",
+      "leavetype": "Paid leave",
+      "cause": "789",
+      "id": 16
+    },
+    {
+      "fromdate": "2019-03-19",
+      "todate": "2019-03-28",
+      "leavetype": "Paid leave",
+      "cause": "36.",
+      "id": 17
+    },
+    {
+      "fromdate": "2019-03-13",
+      "todate": "2019-03-14",
+      "leavetype": "National Holidays",
+      "cause": "741258932",
+      "id": 18
+    },
+    {
+      "fromdate": "2019-03-02",
+      "todate": "2019-03-21",
+      "leavetype": "Paid leave",
+      "cause": "good as always",
+      "id": 19,
+      "ChangeUser": 39,
+      "ChangeDate": 1559931380539
+    },
+    {
+      "fromdate": "2019-04-20",
+      "todate": "2019-04-27",
+      "type": "Sick leave",
+      "cause": "ggggg",
+      "id": 20,
+      "leavetype": "National Holidays"
+    },
+    {
+      "fromdate": "2019-06-02",
+      "todate": "2019-06-09",
+      "leavetype": "Sick leave",
+      "colors": [
+        "orange",
+        "red",
+        "green",
+        "slate",
+        "silver",
+        "forest"
+      ],
+      "cause": "3.3.3.3.",
+      "id": 21
+    },
+    {
+      "fromdate": "2019-06-04",
+      "todate": "2019-06-28",
+      "leavetype": "Religious Holidays",
+      "colors": [
+        "orange",
+        "red",
+        "green",
+        "slate",
+        "silver"
+      ],
+      "cause": "multi select tag",
+      "id": 22
+    },
+    {
+      "fromdate": "2019-06-06",
+      "todate": "2019-06-15",
+      "leavetype": "Paid leave",
+      "cause": "creatuser + change",
+      "id": 23,
+      "ChangeUser": 39,
+      "ChangeDate": 1559846671711
+    },
+    {
+      "fromdate": "2019-06-06",
+      "todate": "2019-06-06",
+      "leavetype": "Special leave",
+      "cause": "aaaaaaaaa",
+      "CreateUser": 39,
+      "CreateDate": 1559846752395,
+      "id": 24
+    }
+  ],
+  "results": [
+    {
+      "id": "1",
+      "name": "Book",
+      "price": "18"
+    },
+    {
+      "id": "2",
+      "name": "Mobile",
+      "price": "400"
+    },
+    {
+      "id": "3",
+      "name": "PC",
+      "price": "1000"
+    },
+    {
+      "id": "4",
+      "name": "PS4",
+      "price": "500"
+    },
+    {
+      "id": "5",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "6",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "7",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "8",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "9",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "10",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "11",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "12",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "13",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "14",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "15",
+      "name": "Chromebook",
+      "price": "500"
+    },
+    {
+      "id": "16",
+      "name": "Chromebook",
+      "price": "500"
+    }
+  ]
+}
