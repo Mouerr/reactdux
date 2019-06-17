@@ -9,7 +9,7 @@ const DataTableButtons = props => {
     return <>
         <Button onClick={onToggle} color="primary" outline><FontAwesomeIcon icon={icons[0]} size="lg"/> Add new {objname}</Button>
         <Button color="danger" onClick={onDelete} disabled={!disableDelete}><FontAwesomeIcon icon={icons[1]} size="lg"/> Delete selected {objname}</Button>
-        <CSVLink data={data} filename={objname+Date.now()+".csv"}>
+        <CSVLink data={data} filename={`${objname}${Date.now()}.csv`}>
             <Button color="info"><FontAwesomeIcon icon='file-csv' size="lg"/> Export To CSV</Button>
         </CSVLink>
         </>

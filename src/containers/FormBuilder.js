@@ -11,18 +11,18 @@ class FormBuilderContainer extends Component {
     };
 
     componentDidMount() {
-        if (this.props.match.url !== '/' + this.props.apiservice.objname + '/create') {
+        if (this.props.match.url !== `/${this.props.apiservice.objname}/create`) {
             const objId = this.props.match.params.objId;
             this.props.dispatch(this.props.action.read(this.props.apiservice, objId));
         }
     }
 
-    shouldComponentUpdate ( nextProps, nextState ) {
+    shouldComponentUpdate(nextProps, nextState) {
         return nextState.formObject !== this.state.formObject || nextProps.item !== this.props.item;
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.match.url !== '/' + this.props.apiservice.objname + '/create') {
+        if (this.props.match.url !== `/${this.props.apiservice.objname}/create`) {
             const {item} = this.props;
             if (item !== prevProps.item) {
                 if (typeof item !== "undefined") {
@@ -40,11 +40,10 @@ class FormBuilderContainer extends Component {
                             updatedFormElement.errorMessage = checkValidity.errorMessage;
                             updatedFormElement.touched = true;
                             updatedForm[key] = updatedFormElement;
-                        }else{
+                        } else {
                             updatedForm[key] = {
                                 value: item[key],
                                 elementConfig: {
-                                    //type: 'number',
                                     hidden: true
                                 },
                                 valid: !!item[key],
@@ -73,7 +72,7 @@ class FormBuilderContainer extends Component {
         for (let formElementIdentifier in this.state.formObject) {
             formData[formElementIdentifier] = this.state.formObject[formElementIdentifier].value;
         }
-        if (this.props.match.url === '/' + this.props.apiservice.objname + '/create') {
+        if (this.props.match.url === `/${this.props.apiservice.objname}/create`) {
             this.props.dispatch(this.props.action.create(this.props.apiservice, formData));
         } else {
             this.props.dispatch(this.props.action.update(this.props.apiservice, formData));

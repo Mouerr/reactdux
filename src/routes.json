@@ -1,5 +1,3 @@
 {
-  "/user/create": "/users/",
-  "/leave/create": "/leaves/",
   "/users/authenticate\\?username=:username&password=:password": "/users"
 }

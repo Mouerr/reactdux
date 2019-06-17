@@ -13,7 +13,7 @@ const FormC = (props) => {
     return (
         <>
             <div className='pb-2 mt-4 mb-2'>
-                <h2>{window.location.pathname === '/' + objname + '/create' ? 'Create ' : 'Update '}{objname}</h2>
+                <h2>{window.location.pathname === `/${objname}/create` ? 'Create ' : 'Update '}{objname}</h2>
             </div>
             <Form onSubmit={onSubmit}>
                 {form}

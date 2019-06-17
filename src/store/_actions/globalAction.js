@@ -1,5 +1,6 @@
 import {alertActions} from './index';
 import {history} from '../../_helpers';
+import {jsUcFirst} from "../../_helpers/utility";
 
 const create = (service, obj) => {
 
@@ -20,12 +21,12 @@ const create = (service, obj) => {
             .then(
                 result => {
                     dispatch(success(result));
-                    history.push('/' + service.objname + '/list');
-                    dispatch(alertActions.success(service.objname + ' successfully Created'));
+                    history.push(`/${service.objname}/list`);
+                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully Created`));
                 },
                 error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(String(error)));
+                    dispatch(alertActions.error(String(error)));
                 }
             );
     };
@@ -50,8 +51,8 @@ const read = (service, objId) => {
             .then(
                 result => dispatch(success(result)),
                 error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(String(error)));
+                    dispatch(alertActions.error(String(error)));
                 });
     };
 };
@@ -74,7 +75,7 @@ const getAll = (service) => {
         service.api.getAll()
             .then(
                 result => dispatch(success(result)),
-                error => dispatch(failure(error.toString()))
+                error => dispatch(failure(String(error)))
             );
     };
 };
@@ -97,12 +98,12 @@ const update = (service, obj) => {
             .then(
                 result => {
                     dispatch(success(result));
-                    history.push('/' + service.objname + '/list');
-                    dispatch(alertActions.success(service.objname + ' successfully Updated'));
+                    history.push(`/${service.objname}/list`);
+                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully Updated`));
                 },
                 error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(String(error)));
+                    dispatch(alertActions.error(String(error)));
                 }
             );
     };
@@ -128,11 +129,11 @@ const _delete = (service, id) => {
             .then(
                 result => {
                     dispatch(success(id));
-                    dispatch(alertActions.success(service.objname + ' successfully Deleted'));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully Deleted`));
                 },
                 error => {
-                    dispatch(failure(id, error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(id, String(error)));
+                    dispatch(alertActions.error(String(error)));
                 }
             );
     };
@@ -156,7 +157,7 @@ const getByUserId = (service, objId) => {
         service.api.getByUserId(objId)
             .then(
                 result => dispatch(success(result)),
-                error => dispatch(failure(error.toString()))
+                error => dispatch(failure(String(error)))
             );
     };
 };

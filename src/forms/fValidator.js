@@ -14,12 +14,12 @@ export const checkFormValidity = (value, rules) => {
     }
 
     if (rules.minLength && input_value.length < rules.minLength) {
-        errorMessage.push('At least ' + rules.minLength + ' characters needed.');
+        errorMessage.push(`At least ${rules.minLength} characters needed.`);
         isValid = false
     }
 
     if (rules.maxLength && input_value.length > rules.maxLength) {
-        errorMessage.push('You can\'t use more than ' + rules.maxLength + ' characters.');
+        errorMessage.push(`You can't use more than ${rules.maxLength} characters.`);
         isValid = false
     }
 

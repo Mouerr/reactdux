@@ -1,7 +1,21 @@
 import {datatableConstants} from '../_constants';
 import {alertActions} from './index';
+import {jsUcFirst} from "../../_helpers/utility";
 
 const create = (service, obj) => {
+
+    const request = (item) => {
+        return {type: datatableConstants.CREATE_REQUEST, item}
+    };
+
+    const success = (item) => {
+        return {type: datatableConstants.CREATE_SUCCESS, item}
+    };
+
+    const failure = (error) => {
+        return {type: datatableConstants.CREATE_FAILURE, error}
+    };
+
     return dispatch => {
         dispatch(request(obj));
 
@@ -10,30 +24,31 @@ const create = (service, obj) => {
                 item => {
                     dispatch(success(item));
                     dispatch(toggleModal());
-                    dispatch(alertActions.success(service.objname + ' successfully Created'));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully created`));
                 },
                 error => {
-                    dispatch(failure(error.toString()));
+                    dispatch(failure(String(error)));
                     dispatch(toggleModal());
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alertActions.error(String(error)));
                 }
             );
     };
-
-    function request(item) {
-        return {type: datatableConstants.CREATE_REQUEST, item}
-    }
-
-    function success(item) {
-        return {type: datatableConstants.CREATE_SUCCESS, item}
-    }
-
-    function failure(error) {
-        return {type: datatableConstants.CREATE_FAILURE, error}
-    }
 };
 
 const update = (service, obj) => {
+
+    const request = () => {
+        return {type: datatableConstants.UPDATE_REQUEST}
+    };
+
+    const success = (item) => {
+        return {type: datatableConstants.UPDATE_SUCCESS, item}
+    };
+
+    const failure = (error) => {
+        return {type: datatableConstants.UPDATE_FAILURE, error}
+    };
+
     return dispatch => {
         dispatch(request());
 
@@ -41,29 +56,30 @@ const update = (service, obj) => {
             .then(
                 item => {
                     dispatch(success(item));
-                    dispatch(alertActions.success(service.objname + ' successfully Updated'));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully updated`));
                 },
                 error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(String(error)));
+                    dispatch(alertActions.error(String(error)));
                 }
             );
     };
-
-    function request() {
-        return {type: datatableConstants.UPDATE_REQUEST}
-    }
-
-    function success(item) {
-        return {type: datatableConstants.UPDATE_SUCCESS, item}
-    }
-
-    function failure(error) {
-        return {type: datatableConstants.UPDATE_FAILURE, error}
-    }
 };
 
 const getAll = (service) => {
+
+    const request = () => {
+        return {type: datatableConstants.GET_ALL_REQUEST}
+    };
+
+    const success = (items) => {
+        return {type: datatableConstants.GET_ALL_SUCCESS, items}
+    };
+
+    const failure = (error) => {
+        return {type: datatableConstants.GET_ALL_FAILURE, error}
+    };
+
     return dispatch => {
         dispatch(request());
 
@@ -71,23 +87,11 @@ const getAll = (service) => {
             .then(
                 items => dispatch(success(items)),
                 error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(String(error)));
+                    dispatch(alertActions.error(String(error)));
                 }
             );
     };
-
-    function request() {
-        return {type: datatableConstants.GET_ALL_REQUEST}
-    }
-
-    function success(items) {
-        return {type: datatableConstants.GET_ALL_SUCCESS, items}
-    }
-
-    function failure(error) {
-        return {type: datatableConstants.GET_ALL_FAILURE, error}
-    }
 };
 
 const filter = (service, conditions) => {
@@ -104,30 +108,33 @@ const filter = (service, conditions) => {
         }
     });
 
+    const request = () => {
+        return {type: datatableConstants.FILTER_REQUEST}
+    };
+
+    const success = (items) => {
+        return {type: datatableConstants.FILTER_SUCCESS, items}
+    };
+
+    const failure = (error) => {
+        return {type: datatableConstants.FILTER_FAILURE, error}
+    };
+
     return dispatch => {
         dispatch(request());
 
         const params_filters = pagination_params + filter_params + sort_params;
         service.api.getByDataTableFilter(params_filters)
             .then(
-                items => dispatch(success(items)),
+                items => {
+                    dispatch(success(items));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} table successfully filtered`));
+                },
                 error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(String(error)));
+                    dispatch(alertActions.error(String(error)));
                 });
     };
-
-    function request() {
-        return {type: datatableConstants.FILTER_REQUEST}
-    }
-
-    function success(items) {
-        return {type: datatableConstants.FILTER_SUCCESS, items}
-    }
-
-    function failure(error) {
-        return {type: datatableConstants.FILTER_FAILURE, error}
-    }
 };
 
 const toggleModal = () => {
@@ -136,6 +143,19 @@ const toggleModal = () => {
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 const _delete = (service, id) => {
+
+    const request = (id) => {
+        return {type: datatableConstants.DELETE_REQUEST, id}
+    };
+
+    const success = (id) => {
+        return {type: datatableConstants.DELETE_SUCCESS, id}
+    };
+
+    const failure = (error) => {
+        return {type: datatableConstants.DELETE_FAILURE, error}
+    };
+
     return dispatch => {
         dispatch(request(id));
 
@@ -143,26 +163,14 @@ const _delete = (service, id) => {
             .then(
                 item => {
                     dispatch(success(id));
-                    dispatch(alertActions.success(service.objname + ' successfully Deleted'));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully deleted`));
                 },
                 error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(String(error)));
+                    dispatch(alertActions.error(String(error)));
                 }
             );
     };
-
-    function request(id) {
-        return {type: datatableConstants.DELETE_REQUEST, id}
-    }
-
-    function success(id) {
-        return {type: datatableConstants.DELETE_SUCCESS, id}
-    }
-
-    function failure(error) {
-        return {type: datatableConstants.DELETE_FAILURE, error}
-    }
 };
 
 export const datatableActions = {

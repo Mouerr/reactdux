@@ -1,5 +1,4 @@
 import {TimelineContainer} from "../containers/Timeline";
-import {leaveService, userService} from "../api";
 import {DataTableContainer} from "../containers/DataTable";
 import {userForm} from "../forms/user";
 import {dtLeaveConfig, dtUserConfig} from "./dataTableConfig";
@@ -7,7 +6,10 @@ import {FormBuilderContainer} from "../containers/FormBuilder";
 import {leaveForm} from "../forms/leave";
 import {globalActions} from "../store/_actions";
 import {leaveConstants, userConstants} from "../store/_constants";
-
+import {Leave} from "../api/leave";
+import {User} from "../api/user";
+const leaveService = new Leave('leaves');
+const userService = new User('users');
 export const routing =
     [
         {
@@ -62,7 +64,8 @@ export const routing =
             dtconfig: dtLeaveConfig,
             apiservice: {api: leaveService, objname: 'leave'},
             navbar: false,
-            roleName: 'User Leaves'
+            roleName: 'User Leaves',
+            icons: ['calendar-plus', 'calendar-minus']
         },
         {
             reactPath: '/leave/create',

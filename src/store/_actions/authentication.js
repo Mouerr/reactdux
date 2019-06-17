@@ -1,5 +1,5 @@
 import {authenticationConstants} from '../_constants';
-import {userService} from '../../api';
+import {Auth} from '../../api/auth';
 import {alertActions} from './index';
 import {history} from '../../_helpers';
 
@@ -15,12 +15,14 @@ const loginFailure = (error) => {
     return {type: authenticationConstants.LOGIN_FAILURE, error}
 };
 
+const authService = new Auth();
+
 const login = (email, password) => {
 
     return dispatch => {
         dispatch(loginRequest({email}));
 
-        userService.login(email, password)
+        authService.login(email, password)
             .then(
                 user => {
                     dispatch(loginSuccess(user));
@@ -28,15 +30,15 @@ const login = (email, password) => {
                     history.push('/');
                 },
                 error => {
-                    dispatch(loginFailure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(loginFailure(String(error)));
+                    dispatch(alertActions.error(String(error)));
                 }
             );
     };
 };
 
 const logout = () => {
-    userService.logout();
+    authService.logout();
     return {type: authenticationConstants.LOGOUT};
 };
 
