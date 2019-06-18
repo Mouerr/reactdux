@@ -5,7 +5,7 @@ import {PrivateRoute} from './config/mapping';
 import {routing} from './config/routing';
 import {history} from './_helpers';
 import Layout from "./components/UI/Layout";
-import {alertActions, authenticationActions} from './store/_actions';
+import {alertActions, authenticationActions, registrationActions} from './store/_actions';
 import {LoginFormContainer} from './containers/Auth/Login';
 import {LogoutContainer} from './containers/Auth/Logout';
 import PageNotFound from './components/PageNotFound';
@@ -14,6 +14,11 @@ import {
     faUserSecret, faKey, faDoorOpen, faSignOutAlt, faFileCsv,
     faArrowCircleDown, faArrowCircleUp, faUserMinus, faUserPlus, faCalendarPlus, faCalendarMinus,
 } from '@fortawesome/free-solid-svg-icons';
+import {registerForm} from "./forms/register";
+import {Register} from "./api/register";
+import {RegisterFormContainer} from "./containers/Register";
+
+const allow_app_signup = process.env.REACT_APP_ALLOW_SIGNUP;
 
 library.add(faUserSecret, faArrowCircleDown, faArrowCircleUp, faKey, faDoorOpen, faUserMinus, faUserPlus, faCalendarPlus, faCalendarMinus, faSignOutAlt, faFileCsv);
 
@@ -22,8 +27,6 @@ class App extends Component {
         super(props);
 
         history.listen((location, action) => {
-
-            //console.log('aaa', action, location);
             // clear alert on location change
             this.props.dispatch(alertActions.clear());
         });
@@ -51,6 +54,13 @@ class App extends Component {
                             )}
                             <Route exact path="/logout" component={LogoutContainer}/>
                             <Route exact path="/login" component={LoginFormContainer}/>
+                            {allow_app_signup === 'true' ? <Route exact path="/register" render={props => (
+                                <RegisterFormContainer {...props}
+                                                       title='Register new account'
+                                                       apiservice={new Register()}
+                                                       action={registrationActions}
+                                                       formconfig={registerForm}/>
+                            )}/> : ''}
                             <PrivateRoute path="" container={PageNotFound}/>
                         </Switch>
                     </Layout>
@@ -61,9 +71,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    const {alert} = state;
-    const {loggedIn} = state.authentication;
-
+    const {alert, authentication: {loggedIn}} = state;
     return {
         alert, loggedIn
     };

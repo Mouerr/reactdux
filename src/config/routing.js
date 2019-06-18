@@ -36,7 +36,8 @@ export const routing =
             formconfig: userForm,
             apiservice: {api: userService, objname: 'user', constant: userConstants},
             navbar: true, label: 'User Create',
-            roleName: 'User Create'
+            roleName: 'User Create',
+            title:'Create User'
         },
         {
             reactPath: '/user/update/:objId',
@@ -45,7 +46,8 @@ export const routing =
             formconfig: userForm,
             apiservice: {api: userService, objname: 'user', constant: userConstants},
             navbar: false,
-            roleName: 'User Update'
+            roleName: 'User Update',
+            title:'Update User'
         },
         {
             reactPath: '/leave/list',
@@ -74,7 +76,8 @@ export const routing =
             formconfig: leaveForm,
             apiservice: {api: leaveService, objname: 'leave', constant: leaveConstants},
             navbar: true,
-            roleName: 'Leave Create'
+            roleName: 'Leave Create',
+            title:'Create Leave'
         },
         {
             reactPath: '/leave/update/:objId',
@@ -83,6 +86,7 @@ export const routing =
             formconfig: leaveForm,
             apiservice: {api: leaveService, objname: 'leave', constant: leaveConstants},
             navbar: false,
-            roleName: 'Leave Update'
+            roleName: 'Leave Update',
+            title:'Create Update'
         },
     ];

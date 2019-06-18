@@ -7,13 +7,13 @@ import {formGenerator} from "../forms/fGenerator";
 
 const FormC = (props) => {
 
-    const {formObject, submitting, onChange, onSubmit, onInjectValue, formIsValid, objname} = props;
+    const {formObject, submitting, onChange, onSubmit, onInjectValue, formIsValid, title} = props;
 
     let form = formGenerator(formObject, onChange, onInjectValue);
     return (
         <>
             <div className='pb-2 mt-4 mb-2'>
-                <h2>{window.location.pathname === `/${objname}/create` ? 'Create ' : 'Update '}{objname}</h2>
+                <h2>{title}</h2>
             </div>
             <Form onSubmit={onSubmit}>
                 {form}
@@ -34,7 +34,8 @@ FormC.propTypes = {
     onInjectValue: PropTypes.func.isRequired,
     formObject: PropTypes.object.isRequired,
     submitting: PropTypes.bool,
-    formIsValid: PropTypes.bool
+    formIsValid: PropTypes.bool,
+    title: PropTypes.string.isRequired
 };
 
 export default FormC;

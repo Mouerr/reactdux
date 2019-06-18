@@ -67,15 +67,16 @@ class FormBuilderContainer extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-
-        const formData = {};
-        for (let formElementIdentifier in this.state.formObject) {
-            formData[formElementIdentifier] = this.state.formObject[formElementIdentifier].value;
-        }
-        if (this.props.match.url === `/${this.props.apiservice.objname}/create`) {
-            this.props.dispatch(this.props.action.create(this.props.apiservice, formData));
-        } else {
-            this.props.dispatch(this.props.action.update(this.props.apiservice, formData));
+        if (this.state.formIsValid) {
+            const formData = {};
+            for (let formElementIdentifier in this.state.formObject) {
+                formData[formElementIdentifier] = this.state.formObject[formElementIdentifier].value;
+            }
+            if (this.props.match.url === `/${this.props.apiservice.objname}/create`) {
+                this.props.dispatch(this.props.action.create(this.props.apiservice, formData));
+            } else {
+                this.props.dispatch(this.props.action.update(this.props.apiservice, formData));
+            }
         }
     };
 
@@ -88,7 +89,7 @@ class FormBuilderContainer extends Component {
         return (
             <FormC
                 {...this.state}
-                objname={this.props.apiservice.objname}
+                title={this.props.title}
                 submitting={this.props.submitting}
                 onInjectValue={this.injectValue}
                 onChange={this.handleFormChange}

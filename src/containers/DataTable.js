@@ -55,13 +55,14 @@ class DataTableContainer extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-
-        const formData = {};
-        for (let formElementIdentifier in this.state.dt_object) {
-            formData[formElementIdentifier] = this.state.dt_object[formElementIdentifier].value;
+        if (this.state.formIsValid) {
+            const formData = {};
+            for (let formElementIdentifier in this.state.dt_object) {
+                formData[formElementIdentifier] = this.state.dt_object[formElementIdentifier].value;
+            }
+            this.props.dispatch(datatableActions.create(this.props.apiservice, formData));
+            this.resetForm();
         }
-        this.props.dispatch(datatableActions.create(this.props.apiservice, formData));
-        this.resetForm();
     };
 
     handleTableChange = (type, {page, sizePerPage, filters, sortField, sortOrder, cellEdit}) => {
@@ -108,7 +109,7 @@ class DataTableContainer extends Component {
         this.setState({dt_object: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
     };
 
-    shouldComponentUpdate ( nextProps, nextState ) {
+    shouldComponentUpdate(nextProps, nextState) {
         return nextState.dt_object !== this.state.dt_object ||
             nextProps.items !== this.props.items ||
             nextState.deleteRowId !== this.state.deleteRowId ||

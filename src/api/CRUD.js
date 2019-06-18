@@ -11,8 +11,7 @@ export class CRUD {
     };
 
     create = (obj) => {
-        console.log('new creation');
-        return fetch(`${this.apiUrl}/${this.name}/create`, headerParams('POST', obj)).then(handleResponse);
+        return fetch(`${this.apiUrl}/${this.name}`, headerParams('POST', obj)).then(handleResponse);
     };
 
     read = (id) => {
