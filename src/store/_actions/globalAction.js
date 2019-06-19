@@ -21,8 +21,8 @@ const create = (service, obj) => {
             .then(
                 result => {
                     dispatch(success(result));
-                    history.push(`/${service.objname}/list`);
-                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully Created`));
+                    history.push(`/${service.objName}/list`);
+                    dispatch(alertActions.success(`${jsUcFirst(service.objName)} successfully Created`));
                 },
                 error => {
                     dispatch(failure(String(error)));
@@ -98,8 +98,8 @@ const update = (service, obj) => {
             .then(
                 result => {
                     dispatch(success(result));
-                    history.push(`/${service.objname}/list`);
-                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully Updated`));
+                    history.push(`/${service.objName}/list`);
+                    dispatch(alertActions.success(`${jsUcFirst(service.objName)} successfully Updated`));
                 },
                 error => {
                     dispatch(failure(String(error)));
@@ -129,7 +129,7 @@ const _delete = (service, id) => {
             .then(
                 result => {
                     dispatch(success(id));
-                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully Deleted`));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objName)} successfully Deleted`));
                 },
                 error => {
                     dispatch(failure(id, String(error)));

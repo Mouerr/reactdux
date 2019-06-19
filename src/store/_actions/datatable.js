@@ -24,7 +24,7 @@ const create = (service, obj) => {
                 item => {
                     dispatch(success(item));
                     dispatch(toggleModal());
-                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully created`));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objName)} successfully created`));
                 },
                 error => {
                     dispatch(failure(String(error)));
@@ -56,7 +56,7 @@ const update = (service, obj) => {
             .then(
                 item => {
                     dispatch(success(item));
-                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully updated`));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objName)} successfully updated`));
                 },
                 error => {
                     dispatch(failure(String(error)));
@@ -98,13 +98,15 @@ const filter = (service, conditions) => {
     const pagination_params = '?_page=' + conditions.page + '&_limit=' + conditions.sizePerPage;
     const sort_params = conditions.sortField ? '&_sort=' + conditions.sortField + '&_order=' + conditions.sortOrder : '';
     let filter_params = '';
-
     Object.entries(conditions.filters).forEach(([key, val]) => {
         if (val.filterType === 'DATE' && val.filterVal.comparator !== '' && val.filterVal.date) {
             filter_params += '&' + key + val.filterVal.comparator + val.filterVal.date.toLocaleDateString('fr-ca')
-
         } else if (val.filterType === "TEXT" || val.filterType === "SELECT") {
             filter_params += '&' + key + '=' + val.filterVal
+        }else if (key === 'groupId'){
+            filter_params += '&' + key + '=' + val
+        }else if (key === 'userId'){
+            filter_params += '&' + key + '=' + val
         }
     });
 
@@ -128,7 +130,7 @@ const filter = (service, conditions) => {
             .then(
                 items => {
                     dispatch(success(items));
-                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} table successfully filtered`));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objName)} table successfully filtered`));
                 },
                 error => {
                     dispatch(failure(String(error)));
@@ -163,7 +165,7 @@ const _delete = (service, id) => {
             .then(
                 item => {
                     dispatch(success(id));
-                    dispatch(alertActions.success(`${jsUcFirst(service.objname)} successfully deleted`));
+                    dispatch(alertActions.success(`${jsUcFirst(service.objName)} successfully deleted`));
                 },
                 error => {
                     dispatch(failure(String(error)));
@@ -173,10 +175,62 @@ const _delete = (service, id) => {
     };
 };
 
+const getByUserId = (service, objId) => {
+
+    const request = () => {
+        return {type: datatableConstants.GET_ALL_REQUEST}
+    };
+
+    const success = (items) => {
+        return {type: datatableConstants.GET_ALL_SUCCESS, items}
+    };
+
+    const failure = (error) => {
+        return {type: datatableConstants.GET_ALL_FAILURE, error}
+    };
+
+    return dispatch => {
+        dispatch(request(objId));
+
+        service.api.getByUserId(objId)
+            .then(
+                items => dispatch(success(items)),
+                error => dispatch(failure(String(error)))
+            );
+    };
+};
+
+const getByGroupId = (service, objId) => {
+
+    const request = () => {
+        return {type: datatableConstants.GET_ALL_REQUEST}
+    };
+
+    const success = (items) => {
+        return {type: datatableConstants.GET_ALL_SUCCESS, items}
+    };
+
+    const failure = (error) => {
+        return {type: datatableConstants.GET_ALL_FAILURE, error}
+    };
+
+    return dispatch => {
+        dispatch(request(objId));
+
+        service.api.getByGroupId(objId)
+            .then(
+                items => dispatch(success(items)),
+                error => dispatch(failure(String(error)))
+            );
+    };
+};
+
 export const datatableActions = {
     create,
     update,
     getAll,
+    getByUserId,
+    getByGroupId,
     toggleModal,
     filter,
     delete: _delete

@@ -11,7 +11,7 @@ class CheckboxRadioC extends PureComponent {
         const {name, value} = event.target;
         this.setState({
             results: {
-                ...this.state.results,
+                ...(this.props.selectedValues ? this.props.selectedValues : this.state.results),
                 [name]: value
             }
         });

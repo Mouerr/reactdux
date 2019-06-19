@@ -9,29 +9,37 @@ import {populateFormObject} from "../_helpers/utility";
 
 class DataTableContainer extends Component {
     state = {
-        dt_object: this.props.formconfig,
+        dtObject: this.props.formConfig,
         formIsValid: false,
         page: 1,
         sizePerPage: 10,
         totalSize: 100,
         deleteRowId: ''
     };
-    baseObjState = this.state.dt_object;
+    baseObjState = this.state.dtObject;
 
     resetForm = () => {
         this.setState({
-            dt_object: this.baseObjState,
+            dtObject: this.baseObjState,
             formIsValid: false
         })
     };
 
     componentDidMount() {
-        this.props.dispatch(datatableActions.getAll(this.props.apiservice));
+        const {dispatch, apiService, roleLevel} = this.props;
+
+        if (roleLevel === 'role admin') {
+            dispatch(datatableActions.getAll(apiService));
+        } else if (roleLevel === 'role manager') {
+            dispatch(datatableActions.getByGroupId(apiService, localStorage.getItem('groupId')));
+        } else {
+            dispatch(datatableActions.getByUserId(apiService, localStorage.getItem('userId')));
+        }
     }
 
     handleDelete = () => {
         if (this.state.deleteRowId !== '') {
-            this.props.dispatch(datatableActions.delete(this.props.apiservice, this.state.deleteRowId));
+            this.props.dispatch(datatableActions.delete(this.props.apiService, this.state.deleteRowId));
             this.setState({deleteRowId: ''})
         }
     };
@@ -41,26 +49,35 @@ class DataTableContainer extends Component {
     };
 
     handleUpdate = editedRow => {
-        this.props.dispatch(datatableActions.update(this.props.apiservice, editedRow));
+        this.props.dispatch(datatableActions.update(this.props.apiService, editedRow));
     };
 
     handleFilter = conditions => {
-        this.props.dispatch(datatableActions.filter(this.props.apiservice, conditions));
+        const {dispatch, apiService, roleLevel} = this.props;
+        if (roleLevel === 'role admin') {
+            dispatch(datatableActions.filter(apiService, conditions));
+        } else if (roleLevel === 'role manager') {
+            conditions.filters['groupId']= localStorage.getItem('groupId');
+            dispatch(datatableActions.filter(apiService, conditions));
+        } else {
+            conditions.filters['userId']= localStorage.getItem('userId');
+            dispatch(datatableActions.filter(apiService, conditions));
+        }
     };
 
     handleFormChange = (event, inputIdentifier) => {
-        const formPopulation = populateFormObject(event, this.state.dt_object, inputIdentifier);
-        this.setState({dt_object: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
+        const formPopulation = populateFormObject(event, this.state.dtObject, inputIdentifier);
+        this.setState({dtObject: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
     };
 
     handleFormSubmit = (event) => {
         event.preventDefault();
         if (this.state.formIsValid) {
             const formData = {};
-            for (let formElementIdentifier in this.state.dt_object) {
-                formData[formElementIdentifier] = this.state.dt_object[formElementIdentifier].value;
+            for (let formElementIdentifier in this.state.dtObject) {
+                formData[formElementIdentifier] = this.state.dtObject[formElementIdentifier].value;
             }
-            this.props.dispatch(datatableActions.create(this.props.apiservice, formData));
+            this.props.dispatch(datatableActions.create(this.props.apiService, formData));
             this.resetForm();
         }
     };
@@ -105,48 +122,52 @@ class DataTableContainer extends Component {
     };
 
     injectValue = (value, inputIdentifier) => {
-        const formPopulation = populateFormObject(value, this.state.dt_object, inputIdentifier, 'Inject');
-        this.setState({dt_object: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
+        const formPopulation = populateFormObject(value, this.state.dtObject, inputIdentifier, 'Inject');
+        this.setState({dtObject: formPopulation['updatedForm'], formIsValid: formPopulation['formIsValid']});
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.dt_object !== this.state.dt_object ||
-            nextProps.items !== this.props.items ||
-            nextState.deleteRowId !== this.state.deleteRowId ||
-            nextProps.modal !== this.props.modal
+        const {items, modal} = this.props;
+        const {deleteRowId, dtObject} = this.state;
+        return nextState.dtObject !== dtObject ||
+            nextProps.items !== items ||
+            nextState.deleteRowId !== deleteRowId ||
+            nextProps.modal !== modal
             ;
     }
 
     render() {
-        const {page, sizePerPage, totalSize} = this.state;
+        const {page, sizePerPage, totalSize, formIsValid, dtObject, deleteRowId} = this.state;
+        const {items, icons, apiService, modal, submitting, dtConfig, loading} = this.props;
+        const {handleToggle, handleDelete, handleFormChange, handleFormSubmit, injectValue, handleTableChange, handleOnSelect} = this;
         return (
             <div className="container" style={{marginTop: 50}}>
                 <>
                     <DataTableButtons
-                        data={this.props.items}
-                        icons={this.props.icons}
-                        objname={this.props.apiservice.objname}
-                        onToggle={this.handleToggle}
-                        onDelete={this.handleDelete}
-                        disableDelete={this.state.deleteRowId}
+                        data={items}
+                        icons={icons}
+                        objName={apiService.objName}
+                        onToggle={handleToggle}
+                        onDelete={handleDelete}
+                        disableDelete={deleteRowId}
                     />
                     <ModalC
-                        formElementsArray={this.state.dt_object}
-                        modal={this.props.modal}
-                        formIsValid={this.state.formIsValid}
-                        submitting={this.props.submitting}
-                        onToggle={this.handleToggle}
-                        onSubmit={this.handleFormSubmit}
-                        onChange={this.handleFormChange}
-                        onInjectValue={this.injectValue}
+                        formElementsArray={dtObject}
+                        modal={modal}
+                        formIsValid={formIsValid}
+                        submitting={submitting}
+                        onToggle={handleToggle}
+                        onSubmit={handleFormSubmit}
+                        onChange={handleFormChange}
+                        onInjectValue={injectValue}
                     />
                     <DataTable
-                        columns={this.props.dtconfig}
-                        data={this.props.items}
-                        onTableChange={this.handleTableChange}
-                        onSelect={this.handleOnSelect}
+                        columns={dtConfig}
+                        data={items}
+                        onTableChange={handleTableChange}
+                        onSelect={handleOnSelect}
                         page={page}
-                        loading={this.props.loading}
+                        loading={loading}
                         sizePerPage={sizePerPage}
                         totalSize={totalSize}
                     />
@@ -168,6 +189,6 @@ const connectedDataTableContainer = connect(mapStateToProps)(DataTableContainer)
 export {connectedDataTableContainer as DataTableContainer};
 
 DataTableContainer.propTypes = {
-    dtconfig: PropTypes.array.isRequired,
-    formconfig: PropTypes.object.isRequired,
+    dtConfig: PropTypes.array.isRequired,
+    formConfig: PropTypes.object.isRequired,
 };

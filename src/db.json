@@ -58,6 +58,7 @@
       "username": "test@portal.com",
       "email": "test@portal.com",
       "password": "Gms@1995",
+      "groupId": 9,
       "groups": [
         "ATM",
         "GTX",
@@ -69,7 +70,7 @@
         "User List": "role admin",
         "User Create": "role manager",
         "User Update": "role manager",
-        "Leave List": "role admin",
+        "Leave List": "role manager",
         "User Leaves": "role user",
         "Leave Create": "role manager",
         "Leave Update": "role admin"
@@ -696,6 +697,7 @@
       "leavetype": "Sick leave",
       "cause": "9999",
       "userId": 39,
+      "groupId": 9,
       "id": 4
     },
     {
@@ -704,6 +706,7 @@
       "leavetype": "Religious Holidays",
       "cause": "9996633",
       "userId": 39,
+      "groupId": 9,
       "id": 5
     },
     {
@@ -712,6 +715,7 @@
       "leavetype": "Special leave",
       "cause": "663",
       "userId": 39,
+      "groupId": 9,
       "id": 7
     },
     {
@@ -720,6 +724,7 @@
       "leavetype": "Paid leave",
       "cause": "66",
       "userId": 39,
+      "groupId": 9,
       "id": 9
     },
     {
@@ -728,6 +733,7 @@
       "leavetype": "National Holidays",
       "cause": "666666666",
       "userId": 39,
+      "groupId": 9,
       "id": 10
     },
     {
@@ -735,6 +741,8 @@
       "todate": "2019-03-22",
       "leavetype": "Paid leave",
       "cause": "travel to dakhla",
+      "userId": 76,
+      "groupId": 1,
       "id": 12
     },
     {
@@ -742,7 +750,8 @@
       "todate": "2019-03-15",
       "leavetype": "Special leave",
       "cause": "0600409502",
-      "userId": 39,
+      "userId": 76,
+      "groupId": 1,
       "id": 13
     },
     {

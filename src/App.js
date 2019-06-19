@@ -18,7 +18,7 @@ import {registerForm} from "./forms/register";
 import {Register} from "./api/register";
 import {RegisterFormContainer} from "./containers/Register";
 
-const allow_app_signup = process.env.REACT_APP_ALLOW_SIGNUP;
+const allowAppSignUp = process.env.REACT_APP_ALLOW_SIGNUP;
 
 library.add(faUserSecret, faArrowCircleDown, faArrowCircleUp, faKey, faDoorOpen, faUserMinus, faUserPlus, faCalendarPlus, faCalendarMinus, faSignOutAlt, faFileCsv);
 
@@ -47,19 +47,19 @@ class App extends Component {
                         <Switch>
                             {user && routing.map((route, index) =>
                                 user.roles.hasOwnProperty(route.roleName) && user.roles[route.roleName] !== 'role denied' &&
-                                <PrivateRoute key={index} exact icons={route.icons}
-                                              path={route.reactPath} action={route.action}
-                                              container={route.container} apiservice={route.apiservice}
-                                              formconfig={route.formconfig} dtconfig={route.dtconfig}/>
+                                <PrivateRoute key={index} exact icons={route.icons} title={route.title}
+                                              path={route.reactPath} action={route.action} roleLevel={user.roles[route.roleName]}
+                                              container={route.container} apiService={route.apiService}
+                                              formConfig={route.formConfig} dtConfig={route.dtConfig}/>
                             )}
                             <Route exact path="/logout" component={LogoutContainer}/>
                             <Route exact path="/login" component={LoginFormContainer}/>
-                            {allow_app_signup === 'true' ? <Route exact path="/register" render={props => (
+                            {allowAppSignUp === 'true' ? <Route exact path="/register" render={props => (
                                 <RegisterFormContainer {...props}
                                                        title='Register new account'
-                                                       apiservice={new Register()}
+                                                       apiService={new Register()}
                                                        action={registrationActions}
-                                                       formconfig={registerForm}/>
+                                                       formConfig={registerForm}/>
                             )}/> : ''}
                             <PrivateRoute path="" container={PageNotFound}/>
                         </Switch>

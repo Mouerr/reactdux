@@ -6,7 +6,7 @@ import FormC from "../components/FormC";
 
 class RegisterFormContainer extends PureComponent {
     state = {
-        formObject: this.props.formconfig,
+        formObject: this.props.formConfig,
         formIsValid: false,
     };
 
@@ -23,7 +23,7 @@ class RegisterFormContainer extends PureComponent {
             for (let formElementIdentifier in this.state.formObject) {
                 formData[formElementIdentifier] = this.state.formObject[formElementIdentifier].value;
             }
-            this.props.dispatch(this.props.action.register(this.props.apiservice, formData));
+            this.props.dispatch(this.props.action.register(this.props.apiService, formData));
         }
     };
 

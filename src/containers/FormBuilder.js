@@ -6,14 +6,15 @@ import {populateFormObject} from "../_helpers/utility";
 
 class FormBuilderContainer extends Component {
     state = {
-        formObject: this.props.formconfig,
+        formObject: this.props.formConfig,
         formIsValid: false,
     };
 
     componentDidMount() {
-        if (this.props.match.url !== `/${this.props.apiservice.objname}/create`) {
-            const objId = this.props.match.params.objId;
-            this.props.dispatch(this.props.action.read(this.props.apiservice, objId));
+        const {apiService, action, dispatch, match} = this.props;
+        if (match.url !== `/${apiService.objName}/create`) {
+            const objId = match.params.objId;
+            dispatch(action.read(apiService, objId));
         }
     }
 
@@ -22,7 +23,7 @@ class FormBuilderContainer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.match.url !== `/${this.props.apiservice.objname}/create`) {
+        if (this.props.match.url !== `/${this.props.apiService.objName}/create`) {
             const {item} = this.props;
             if (item !== prevProps.item) {
                 if (typeof item !== "undefined") {
@@ -72,10 +73,11 @@ class FormBuilderContainer extends Component {
             for (let formElementIdentifier in this.state.formObject) {
                 formData[formElementIdentifier] = this.state.formObject[formElementIdentifier].value;
             }
-            if (this.props.match.url === `/${this.props.apiservice.objname}/create`) {
-                this.props.dispatch(this.props.action.create(this.props.apiservice, formData));
+            const {apiService, action, dispatch, match} = this.props;
+            if (match.url === `/${apiService.objName}/create`) {
+                dispatch(action.create(apiService, formData));
             } else {
-                this.props.dispatch(this.props.action.update(this.props.apiservice, formData));
+                dispatch(action.update(apiService, formData));
             }
         }
     };
@@ -86,21 +88,24 @@ class FormBuilderContainer extends Component {
     };
 
     render() {
+        console.log('form builder rendered');
+        const {submitting, title} = this.props;
+        const {handleFormChange, injectValue, handleFormSubmit} = this;
         return (
             <FormC
                 {...this.state}
-                title={this.props.title}
-                submitting={this.props.submitting}
-                onInjectValue={this.injectValue}
-                onChange={this.handleFormChange}
-                onSubmit={this.handleFormSubmit}
+                title={title}
+                submitting={submitting}
+                onInjectValue={injectValue}
+                onChange={handleFormChange}
+                onSubmit={handleFormSubmit}
             />
         );
     }
 }
 
 function mapStateToProps(state, ownProps) {
-    const {submitting, item} = state[ownProps.apiservice.objname];
+    const {submitting, item} = state[ownProps.apiService.objName];
     return {
         submitting,
         item

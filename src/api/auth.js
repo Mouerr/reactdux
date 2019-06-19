@@ -12,6 +12,7 @@ export class Auth {
                     const expirationDate = new Date(new Date().getTime() + user[0].expirationTime * 1000);
                     localStorage.setItem('user', JSON.stringify(user[0]));
                     localStorage.setItem('userId', user[0].id);
+                    localStorage.setItem('groupId', user[0].groupId);
                     localStorage.setItem('token', user[0].token);
                     localStorage.setItem('expirationDate', expirationDate);
                     return user[0];

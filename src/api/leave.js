@@ -9,4 +9,8 @@ export class Leave extends CRUD {
     getByUserId = (userId) => {
         return fetch(`${this.apiUrl}/users/${userId}/${this.name}`, headerParams('GET')).then(handleResponse);
     };
+
+    getByGroupId = (groupId) => {
+        return fetch(`${this.apiUrl}/groups/${groupId}/${this.name}`, headerParams('GET')).then(handleResponse);
+    };
 }

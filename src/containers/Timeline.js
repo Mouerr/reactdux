@@ -15,7 +15,7 @@ const TLSpinner = <div style={{
 class TimelineContainer extends Component {
 
     componentDidMount() {
-        this.props.dispatch(datatableActions.getAll(this.props.apiservice));
+        this.props.dispatch(datatableActions.getAll(this.props.apiService));
     }
 
     render() {
