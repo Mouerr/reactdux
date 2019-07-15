@@ -88,7 +88,6 @@ class FormBuilderContainer extends Component {
     };
 
     render() {
-        console.log('form builder rendered');
         const {submitting, title} = this.props;
         const {handleFormChange, injectValue, handleFormSubmit} = this;
         return (
