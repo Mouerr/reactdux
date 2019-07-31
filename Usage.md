@@ -1,7 +1,7 @@
 ### Package Installation:
 
-**with npm:** yarn install<br>
-**with yarn:** npm install
+**with npm:** npm install<br>
+**with yarn:** yarn install
 
 
 ### Fake REST:
@@ -10,9 +10,11 @@
 **with npm:**   npm install -g json-server<br>
 **with yarn:**  yarn global add json-server
 
-* edit the parameter **REACT_APP_API_URL** exist in **.env** file with your chosen fake json api **IP**.
+* edit the parameter **REACT_APP_API_URL** exist in ProjectDir/**.env** file with your chosen fake json api **IP**.
 * launch: <br>
 json-server --watch src/db.json --routes src/routes.json --host **YOUR_API_IP** -p **YOUR_API_PORT_NUMBER**
+
+>please don't forget to allow in your firewall both your fake api ip/port_number and your react app ip/port_number.
 
 ### Launch project
 
