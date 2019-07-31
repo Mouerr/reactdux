@@ -53,11 +53,11 @@
     },
     {
       "id": 39,
-      "firstname": "test100",
-      "lastname": "test100",
-      "username": "test@portal.com",
-      "email": "test@portal.com",
-      "password": "Gms@1995",
+      "firstname": "admin",
+      "lastname": "admin",
+      "username": "admin@admin.com",
+      "email": "admin@admin.com",
+      "password": "GMAdmin2019",
       "groupId": 9,
       "groups": [
         "ATM",
@@ -68,11 +68,11 @@
       "roles": {
         "Dashboard": "role admin",
         "User List": "role admin",
-        "User Create": "role manager",
-        "User Update": "role manager",
-        "Leave List": "role manager",
-        "User Leaves": "role user",
-        "Leave Create": "role manager",
+        "User Create": "role admin",
+        "User Update": "role admin",
+        "Leave List": "role admin",
+        "User Leaves": "role admin",
+        "Leave Create": "role admin",
         "Leave Update": "role admin"
       },
       "status": "Enabled",
