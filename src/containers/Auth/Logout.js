@@ -1,24 +1,15 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-
+import React, {useEffect} from 'react';
+import {Redirect} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import {authenticationActions} from '../../store/_actions/authentication';
 
-class LogoutContainer extends Component {
-    componentDidMount () {
-        this.props.onLogout();
-    }
+const LogoutContainer = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(authenticationActions.logout())
 
-    render () {
-        return <Redirect to="/login"/>;
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onLogout: () => dispatch(authenticationActions.logout())
-    };
+    }, [dispatch]);
+    return <Redirect to="/login"/>;
 };
 
-const connectedLogoutFormContainer = connect(null, mapDispatchToProps)(LogoutContainer);
-export {connectedLogoutFormContainer as LogoutContainer};
+export default LogoutContainer;
