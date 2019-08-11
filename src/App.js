@@ -5,7 +5,7 @@ import {PrivateRoute} from './config/mapping';
 import {routing} from './config/routing';
 import {history} from './_helpers';
 import Layout from "./components/UI/Layout";
-import {alertActions, authenticationActions, registrationActions} from './store/_actions';
+import {/*alertActions,*/ authenticationActions, registrationActions} from './store/_actions';
 import {LoginFormContainer} from './containers/Auth/Login';
 import LogoutContainer from './containers/Auth/Logout';
 import PageNotFound from './components/PageNotFound';
@@ -29,7 +29,7 @@ const App = () => {
     useEffect(() => {
         history.listen((location, action) => {
             // clear alert on location change
-            dispatch(alertActions.clear());
+            //dispatch(alertActions.clear());
         });
         dispatch(authenticationActions.authCheckState())
     }, [dispatch]);

@@ -10,11 +10,11 @@ const Layout = props => {
 
     return (
         <>
-            <AppNavbar loggedIn={loggedIn} user={user}/>
+            {loggedIn && <AppNavbar loggedIn={loggedIn} userRoles={user.roles}/>}
 
             <Container>
                 <BreadcrumbC/>
-                <AlertC alert={alert}/>
+                {Object.keys(alert).length > 0 && <AlertC alert={alert}/>}
 
                 {props.children}
             </Container>
