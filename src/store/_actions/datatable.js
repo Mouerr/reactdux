@@ -25,6 +25,9 @@ const create = (service, obj) => {
                     dispatch(success(item));
                     dispatch(toggleModal());
                     dispatch(alertActions.success(`${jsUcFirst(service.objName)} successfully created`));
+                    const SELECTOR = 'table tbody tr:nth-child(1)';
+                    const cell = document.querySelector(SELECTOR);
+                    cell.style.backgroundColor = '4BB543';
                 },
                 error => {
                     dispatch(failure(String(error)));

@@ -57,10 +57,10 @@ class DataTableContainer extends Component {
         if (roleLevel === 'role admin') {
             dispatch(datatableActions.filter(apiService, conditions));
         } else if (roleLevel === 'role manager') {
-            conditions.filters['groupId']= localStorage.getItem('groupId');
+            conditions.filters['groupId'] = localStorage.getItem('groupId');
             dispatch(datatableActions.filter(apiService, conditions));
         } else {
-            conditions.filters['userId']= localStorage.getItem('userId');
+            conditions.filters['userId'] = localStorage.getItem('userId');
             dispatch(datatableActions.filter(apiService, conditions));
         }
     };
@@ -149,7 +149,7 @@ class DataTableContainer extends Component {
                         objName={apiService.objName}
                         onToggle={handleToggle}
                         onDelete={handleDelete}
-                        disableDelete={deleteRowId}
+                        isRowIdSelected={deleteRowId}
                     />
                     <ModalC
                         formElementsArray={dtObject}

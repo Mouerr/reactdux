@@ -21,7 +21,14 @@ const tableSpinner = <div style={{
 
 const DataTable = props => {
     const {page, sizePerPage, totalSize, data, columns, onSelect, onTableChange} = props;
-
+    const selectRow = {
+        mode: 'radio', onSelect: onSelect,
+        style: {
+            textDecorationLine: 'line-through',
+            fontWeight: 800,
+            color: '#d9d9d9'
+        }
+    };
     return <>
         {props.loading && tableSpinner}
         <BootstrapTable
@@ -31,7 +38,7 @@ const DataTable = props => {
             hover
             condensed
             keyField="id"
-            selectRow={{mode: 'radio', onSelect: onSelect}}
+            selectRow={selectRow}
             data={data}
             columns={columns}
             filter={filterFactory()}
