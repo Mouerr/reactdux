@@ -20,7 +20,7 @@ export class Auth {
             });
     };
 
-    /*loginAsRegistered = (email, password) => {
+    /*loginRealApi = (email, password) => {
 
         const header = {
             method: 'POST',
@@ -28,7 +28,7 @@ export class Auth {
             body: JSON.stringify({email: email, password: password})
         };
 
-        return fetch(`http://web.gmpanel.net:8093/api/users/api-token-auth/`, header)
+        return fetch(`http://test.com`, header)
             .then(handleResponse)
             .then(response => {
                 if (response.token !== '') {
@@ -41,20 +41,6 @@ export class Auth {
                     if (filteredUsers.length) {
                         localStorage.setItem('user', JSON.stringify(filteredUsers[0]));
                         return filteredUsers[0];
-
-                    } else {
-                        let apiuser = response.user;
-                        const emailname = apiuser.username.substring(0, apiuser.username.lastIndexOf("@"));
-                        apiuser.firstname = emailname;
-                        apiuser.lastname = emailname;
-                        apiuser.email = apiuser.username;
-                        apiuser.password = password;
-
-                        return fetch(`${apiurl}/user/create`,
-                            headerParams('POST', apiuser)).then(handleResponse).then(user => {
-                            localStorage.setItem('user', JSON.stringify(user));
-                            return user;
-                        });
                     }
                 }
             });

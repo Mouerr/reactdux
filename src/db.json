@@ -631,6 +631,44 @@
       },
       "status": "Enabled",
       "id": 96
+    },
+    {
+      "firstname": "balala",
+      "lastname": "balala",
+      "username": "balala",
+      "email": "balala@azerty.com",
+      "password": "Azerty123456@",
+      "id": 97
+    },
+    {
+      "firstname": "growrow",
+      "lastname": "growrow",
+      "username": "growrow",
+      "email": "growrow@mail.cc",
+      "password": "growrowA@4",
+      "id": 98
+    },
+    {
+      "firstname": "madmimi",
+      "lastname": "madmimi",
+      "username": "madmimi",
+      "email": "madmimi@mail.com",
+      "password": "Azerty@123.",
+      "groups": [
+        "RBX"
+      ],
+      "roles": {
+        "Dashboard": "role admin",
+        "User List": "role denied",
+        "User Create": "role denied",
+        "User Update": "role denied",
+        "Leave List": "role denied",
+        "User Leaves": "role denied",
+        "Leave Create": "role denied",
+        "Leave Update": "role denied"
+      },
+      "status": "Enabled",
+      "id": 99
     }
   ],
   "route_roles": [
@@ -717,15 +755,6 @@
       "userId": 39,
       "groupId": 9,
       "id": 7
-    },
-    {
-      "fromdate": "2019-01-30",
-      "todate": "2019-02-02",
-      "leavetype": "Paid leave",
-      "cause": "66",
-      "userId": 39,
-      "groupId": 9,
-      "id": 9
     },
     {
       "fromdate": "2019-01-31",
@@ -845,6 +874,55 @@
       "CreateUser": 39,
       "CreateDate": 1559846752395,
       "id": 24
+    },
+    {
+      "fromdate": "2019-08-20",
+      "todate": "2019-08-24",
+      "leavetype": "Paid leave",
+      "cause": "atres",
+      "id": 25
+    },
+    {
+      "fromdate": "2019-08-13",
+      "todate": "2019-08-22",
+      "leavetype": "Paid leave",
+      "cause": "555",
+      "id": 26
+    },
+    {
+      "fromdate": "2019-08-21",
+      "todate": "2019-08-23",
+      "leavetype": "Religious Holidays",
+      "cause": "231",
+      "id": 27
+    },
+    {
+      "fromdate": "2019-08-20",
+      "todate": "2019-08-21",
+      "leavetype": "Paid leave",
+      "cause": "5",
+      "id": 29
+    },
+    {
+      "fromdate": "2019-08-21",
+      "todate": "2019-08-22",
+      "leavetype": "National Holidays",
+      "cause": "77",
+      "id": 30
+    },
+    {
+      "fromdate": "2019-08-21",
+      "todate": "2019-08-22",
+      "leavetype": "Sick leave",
+      "cause": "azerty",
+      "id": 31
+    },
+    {
+      "fromdate": "2019-08-21",
+      "todate": "2019-08-21",
+      "leavetype": "National Holidays",
+      "cause": ".3020",
+      "id": 32
     }
   ],
   "results": [

@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Route, Router, Switch} from 'react-router-dom';
-import {PrivateRoute} from './config/mapping';
-import {routing} from './config/routing';
+import {PrivateRoute} from './config/privateRoute';
+import {routingParams} from './config/routingParams';
+import {rolesRouting} from './config/rolesRouting';
 import {history} from './_helpers';
 import Layout from "./components/UI/Layout";
 import {/*alertActions,*/ authenticationActions, registrationActions} from './store/_actions';
@@ -34,25 +35,40 @@ const App = () => {
         dispatch(authenticationActions.authCheckState())
     }, [dispatch]);
 
-    const alert = useSelector(store => store.alert);
     const loggedIn = useSelector(store => store.authentication.loggedIn);
     const user = JSON.parse(localStorage.getItem('user'));
+    let mappingRoutes = [];
+    let mappingNavbar = [];
+
+    if (user) {
+        for (const k in rolesRouting) {
+            if (routingParams.hasOwnProperty(k) && user.roles[k] !== 'role denied' && typeof user.roles[k] !== 'undefined') {
+
+                mappingRoutes.push(<PrivateRoute key={k} exact icons={routingParams[k].icons}
+                                                 title={routingParams[k].title}
+                                                 path={rolesRouting[k]} action={routingParams[k].action}
+                                                 roleLevel={user.roles[k]}
+                                                 container={routingParams[k].container}
+                                                 apiService={routingParams[k].apiService}
+                                                 formConfig={routingParams[k].formConfig}
+                                                 dtConfig={routingParams[k].dtConfig}/>);
+                if (routingParams[k].navbar) {
+                    mappingNavbar.push(`${k}#${rolesRouting[k]}`);
+                }
+            }
+        }
+    }
 
     return (
         <div className="App">
             <Router history={history}>
-                <Layout alert={alert} user={user} loggedIn={loggedIn}>
+                <Layout loggedIn={loggedIn} mappingNavbar={mappingNavbar}>
                     <Switch>
-                        {user && routing.map((route, index) =>
-                            user.roles.hasOwnProperty(route.roleName) && user.roles[route.roleName] !== 'role denied' &&
-                            <PrivateRoute key={index} exact icons={route.icons} title={route.title}
-                                          path={route.reactPath} action={route.action}
-                                          roleLevel={user.roles[route.roleName]}
-                                          container={route.container} apiService={route.apiService}
-                                          formConfig={route.formConfig} dtConfig={route.dtConfig}/>
-                        )}
+                        {mappingRoutes.map(prvRoute => {
+                            return prvRoute
+                        })}
                         <Route exact path="/logout" component={LogoutContainer}/>
-                        <Route exact path="/login" component={LoginFormContainer}/>
+                        {!loggedIn && <Route exact path="/login" component={LoginFormContainer}/>}
                         {allowAppSignUp === 'true' ? <Route exact path="/register" render={props => (
                             <RegisterFormContainer {...props}
                                                    title='Register new account'

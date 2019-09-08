@@ -1,4 +1,4 @@
-const routing = JSON.parse(localStorage.getItem('app_roles'));
+import {rolesRouting} from '../config/rolesRouting';
 
 export const userForm = {
     firstname: {
@@ -84,10 +84,10 @@ export const userForm = {
         elementType: 'reactMultiSelect',
         elementConfig: {
             options: [
-                { value: 'ATM', label: 'ATM'},
-                { value: 'GTX', label: 'GTX'},
-                { value: 'RBX', label: 'RBX'},
-                { value: 'SLK', label: 'SLK'},
+                {value: 'ATM', label: 'ATM'},
+                {value: 'GTX', label: 'GTX'},
+                {value: 'RBX', label: 'RBX'},
+                {value: 'SLK', label: 'SLK'},
             ]
         },
         value: '',
@@ -102,7 +102,7 @@ export const userForm = {
     roles: {
         elementType: 'checkbox-radio',
         elementConfig: {
-            labels: routing ? Object.assign.apply({}, routing.map((el) => ({[el]: 'role denied'}))) : null,
+            labels: Object.assign.apply({}, Object.keys(rolesRouting).map((el) => ({[el]: 'role denied'}))),
             options: ['role denied', 'role user', 'role manager', 'role admin']
         },
         value: '',
@@ -117,7 +117,7 @@ export const userForm = {
     status: {
         elementType: 'radio',
         elementConfig: {
-            options: ['Enabled','Disabled'],
+            options: ['Enabled', 'Disabled'],
         },
         value: '',
         label: 'Status',

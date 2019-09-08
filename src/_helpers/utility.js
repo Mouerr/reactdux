@@ -80,3 +80,10 @@ export const populateFormObject = (eventValue, formObject, inputIdentifier, hand
     response['formIsValid'] = formIsValid;
     return response;
 };
+
+
+export const isEmpty = (value) =>
+    typeof value === 'undefined' ||
+    value === null ||
+    value === '' ||
+    (Array.isArray(value) && value.length === 0);

@@ -6,16 +6,15 @@ import BreadcrumbC from "./Breadcrumb";
 import AlertC from "./Alert";
 
 const Layout = props => {
-    const {loggedIn, user, alert} = props;
+    const {loggedIn, mappingNavbar} = props;
 
     return (
         <>
-            {loggedIn && <AppNavbar loggedIn={loggedIn} userRoles={user.roles}/>}
+            {loggedIn && <AppNavbar mappingNavbar={mappingNavbar}/>}
 
             <Container>
                 <BreadcrumbC/>
-                {Object.keys(alert).length > 0 && <AlertC alert={alert}/>}
-
+                <AlertC/>
                 {props.children}
             </Container>
         </>

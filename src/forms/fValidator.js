@@ -1,14 +1,16 @@
+import {isEmpty} from "../_helpers/utility";
+
 export const checkFormValidity = (value, rules) => {
     let isValid = true;
     let input_value = value;
-    if(typeof value === 'string') input_value = value.trim();
+    if (typeof value === 'string') input_value = value.trim();
     let errorMessage = [];
 
     if (!rules) {
         return true;
     }
 
-    if (rules.required && (input_value === '' || Object.values(input_value).every(item => item === false))) {
+    if (rules.required && isEmpty(input_value)) {
         errorMessage.push('Field cannot be empty');
         isValid = false
     }

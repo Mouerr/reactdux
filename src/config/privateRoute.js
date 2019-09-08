@@ -1,9 +1,7 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
-import {routing} from "./routing";
 
 const PrivateRoute = ({container: Component, ...rest}) => {
-    localStorage.setItem('app_roles', JSON.stringify(routing.map((el) => (el.roleName))));
 
     return <Route {...rest} render={props => (
         localStorage.getItem('user')
